@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YamySystem | Soluciones Tecnológicas Integrales</title>
+    <link rel="icon" href="img/logotipo.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('2ZCVwRxMpU4ucivnQ')
+</script>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="nav-brand">
+                <img src="img/logo.jpg" alt="YamySystem Logo" class="logotipo">
+                <div class="logo">YamySystem</div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+
+            <!-- Botón de Tema Oscuro/Claro -->
+            <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </nav>
+    </header>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Soluciones Tecnológicas Integrales</h1>
+            <p>Reparación de PC, desarrollo web y consultoría tecnológica. Transformamos tus ideas en realidad digital.</p>
+            
+            <!-- Redes Sociales -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/yamilapenagisele" target="_blank" class="social-icon" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/yamilacode" target="_blank" class="social-icon" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/yamysystem?igsh=Y210eW10OWdibDdh" target="_blank" class="social-icon" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#contacto" class="btn btn-primary">Contactar Ahora</a>
+                <a href="#servicios" class="btn btn-secondary">Ver Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="counter" data-target="150">0</h3>
+                <p>PCs Reparadas</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="50">0</h3>
+                <p>Sitios Web Creados</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="98">0</h3>
+                <p>Clientes Satisfechos</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="3">0</h3>
+                <p>Años de Experiencia</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios" data-aos="fade-up">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <p class="section-subtitle">Soluciones completas para todas tus necesidades tecnológicas</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>
+                <h3>Reparación de PC</h3>
+                <p>Diagnóstico profesional y reparación de todo tipo de problemas en computadoras de escritorio y portátiles.</p>
+                <ul class="service-features">
+                    <li>Diagnóstico completo gratuito</li>
+                    <li>Reparación de hardware y software</li>
+                    <li>Limpieza profunda del sistema</li>
+                    <li>Eliminación de virus y malware</li>
+                    <li>Optimización de rendimiento</li>
+                    <li>Recuperación de datos</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <h3>Armado de PC</h3>
+                <p>Ensamblaje personalizado según tus necesidades específicas y presupuesto disponible.</p>
+                <ul class="service-features">
+                    <li>Asesoramiento personalizado</li>
+                    <li>Selección de componentes óptimos</li>
+                    <li>PC para Gaming de alto rendimiento</li>
+                    <li>Estaciones de trabajo para diseño</li>
+                    <li>Computadoras para oficina</li>
+                    <li>Garantía en todos los componentes</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Desarrollo Web</h3>
+                <p>Creación de sitios web modernos, responsivos y optimizados para tu negocio o proyecto personal.</p>
+                <ul class="service-features">
+                    <li>Diseño web responsive</li>
+                    <li>Landing pages efectivas</li>
+                    <li>Tiendas online (E-commerce)</li>
+                    <li>SEO y optimización</li>
+                    <li>Hosting y dominio incluido</li>
+                    <li>Soporte y mantenimiento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonios" data-aos="zoom-in">
+        <div class="testimonials-container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle">La satisfacción de nuestros clientes es nuestra mejor carta de presentación</p>
+            
+            <div class="testimonials-carousel">
+                <div class="testimonials-wrapper" id="testimonialsWrapper">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div>
+                                <div class="testimonial-avatar">MC</div>
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>María Cardozo</h4>
+                                <p>Dueña de Boutique Local</p>
+                            </div>
+                        </div>
+                        <div class="stars"><i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            </div>
+                        <p class="testimonial-text">"Excelente servicio. Me crearon una página web hermosa para mi boutique y el resultado superó mis expectativas. Ahora tengo clientes de toda la provincia gracias a mi presencia online."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div>
+                                <div class="testimonial-avatar">BR</div>
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>Benjamín Ramírez</h4>
+                                <p>Estudiante Universitario</p>
+                            </div>
+                        </div>
+                        <div class="stars"><i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            </div>
+                        <p class="testimonial-text">"Mi laptop no encendía y necesitaba mis trabajos de la facultad urgente. En YamySystem lo solucionaron en menos de 24 horas y recuperaron todos mis archivos. ¡Salvaron mi semestre!"</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div>
+                                <div class="testimonial-avatar">LG</div>
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>Luis González</h4>
+                                <p>Empresario</p>
+                            </div>
+                        </div>
+                        <div class="stars"><i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            </div>
+                        <p class="testimonial-text">"Me armaron una PC gamer increíble. Explicaron cada componente, se adaptaron a mi presupuesto y el resultado es espectacular. Corre todos los juegos en ultra sin problemas."</p>
+                    </div>
+                </div>
+
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact" id="contacto" data-aos="fade-up">
+        <h2 class="section-title">Contacto</h2>
+        
+        <div class="contact-info">
+            <p class="contact-email">
+                <i class="fas fa-envelope"></i>
+                <strong>yamysystem@outlook.com</strong>
+            </p>
+            <div class="social-links-footer">
+                <a href="https://www.linkedin.com/in/yamilapenagisele" target="_blank" class="social-icon-footer" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/yamilacode" target="_blank" class="social-icon-footer" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/yamysystem?igsh=Y210eW10OWdibDdh" target="_blank" class="social-icon-footer" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <form id="contactForm">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="servicio">Servicio</label>
+        <select id="servicio" name="servicio" required>
+            <option value="">Seleccionar servicio...</option>
+            <option value="Reparación de PC">Reparación de PC</option>
+            <option value="Armado de PC">Armado de PC</option>
+            <option value="Desarrollo Web">Desarrollo Web</option>
+            <option value="Consulta General">Consulta General</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+    </div>
+    
+    <!-- Campos ocultos para EmailJS -->
+    <input type="hidden" name="title" id="title">
+    <input type="hidden" name="name" id="name">
+    
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+    <div id="successMessage" class="success-message">
+        ✅ ¡Mensaje enviado correctamente! Te contactaremos pronto.
+    </div>
+</form>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div data-aos="zoom-out">
+        <p><strong>YamySystem</strong> - Soluciones Tecnológicas Integrales</p>
+        <p><i class="fa-regular fa-envelope"></i> yamysystem@outlook.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Formosa, Argentina</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">© 2024 YamySystem. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Chat Toggle Button -->
+    <button class="chat-toggle" onclick="toggleChat()">🤖</button>
+
+    <!-- Chatbot -->
+   <div class="chatbot-container" id="chatbot">
+    <div class="chatbot-header">
+        <h3 style="margin:0; font-size: 1.1rem;">Asistente Virtual</h3>
+        <button class="chatbot-close" onclick="toggleChat()">×</button>
+    </div>
+    
+    <div class="chatbot-messages" id="chatMessages">
+        <div class="message bot">¡Hola! 👋 Soy el asistente virtual de YamySystem. ¿En qué puedo ayudarte hoy?</div>
+    </div>
+    
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+
+     <!--Scripts para las animaciones-->
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
+</body>
+</html>
