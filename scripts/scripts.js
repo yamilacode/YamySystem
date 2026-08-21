@@ -258,7 +258,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Conexiones cursor ↔ nodos (el cursor actúa como nodo con gravedad)
+        // Conexiones cursor nodos (el cursor actúa como nodo con gravedad)
         if (pointer.active) {
             const wx = pointer.x * 16, wy = pointer.y * 9, wz = -8;
             cursorArr[0] = wx; cursorArr[1] = wy; cursorArr[2] = wz;
@@ -358,7 +358,7 @@ function switchTab(tabId, event) {
 
     if (window.particleFormation) window.particleFormation(tabId);
 
-    if (tabId === 'proyectos' || tabId === 'contacto') {
+    if (tabId === 'proyectos') {
         const catPeeping = document.getElementById(`peep-${tabId}`);
         if (catPeeping) {
             catPeeping.loopCount = 0; 
@@ -366,11 +366,17 @@ function switchTab(tabId, event) {
             catPeeping.play();        
         }
     }
+    if (tabId === 'contacto') {
+        const walkCat = document.getElementById('walk-contacto');
+        const sitCat = document.getElementById('sit-contacto');
+        if (walkCat) { walkCat.seek(0); walkCat.play(); }
+        if (sitCat) { sitCat.seek(0); sitCat.play(); }
+    }
 }
 
 // ===== CONGELAR GATOS ASOMADIZOS (DESPUÉS DE 2 VECES) =====
 window.addEventListener('DOMContentLoaded', () => {
-    const peepingCats = ['peep-proyectos', 'peep-contacto'];
+    const peepingCats = ['peep-proyectos'];
     
     peepingCats.forEach(id => {
         const cat = document.getElementById(id);
@@ -673,6 +679,75 @@ handleHashRoute();
 
     const observer = new MutationObserver(() => { initAllCards(); });
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+})();
+
+// ===== WELCOME CODE: se escribe como código =====
+(function initWelcomeCode() {
+    var el = document.getElementById('welcome-typewriter');
+    var wrap = document.getElementById('heroLogoTilt');
+    if (!el || !wrap) return;
+
+    var line1 = 'var str = "Tu idea, hecha"';
+    var line2 = 'console.log("Bienvenido a YamySystem " + str)';
+    var output1 = 'Bienvenido a YamySystem Tu idea, hecha código';
+    var output2 = '< undefined';
+
+    var htmlLine1 = '<span class="tw-violet">var</span> <span class="tw-white">str</span> <span class="tw-violet">=</span> <span class="tw-green">"Tu idea, hecha código"</span>';
+    var htmlLine2 = '<span class="tw-cyan">console</span><span class="tw-violet">.log</span><span class="tw-violet">(</span><span class="tw-green">"Bienvenido a YamySystem "</span> <span class="tw-green">+</span> <span class="tw-white">str</span><span class="tw-violet">)</span>';
+    var htmlOut1 = '<span class="tw-white" style="opacity:0.75">' + output1 + '</span>';
+    var htmlOut2 = '<span class="tw-white" style="opacity:0.65">&lt; undefined</span>';
+
+    var fullPlain = line1 + '\n' + line2 + '\n' + output1 + '\n' + output2;
+    var fullHTML = htmlLine1 + '\n' + htmlLine2 + '\n' + htmlOut1 + '\n' + htmlOut2;
+
+    var i = 0;
+    var typeTimer = null;
+    var hideTimer = null;
+
+    function countVisible(plainUpTo) {
+        var count = 0;
+        for (var j = 0; j < fullHTML.length && count < plainUpTo; j++) {
+            if (fullHTML[j] === '<') { while (j < fullHTML.length && fullHTML[j] !== '>') j++; continue; }
+            if (fullHTML[j] === '&') { if (fullHTML.substring(j, j + 4) === '&lt;') { count++; j += 3; continue; } }
+            count++;
+        }
+        return j;
+    }
+
+    function typeChar() {
+        if (i < fullPlain.length) {
+            i++;
+            var htmlIdx = countVisible(i);
+            el.innerHTML = fullHTML.substring(0, htmlIdx) + '<span class="tw-cursor"></span>';
+            var ch = fullPlain[i - 1];
+            var speed = (ch === '\n') ? 350 : (30 + Math.random() * 25);
+            typeTimer = setTimeout(typeChar, speed);
+        } else {
+            el.innerHTML = fullHTML + '<span class="tw-cursor"></span>';
+            hideTimer = setTimeout(function() { el.classList.remove('active'); }, 4500);
+        }
+    }
+
+    function startTyping() {
+        clearTimeout(typeTimer);
+        clearTimeout(hideTimer);
+        i = 0;
+        el.innerHTML = '';
+        el.classList.add('active');
+        typeChar();
+    }
+
+    wrap.addEventListener('mouseenter', startTyping);
+
+    wrap.addEventListener('mouseleave', function() {
+        clearTimeout(typeTimer);
+        clearTimeout(hideTimer);
+        setTimeout(function() {
+            el.classList.remove('active');
+            el.innerHTML = '';
+            i = 0;
+        }, 600);
+    });
 })();
 
 // ===== HERO LOGO + CAGE: tilt 3D unificado + float =====

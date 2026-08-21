@@ -114,20 +114,6 @@
 </head>
 
 <body class="dashboard-body">
-    <div id="cat-container-inicio" class="cat-box-general cat-active-inicio">
-        <div id="cat-speech-bubble-inicio" class="speech-bubble"></div>
-        <lottie-player id="walk-inicio" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
-        <lottie-player id="sit-inicio" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
-    </div>
-
-    <div id="cat-container-servicios" class="cat-box-general cat-active-servicios">
-        <lottie-player id="walk-servicios" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
-        <lottie-player id="sit-servicios" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
-    </div>
-
-    <div id="cat-container-contacto" class="cat-box-general">
-        <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
-    </div>
     <div id="loader-wrapper" class="preloader-screen">
         <div class="preloader-inner">
             <lottie-player class="preloader-lottie" src="json/Michilactic.json" background="transparent" speed="0.7" loop autoplay></lottie-player>
@@ -189,7 +175,7 @@
                     </svg>
                 </div>
                 <h2>Yamila Peña</h2>
-                <p class="role">Full Stack Web Dev. & Software Developer</p>
+                <p class="role">Full Stack Dev. & Software Developer</p>
                 <div class="sidebar-socials">
                     <a href="https://www.linkedin.com/in/yamilapeña" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://github.com/yamilacode" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
@@ -213,7 +199,7 @@
                 <div class="hero-card-glass">
                     <div class="hero-text-col">
                         <span class="status-badge"><i class="fas fa-circle"></i> Soluciones Digitales a Medida</span>
-                        <h2>Software a Medida para Escalar tu Negocio</h2>
+                        <h2 class="hero-3d-title"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span> <span class="letter">a</span> <span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span> <span class="letter">p</span><span class="letter">a</span><span class="letter">r</span><span class="letter">a</span> <span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span> <span class="letter">t</span><span class="letter">u</span> <span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></h2>
                         <p>Diseñamos sitios web corporativos de alta conversión, landing pages dinámicas y sistemas de software interactivos. Entregamos soluciones tecnológicas modernas, priorizando el rendimiento extremo y la eficiencia de tu institución.</p>
                         <div class="hero-actions">
                            <button class="btn btn-primary" onclick="switchTab('proyectos', event)"><span>Ver Trabajos <i class="btn-arrow" aria-hidden="true">→</i></span></button>
@@ -223,12 +209,19 @@
                     <div class="hero-logo-tilt" id="heroLogoTilt">
                         <canvas id="cageCanvas"></canvas>
                         <img src="img/logotipo.png" alt="YamySystem Escudo" class="hero-logotipo-img">
+                        <div id="welcome-typewriter" class="welcome-typewriter"></div>
                     </div>
                 </div>
             </section>
 
             <section id="servicios" class="tab-content" aria-label="Servicios">
-                <h2 class="section-title-left">Nuestros Servicios</h2>
+                <div class="section-title-row">
+                    <h2 class="section-title-left">Nuestros Servicios</h2>
+                    <div id="cat-container-servicios" class="cat-box-general">
+                        <lottie-player id="walk-servicios" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
+                        <lottie-player id="sit-servicios" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                    </div>
+                </div>
                 <div class="services-grid-glass">
                     <div class="glass-card">
                         <i class="fas fa-globe"></i>
@@ -367,6 +360,9 @@
             <section id="contacto" class="tab-content" aria-label="Formulario de contacto">
                 <h2 class="section-title-left">Iniciar Comunicación</h2>
                 <div class="contact-card-glass">
+                    <div id="cat-container-contacto" class="cat-box-general">
+                        <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                    </div>
                     <p class="contact-email"><i class="fas fa-envelope"></i> Formulario de Contacto</p>
                     <form id="contactForm">
                         <div class="form-row">
