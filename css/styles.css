@@ -1342,6 +1342,32 @@ vertical-align: text-bottom;
     .form-group input, .form-group select, .form-group textarea { font-size: clamp(1.5rem, 1.2vw, 2rem); }
 }
 
+/* ------------------------------------------------- */
+/* Terminal Console: solo en pantallas grandes (1440px+) */
+/* ------------------------------------------------- */
+.terminal-console { display: none; position: relative; width: 100%; padding: clamp(2rem, 4vw, 4rem); background: rgba(10, 15, 30, 0.8); border-top: 1px solid rgba(139, 92, 246, 0.3); }
+@media (min-width: 1440px) {
+    .terminal-console { display: block; }
+    .terminal-console .terminal-header { display: flex; justify-content: between; align-items: center; margin-bottom: clamp(1rem, 2vw, 1.5rem); padding-bottom: 1rem; border-bottom: 1px solid rgba(139, 92, 246, 0.2); }
+    .terminal-console .terminal-title { color: var(--primary); font-size: clamp(0.8rem, 1.5vw, 1rem); font-family: 'Courier New', Courier, monospace; font-weight: 600; letter-spacing: 0.5px; }
+    .terminal-console .terminal-cursor { color: var(--primary); font-size: 0.8rem; }
+    .terminal-console .terminal-content { max-height: 400px; overflow: auto; }
+    .terminal-console .terminal-prompt { color: var(--secondary); font-size: 0.85rem; font-family: 'Courier New', Courier, monospace; display: inline-block; min-width: 5ch; }
+    .terminal-console .terminal-cmd { color: var(--accent); font-size: 0.85rem; font-family: 'Courier New', Courier, monospace; }
+    .terminal-console .terminal-output { color: var(--text-main); font-size: 0.8rem; font-family: 'Courier New', Courier, monospace; margin-bottom: 0.4rem; display: block; }
+    .terminal-console .terminal-output span { color: var(--accent); }
+}
+
+/* Scrollbar para el terminal en Webkit */
+.terminal-content::-webkit-scrollbar { width: 4px; }
+.terminal-content::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+.terminal-content::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+/* Ocultar en pantallas chicas */
+@media (max-width: 1024px) {
+    .terminal-console { display: none !important; }
+}
+
 /* Nota: el escalado en pantallas HD/2K/4K ahora es continuo (clamp con techos altos
    en .services-grid-glass .glass-card, .projects-grid-glass y sus textos), sin saltos
    por breakpoint, para que el tamaño se sienta proporcional en cualquier resolución. */
