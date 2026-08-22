@@ -629,6 +629,71 @@ function handleHashRoute() {
 window.addEventListener('hashchange', handleHashRoute);
 handleHashRoute();
 
+// ===== STACK DE SERVICIOS (click o rueda del mouse para rotar, en loop) =====
+function rotateServices(direction) {
+    const track = document.getElementById('servicesCarousel');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.glass-card'));
+    const total = cards.length;
+    if (!total) return;
+
+    cards.forEach(card => {
+        const current = parseInt(card.dataset.pos, 10) || 0;
+        const next = (current - direction + total) % total;
+        card.dataset.pos = next;
+    });
+}
+
+(function initServicesStack() {
+    const track = document.getElementById('servicesCarousel');
+    if (!track) return;
+
+    // Click en cualquier parte del stack: pasa a la siguiente tarjeta
+    track.addEventListener('click', () => rotateServices(1));
+
+    // Rueda del mouse sobre el stack: gira sin scrollear la página, con un pequeño freno anti-rebote
+    let wheelLocked = false;
+    track.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        rotateServices(e.deltaY > 0 ? 1 : -1);
+        setTimeout(() => { wheelLocked = false; }, 350);
+    }, { passive: false });
+})();
+
+// ===== CARRUSEL 3D DE PROYECTOS (flechas laterales) =====
+function rotateProjects(direction) {
+    const track = document.getElementById('projectsCarousel');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.project-card'));
+    const total = cards.length;
+    if (!total) return;
+
+    cards.forEach(card => {
+        const current = parseInt(card.dataset.pos, 10) || 0;
+        const next = (current - direction + total) % total;
+        card.dataset.pos = next;
+    });
+}
+
+// ===== PROYECTOS: Click + rueda del mouse para rotar (igual que servicios) =====
+(function initProjectsStack() {
+    const track = document.getElementById('projectsCarousel');
+    if (!track) return;
+
+    track.addEventListener('click', () => rotateProjects(1));
+
+    let wheelLocked = false;
+    track.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        rotateProjects(e.deltaY > 0 ? 1 : -1);
+        setTimeout(() => { wheelLocked = false; }, 350);
+    }, { passive: false });
+})();
+
 // ===== EFECTO 3D TILT EN TARJETAS (SERVICIOS + PROYECTOS) =====
 (function initTilt() {
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
@@ -672,7 +737,7 @@ handleHashRoute();
     }
 
     function initAllCards() {
-        document.querySelectorAll('.glass-card, .profile-widget').forEach(attachTilt);
+        document.querySelectorAll('.projects-grid-glass .glass-card:not(.project-card), .profile-widget').forEach(attachTilt);
     }
 
     initAllCards();
@@ -687,8 +752,8 @@ handleHashRoute();
     var wrap = document.getElementById('heroLogoTilt');
     if (!el || !wrap) return;
 
-    var line1 = 'var str = "Tu idea, hecha"';
-    var line2 = 'console.log("Bienvenido a YamySystem " + str)';
+    var line1 = 'const str = "Tu idea, hecha código";';
+    var line2 = 'console.log(Bienvenido a YamySystem ${str});';
     var output1 = 'Bienvenido a YamySystem Tu idea, hecha código';
     var output2 = '< undefined';
 
@@ -865,4 +930,31 @@ handleHashRoute();
         animate();
         console.log('[CAGE] initialized OK');
     } catch(e) { console.error('[CAGE] ERROR:', e.message); }
+})();
+
+// =======================================================
+// THEME TOGGLE - Color palette switcher
+// =======================================================
+(function initThemeToggle() {
+    const toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+
+    const themes = ['violet', 'emerald', 'amber', 'rose', 'indigo', 'cyan'];
+    let currentIndex = 0;
+
+    // Load saved theme
+    const saved = localStorage.getItem('yamysystem-theme');
+    if (saved && themes.includes(saved)) {
+        currentIndex = themes.indexOf(saved);
+        document.documentElement.setAttribute('data-theme', saved);
+    }
+
+    toggle.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % themes.length;
+        const theme = themes[currentIndex];
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('yamysystem-theme', theme);
+        toggle.style.transform = 'scale(0.95) rotate(180deg)';
+        setTimeout(() => { toggle.style.transform = ''; }, 150);
+    });
 })();

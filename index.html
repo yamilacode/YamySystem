@@ -101,7 +101,7 @@
     </script>
 
     <link rel="icon" href="img/logotipo.png">
-    <link rel="stylesheet" href="css/styles.css?v=25">
+    <link rel="stylesheet" href="css/styles.css?v=29">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -142,6 +142,27 @@
             <a href="https://t.me/YamySystem" target="_blank"><i class="fab fa-telegram-plane"></i></a>
         </div>
     </div>
+
+    <!-- Desktop Top Header -->
+    <header class="desktop-top-header">
+        <div class="desktop-header-inner">
+            <div class="desktop-brand">
+                <div class="logo-animado-wrapper">
+                    <img src="img/logo.png" alt="YamySystem Logo" class="logotipo-glow">
+                </div>
+                <span class="desktop-brand-name">YamySystem</span>
+                <span class="desktop-tagline">Desarrollo Web & Software</span>
+            </div>
+            <div id="cat-container-header" class="cat-box-general">
+                <lottie-player id="walk-header" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
+                <lottie-player id="sit-header" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color" title="Cambiar paleta de colores">
+                <i class="fas fa-palette"></i>
+                <span class="theme-tooltip">Cambiar tema</span>
+            </button>
+        </div>
+    </header>
 
     <div class="app-container">
 
@@ -199,7 +220,7 @@
                 <div class="hero-card-glass">
                     <div class="hero-text-col">
                         <span class="status-badge"><i class="fas fa-circle"></i> Soluciones Digitales a Medida</span>
-                        <h2 class="hero-3d-title"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span> <span class="letter">a</span> <span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span> <span class="letter">p</span><span class="letter">a</span><span class="letter">r</span><span class="letter">a</span> <span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span> <span class="letter">t</span><span class="letter">u</span> <span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></h2>
+                        <h2 class="hero-3d-title"><span class="word"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span></span> <span class="word"><span class="letter">a</span></span>&nbsp;<span class="word"><span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span></span><br><span class="word"><span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span></span> <span class="word"><span class="letter">t</span><span class="letter">u</span></span> <span class="word"><span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></span></h2>
                         <p>Diseñamos sitios web corporativos de alta conversión, landing pages dinámicas y sistemas de software interactivos. Entregamos soluciones tecnológicas modernas, priorizando el rendimiento extremo y la eficiencia de tu institución.</p>
                         <div class="hero-actions">
                            <button class="btn btn-primary" onclick="switchTab('proyectos', event)"><span>Ver Trabajos <i class="btn-arrow" aria-hidden="true">→</i></span></button>
@@ -215,45 +236,39 @@
             </section>
 
             <section id="servicios" class="tab-content" aria-label="Servicios">
-                <div class="section-title-row">
-                    <h2 class="section-title-left">Nuestros Servicios</h2>
-                    <div id="cat-container-servicios" class="cat-box-general">
-                        <lottie-player id="walk-servicios" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
-                        <lottie-player id="sit-servicios" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
-                    </div>
-                </div>
-                <div class="services-grid-glass">
-                    <div class="glass-card">
+                <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Servicios</span>
+                <div class="services-grid-glass" id="servicesCarousel">
+                    <div class="glass-card" data-pos="0">
                         <i class="fas fa-globe"></i>
                         <h3>Desarrollo Web</h3>
                         <p>Creación de sitios corporativos modernos, ultrarrápidos y optimizados estrictamente para posicionamiento web (SEO).</p>
                     </div>
 
-                    <div class="glass-card">
+                    <div class="glass-card" data-pos="1">
                         <i class="fas fa-laptop-code"></i>
                         <h3>Aplicaciones de Software</h3>
                         <p>Construcción de sistemas institucionales y plataformas interactivas adaptadas al flujo operativo exacto que necesites.</p>
                     </div>
 
-                    <div class="glass-card">
+                    <div class="glass-card" data-pos="2">
                         <i class="fas fa-database"></i>
                         <h3>Optimización & Código</h3>
                         <p>Arquitecturas limpias, modulares y seguras utilizando tecnologías web de vanguardia.</p>
                     </div>
 
-                    <div class="glass-card">
+                    <div class="glass-card" data-pos="3">
                         <i class="fas fa-plug"></i>
                         <h3>APIs & Integraciones</h3>
                         <p>Conexión de servicios externos, pasarelas de pago y desarrollo de módulos a medida para expandir las funciones de tu sistema.</p>
                     </div>
 
-                    <div class="glass-card">
+                    <div class="glass-card" data-pos="4">
                         <i class="fas fa-shield-alt"></i>
                         <h3>Seguridad Web</h3>
                         <p>Protección contra bots, ataques DDoS y vulnerabilidades. Implementación de WAF, anti-bot y buenas prácticas de seguridad.</p>
                     </div>
 
-                    <div class="glass-card">
+                    <div class="glass-card" data-pos="5">
                         <i class="fas fa-headset"></i>
                         <h3>Soporte & Mantenimiento</h3>
                         <p>Actualizaciones, monitoreo y resolución de problemas para que tu sitio funcione sin interrupciones las 24 horas.</p>
@@ -262,10 +277,15 @@
             </section>
 
             <section id="proyectos" class="tab-content">
-                <h2 class="section-title-left">Proyectos y Plantillas</h2>
-                <div class="projects-grid-glass">
-                    
-                    <div class="glass-card project-card">
+                <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Trabajos</span>
+                <div class="projects-carousel-wrap">
+                    <button type="button" class="carousel-arrow arrow-left" onclick="rotateProjects(-1)" aria-label="Proyecto anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <div class="projects-grid-glass" id="projectsCarousel">
+
+                    <div class="glass-card project-card" data-pos="0">
                         <div class="project-img-box stacked-gallery" onclick="openGallery([
                             'img/proyect/block1.png', 
                             'img/proyect/block2.png', 
@@ -279,8 +299,8 @@
                         </div>
                         <div class="project-details">
                             <div class="project-header-tag">Sistema Web Institucional</div>
-                            <h3>Biblioteca Digital Interactiva</h3>
-                            <p>Catálogo bibliográfico serverless y en tiempo real. Gestión de recursos literarios educativos con visor PDF integrado, panel de administración seguro y almacenamiento en la nube.</p>
+                            <h3>Biblioteca Digital</h3>
+                            <p>Catálogo bibliográfico serverless. Gestión de recursos literarios educativos, panel de administración seguro y almacenamiento en la nube.</p>
                             <div class="tech-tags">
                                 <span>JavaScript</span>
                                 <span>Firebase</span>
@@ -290,7 +310,7 @@
                         </div>
                     </div>
 
-                    <div class="glass-card project-card">
+                    <div class="glass-card project-card" data-pos="1">
                         <div class="project-img-box stacked-gallery" onclick="openGallery([
                             'img/proyect/lumina1.png', 
                             'img/proyect/lumina2.png', 
@@ -311,7 +331,7 @@
                         </div>
                     </div>
 
-                    <div class="glass-card project-card">
+                    <div class="glass-card project-card" data-pos="2">
                         <div class="project-img-box stacked-gallery" onclick="openGallery([
                             'img/proyect/abogado1.png', 
                             'img/proyect/abogado2.png', 
@@ -332,7 +352,7 @@
                         </div>
                     </div>
 
-                    <div class="glass-card project-card">
+                    <div class="glass-card project-card" data-pos="3">
                         <div class="project-img-box stacked-gallery" onclick="openGallery([
                             'img/proyect/volta1.png', 
                             'img/proyect/volta2.png', 
@@ -346,19 +366,22 @@
                         </div>
                         <div class="project-details">
                             <div class="project-header-tag">WEB GENERATIVA</div>
-                            <h3>VOLTA — Estudio de Arte Digital</h3>
-                            <p>Portfolio one-page con fondo 3D de partículas en WebGL, 13 piezas generativas dibujadas en tiempo real con Canvas 2D, cursor custom, loader y micro-interacciones. Sin frameworks ni dependencias externas.</p>
+                            <h3>VOLTA — Estudio Digital</h3>
+                            <p>Portfolio one-page con fondo 3D de partículas, 13 piezas generativas dibujadas con Canvas 2D, cursor custom, loader y micro-interacciones.</p>
                             <div class="tech-tags"><span>Three.js</span><span>JavaScript</span><span>WebGL</span></div>
                             <a href="https://yamilacode.github.io/volta-studio/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
                         </div>
                     </div>
+                    </div>
 
-
+                    <button type="button" class="carousel-arrow arrow-right" onclick="rotateProjects(1)" aria-label="Proyecto siguiente">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </section>
 
             <section id="contacto" class="tab-content" aria-label="Formulario de contacto">
-                <h2 class="section-title-left">Iniciar Comunicación</h2>
+                <span class="status-badge"><i class="fas fa-circle"></i> Trabajemos Juntos</span>
                 <div class="contact-card-glass">
                     <div id="cat-container-contacto" class="cat-box-general">
                         <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
