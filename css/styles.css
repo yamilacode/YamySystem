@@ -262,7 +262,20 @@ body.no-webgl {
     width: 100%; margin-left: auto; margin-right: auto; position: relative;
     overflow-y: auto; scrollbar-width: thin; -ms-overflow-style: none;
 }
-.contact-card-glass::-webkit-scrollbar { width: 0; }
+.contact-card-glass::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 20px;
+    background: rgba(139, 92, 246, 0.15);
+}
+.contact-card-glass::-webkit-scrollbar-thumb {
+    width: 8px;
+    border-radius: 20px;
+    background: var(--primary);
+    border: 2px solid rgba(139, 92, 246, 0.15);
+}
+.contact-card-glass::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
 
 #cat-container-form {
     position: absolute; top: 1rem; right: 1rem; width: 80px; height: 80px; z-index: 2;
