@@ -1343,29 +1343,30 @@ vertical-align: text-bottom;
 }
 
 /* ------------------------------------------------- */
-/* Terminal Console: solo en pantallas grandes (1440px+) */
+/* Console Display: solo en pantallas grandes (1440px+) */
+/* Estilo código JavaScript tipo "inicio" con tema colors */
 /* ------------------------------------------------- */
-.terminal-console { display: none; position: relative; width: 100%; padding: clamp(2rem, 4vw, 4rem); background: rgba(10, 15, 30, 0.8); border-top: 1px solid rgba(139, 92, 246, 0.3); }
+.console-display { display: none; position: relative; width: 100%; padding: clamp(2rem, 4vw, 4rem); background: rgba(10, 15, 30, 0.8); border-top: 1px solid rgba(139, 92, 246, 0.3); margin-top: clamp(2rem, 4vw, 4rem); }
 @media (min-width: 1440px) {
-    .terminal-console { display: block; }
-    .terminal-console .terminal-header { display: flex; justify-content: between; align-items: center; margin-bottom: clamp(1rem, 2vw, 1.5rem); padding-bottom: 1rem; border-bottom: 1px solid rgba(139, 92, 246, 0.2); }
-    .terminal-console .terminal-title { color: var(--primary); font-size: clamp(0.8rem, 1.5vw, 1rem); font-family: 'Courier New', Courier, monospace; font-weight: 600; letter-spacing: 0.5px; }
-    .terminal-console .terminal-cursor { color: var(--primary); font-size: 0.8rem; }
-    .terminal-console .terminal-content { max-height: 400px; overflow: auto; }
-    .terminal-console .terminal-prompt { color: var(--secondary); font-size: 0.85rem; font-family: 'Courier New', Courier, monospace; display: inline-block; min-width: 5ch; }
-    .terminal-console .terminal-cmd { color: var(--accent); font-size: 0.85rem; font-family: 'Courier New', Courier, monospace; }
-    .terminal-console .terminal-output { color: var(--text-main); font-size: 0.8rem; font-family: 'Courier New', Courier, monospace; margin-bottom: 0.4rem; display: block; }
-    .terminal-console .terminal-output span { color: var(--accent); }
+    .console-display { display: block; }
+    .console-display .console-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: clamp(1rem, 2vw, 1.5rem); padding-bottom: 1rem; border-bottom: 1px solid rgba(139, 92, 246, 0.2); }
+    .console-display .console-header span { color: var(--primary); font-size: 0.8rem; font-family: 'Orbitron', sans-serif; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+    .console-display .code-block { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.5rem; overflow-x: auto; }
+    .console-display code { color: var(--text-main); font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; line-height: 1.6; display: block; }
+    .console-display code .keyword { color: var(--accent); }
+    .console-display code .string { color: var(--primary); }
+    .console-display code .comment { color: var(--secondary); opacity: 0.6; }
+    .console-display code .function { color: var(--primary); }
 }
 
-/* Scrollbar para el terminal en Webkit */
-.terminal-content::-webkit-scrollbar { width: 4px; }
-.terminal-content::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
-.terminal-content::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+/* Scrollbar personalizada para el código */
+.console-display::-webkit-scrollbar { width: 6px; }
+.console-display::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+.console-display::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
 
-/* Ocultar en pantallas chicas */
+/* Ocultar en pantallas chicas y tablet */
 @media (max-width: 1024px) {
-    .terminal-console { display: none !important; }
+    .console-display { display: none !important; }
 }
 
 /* Nota: el escalado en pantallas HD/2K/4K ahora es continuo (clamp con techos altos
