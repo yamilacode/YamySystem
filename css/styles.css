@@ -1005,23 +1005,23 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 
     /* Mobile Services: fan stack like desktop */
     .services-grid-glass {
-        position: relative; display: block; width: 100%; max-width: min(520px, 92vw);
-        margin: 0 auto; height: min(60vh, 480px); padding: 0; cursor: pointer;
-        user-select: none; perspective: 1400px;
+        position: relative; display: block; width: 100%; max-width: min(400px, 85vw);
+        margin: 0 auto; height: min(55vh, 400px); padding: 0; cursor: pointer;
+        user-select: none; perspective: 1200px;
     }
     .services-grid-glass .glass-card {
-        position: absolute; top: 50%; left: 0; width: clamp(280px, 75vw, 420px); height: clamp(160px, 35vw, 240px);
+        position: absolute; top: 50%; left: 0; width: clamp(220px, 70vw, 340px); height: clamp(140px, 30vw, 200px);
         display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left;
-        border-radius: 18px; padding: clamp(1rem, 3vw, 1.5rem);
+        border-radius: 14px; padding: clamp(0.8rem, 2.5vw, 1.2rem);
         background: linear-gradient(135deg, rgba(25, 20, 48, 0.99), rgba(12, 16, 34, 1));
-        border: 1.5px solid rgba(139, 92, 246, 0.4);
+        border: 1px solid rgba(139, 92, 246, 0.35);
         background-clip: padding-box;
-        box-shadow: 0 0 0 1.5px rgba(139, 92, 246, 0.5), 0 16px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(139, 92, 246, 0.12);
+        box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.45), 0 12px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(139, 92, 246, 0.1);
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease, z-index 0s;
     }
-    .services-grid-glass .glass-card i { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 0.4rem; }
-    .services-grid-glass .glass-card h3 { font-size: clamp(1rem, 3vw, 1.3rem); margin-bottom: 0.3rem; }
-    .services-grid-glass .glass-card p { font-size: clamp(0.8rem, 2.5vw, 1rem); line-height: 1.4; }
+    .services-grid-glass .glass-card i { font-size: clamp(1.2rem, 3.5vw, 1.6rem); margin-bottom: 0.3rem; }
+    .services-grid-glass .glass-card h3 { font-size: clamp(0.9rem, 2.5vw, 1.2rem); margin-bottom: 0.25rem; }
+    .services-grid-glass .glass-card p { font-size: clamp(0.75rem, 2vw, 0.95rem); line-height: 1.35; }
 
     /* Fan positions - scaled for mobile */
     .services-grid-glass .glass-card[data-pos="0"] { transform: translateY(-50%) translateX(0)                                     rotate(0deg)  scale(1);    opacity: 1;    z-index: 6; filter: none; }
@@ -1038,12 +1038,12 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 /* Mobile Projects: fan carousel like desktop */
     .projects-carousel-wrap { position: relative; width: 100%; display: flex; align-items: flex-start; justify-content: center; }
     .projects-grid-glass {
-        position: relative; display: block; width: 100%; max-width: min(500px, 92vw);
-        margin: 0 auto; min-height: clamp(340px, 50vh, 420px); padding: 0;
-        perspective: 1250px; perspective-origin: 50% 0%;
+        position: relative; display: block; width: 100%; max-width: min(420px, 88vw);
+        margin: 0 auto; min-height: clamp(300px, 45vh, 380px); padding: 0;
+        perspective: 1150px; perspective-origin: 50% 0%;
     }
     .projects-grid-glass .glass-card.project-card {
-        position: absolute; top: 0; left: 50%; width: clamp(220px, 65vw, 320px);
+        position: absolute; top: 0; left: 50%; width: clamp(190px, 60vw, 280px);
         overflow: hidden; cursor: default;
         transform-style: preserve-3d; backface-visibility: hidden;
         box-shadow: 0 11px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.03);
