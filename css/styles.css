@@ -1039,6 +1039,8 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     .services-grid-glass .glass-card[data-pos="5"] { transform: translateY(-50%) translateX(clamp(320px, 64vw, 520px)) rotate(30deg) scale(0.5);  opacity: 0.3; z-index: 1; filter: brightness(0.3) blur(2px); }
 
     .projects-grid-glass { grid-template-columns: 1fr; }
+    /* Cat in contact form is NOT hidden on mobile - it's needed for visibility */
+    #cat-container-form { display: block !important; }
     .cat-box-general, .speech-bubble { display: none !important; }
     .telegram-float { bottom: 20px; right: 20px; }
 
