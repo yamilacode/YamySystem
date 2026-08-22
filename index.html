@@ -276,9 +276,7 @@
                 </div>
             </section>
 
-            </section>
-
-<section id="proyectos" class="tab-content">
+            <section id="proyectos" class="tab-content">
                 <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Trabajos</span>
                 <div class="projects-carousel-wrap">
                     <button type="button" class="carousel-arrow arrow-left" onclick="rotateProjects(-1)" aria-label="Proyecto anterior">
@@ -301,8 +299,8 @@
                         </div>
                         <div class="project-details">
                             <div class="project-header-tag">Sistema Web Institucional</div>
-                            <h3>Biblioteca Digital</h3>
-                            <p>Catálogo bibliográfico serverless. Gestión de recursos literarios educativos, panel de administración seguro y almacenamiento en la nube.</p>
+                            <h3>Biblioteca Digital Interactiva</h3>
+                            <p>Catálogo bibliográfico serverless y en tiempo real. Gestión de recursos literarios educativos con visor PDF integrado, panel de administración seguro y almacenamiento en la nube.</p>
                             <div class="tech-tags">
                                 <span>JavaScript</span>
                                 <span>Firebase</span>
@@ -368,8 +366,8 @@
                         </div>
                         <div class="project-details">
                             <div class="project-header-tag">WEB GENERATIVA</div>
-                            <h3>VOLTA — Estudio Digital</h3>
-                            <p>Portfolio one-page con fondo 3D de partículas, 13 piezas generativas dibujadas con Canvas 2D, cursor custom, loader y micro-interacciones.</p>
+                            <h3>VOLTA — Estudio de Arte Digital</h3>
+                            <p>Portfolio one-page con fondo 3D de partículas en WebGL, 13 piezas generativas dibujadas con Canvas 2D, cursor custom, loader y micro-interacciones.</p>
                             <div class="tech-tags"><span>Three.js</span><span>JavaScript</span><span>WebGL</span></div>
                             <a href="https://yamilacode.github.io/volta-studio/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
                         </div>
@@ -385,10 +383,10 @@
             <section id="contacto" class="tab-content" aria-label="Formulario de contacto">
                 <span class="status-badge"><i class="fas fa-circle"></i> Trabajemos Juntos</span>
                 <div class="contact-card-glass">
-                    <p class="contact-email"><i class="fas fa-envelope"></i> Formulario de Contacto</p>
-                    <div id="cat-container-form" class="cat-box-general" style="position: absolute; top: 1rem; right: 1rem; width: 100px; height: 100px;">
-                        <lottie-player id="peep-form" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                    <div id="cat-container-contacto" class="cat-box-general">
+                        <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
                     </div>
+                    <p class="contact-email"><i class="fas fa-envelope"></i> Formulario de Contacto</p>
                     <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
@@ -430,12 +428,13 @@
                             <button type="submit" class="btn-submit-compact"><span>Enviar</span></button>
                         </div>
                     </form>
-                    <!-- Cat repositioned to overlay near form -->
                 </div>
             </section>
 
         </main>
     </div>
+
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
         <button class="bottom-nav-btn active" onclick="switchTab('inicio', event)">
             <i class="fas fa-terminal"></i>
             <span>Inicio</span>
