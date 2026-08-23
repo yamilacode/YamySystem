@@ -1194,7 +1194,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 #cat-container-contacto {
     position: absolute;
     top: clamp(1px, -4vw, -24px);
-    right: clamp(0.8rem, 4vw, 2.2rem);
+    right: -14px;
     z-index: 8;
     pointer-events: none;
     display: block;
