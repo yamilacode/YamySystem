@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>YamySystem | Desarrollo Web y Software a Medida</title>
+
+    <!-- SEO -->
+    <meta name="description" content="YamySystem desarrolla sitios web corporativos, landing pages y aplicaciones de software a medida en Argentina. Código limpio, rendimiento extremo y SEO para escalar tu negocio.">
+    <meta name="keywords" content="desarrollo web Argentina, aplicaciones de software a medida, páginas web profesionales, diseño web corporativo, landing pages, sistemas web, integraciones API, YamySystem, Yamila Peña">
+    <meta name="author" content="Yamila Peña">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#060811">
+    <meta name="geo.region" content="AR">
+    <meta name="geo.placename" content="Argentina">
+    <link rel="canonical" href="https://www.yamysystem.com.ar/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.yamysystem.com.ar/sitemap.xml">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="YamySystem">
+    <meta property="og:title" content="YamySystem | Desarrollo Web y Software a Medida en Argentina">
+    <meta property="og:description" content="Sitios web corporativos, landing pages y aplicaciones de software a medida. Código limpio, rendimiento extremo y SEO para escalar tu negocio.">
+    <meta property="og:url" content="https://www.yamysystem.com.ar/">
+    <meta property="og:image" content="https://www.yamysystem.com.ar/img/logo.png">
+    <meta property="og:image:alt" content="Logo de YamySystem">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="YamySystem | Desarrollo Web y Software a Medida en Argentina">
+    <meta name="twitter:description" content="Sitios web corporativos, landing pages y aplicaciones de software a medida en Argentina.">
+    <meta name="twitter:image" content="https://www.yamysystem.com.ar/img/logo.png">
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://www.yamysystem.com.ar/#organization",
+      "name": "YamySystem",
+      "url": "https://www.yamysystem.com.ar/",
+      "logo": "https://www.yamysystem.com.ar/img/logo.png",
+      "image": "https://www.yamysystem.com.ar/img/logo.png",
+      "description": "Estudio de desarrollo web y software a medida: sitios corporativos, landing pages, aplicaciones de software, optimización de código e integraciones API en Argentina.",
+      "founder": { "@type": "Person", "name": "Yamila Peña", "jobTitle": "Software Developer" },
+      "address": { "@type": "PostalAddress", "addressCountry": "AR" },
+      "areaServed": "Argentina",
+      "priceRange": "$$",
+      "sameAs": [
+        "https://www.linkedin.com/in/yamilapeña",
+        "https://github.com/yamilacode",
+        "https://www.instagram.com/yamysystem",
+        "https://t.me/YamySystem"
+      ],
+      "knowsAbout": ["Desarrollo Web", "Aplicaciones de Software", "SEO", "Integraciones API", "Diseño UI/UX"],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Desarrollo Web Corporativo",
+            "description": "Sitios web profesionales, ultrarrápidos y optimizados para posicionamiento en buscadores (SEO)."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Aplicaciones de Software a Medida",
+            "description": "Sistemas institucionales y plataformas interactivas adaptadas a tu flujo operativo."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Optimización de Código y APIs",
+            "description": "Arquitecturas limpias, seguras e integraciones de servicios externos y pasarelas de pago."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Seguridad Web",
+            "description": "Protección contra bots, ataques DDoS y vulnerabilidades. Implementación de WAF y buenas prácticas de seguridad."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Soporte & Mantenimiento",
+            "description": "Actualizaciones, monitoreo y resolución de problemas para que tu sitio funcione sin interrupciones."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="icon" href="img/logotipo.png">
+    <link rel="stylesheet" href="css/styles.css?v=29">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.9/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      emailjs.init('2ZCVwRxMpU4ucivnQ')
+    </script>
+</head>
+
+<body class="dashboard-body">
+    <div class="glass-noise" aria-hidden="true"></div>
+
+    <div id="loader-wrapper" class="preloader-screen">
+        <div class="preloader-inner">
+            <lottie-player class="preloader-lottie" src="json/Michilactic.json" background="transparent" speed="0.7" loop autoplay></lottie-player>
+            <div class="preloader-brand-anim">
+                <span class="brand-yamy">YAMY</span><span class="brand-system">SYSTEM</span>
+            </div>
+            <div class="preloader-neon-line">
+                <div class="neon-line-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="mobile-top-header" class="mobile-top-header">
+        <div class="mobile-brand">
+            <div class="mobile-logo-ring">
+                <img src="img/logo.png" alt="YamySystem Logo" class="mobile-logo-img">
+            </div>
+            <span class="mobile-brand-name">YamySystem</span>
+        </div>
+        <div class="mobile-socials">
+            <a href="https://www.linkedin.com/in/yamilapeña" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/yamilacode" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/yamysystem" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/YamySystem" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+    </div>
+
+    <!-- Desktop Top Header -->
+    <header class="desktop-top-header">
+        <div class="desktop-header-inner">
+            <div class="desktop-brand">
+                <div class="logo-animado-wrapper">
+                    <img src="img/logo.png" alt="YamySystem Logo" class="logotipo-glow">
+                </div>
+                <span class="desktop-brand-name">YamySystem</span>
+                <span class="desktop-tagline">Desarrollo Web & Software</span>
+            </div>
+            <div id="cat-container-header" class="cat-box-general">
+                <lottie-player id="walk-header" src="json/cat_line.json" background="transparent" speed="0.6" loop autoplay></lottie-player>
+                <lottie-player id="sit-header" src="json/cat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema de color" title="Cambiar paleta de colores">
+                <i class="fas fa-palette"></i>
+                <span class="theme-tooltip">Cambiar tema</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+
+        <aside class="app-sidebar">
+            <div class="brand-box">
+                <div class="logo-animado-wrapper">
+                    <img src="img/logo.png" alt="YamySystem Logo" class="logotipo-glow">
+                </div>
+                <h1>YamySystem</h1>
+                <p class="tagline">Desarrollo Web & Software</p>
+            </div>
+
+            <div class="profile-widget">
+                <div class="profile-avatar">
+                    <svg class="profile-avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8.6 12.6 L7.4 8.4 L10.6 10.5 Z" fill="#eef2ff"/>
+                        <path d="M15.4 12.6 L16.6 8.4 L13.4 10.5 Z" fill="#eef2ff"/>
+                        <path d="M8.7 12.3 L8.2 9.6 L10.3 11.1 Z" fill="#c4b5fd"/>
+                        <path d="M15.3 12.3 L15.8 9.6 L13.7 11.1 Z" fill="#c4b5fd"/>
+                        <circle cx="12" cy="14.2" r="4.1" fill="#eef2ff"/>
+                        <circle cx="10.4" cy="13.8" r="0.7" fill="#0f172a"/>
+                        <circle cx="13.6" cy="13.8" r="0.7" fill="#0f172a"/>
+                        <path d="M11.2 15.6 L12 16.4 L12.8 15.6" fill="#d946ef"/>
+                        <path d="M12 16.4 v 0.5 M12 16.9 c -0.7 0.5 -1.4 0.4 -1.7 -0.2 M12 16.9 c 0.7 0.5 1.4 0.4 1.7 -0.2" stroke="#94a3b8" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+                        <path d="M7.4 14.6 h -1.6 M7.7 16 h -1.8 M16.6 14.6 h 1.6 M16.3 16 h 1.8" stroke="#94a3b8" stroke-width="0.5" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="9.2" fill="rgba(139,92,246,0.22)" stroke="rgba(139,92,246,0.95)" stroke-width="1.2"/>
+                        <path d="M6.6 9.4 A 6.8 6.8 0 0 1 12 3.8" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1" stroke-linecap="round"/>
+                        <circle cx="7.4" cy="7.4" r="1.1" fill="rgba(255,255,255,0.35)"/>
+                        <ellipse cx="12" cy="20.6" rx="5.4" ry="1.5" fill="#a78bfa"/>
+                        <ellipse cx="12" cy="20.2" rx="4.4" ry="1" fill="#8b5cf6"/>
+                    </svg>
+                </div>
+                <h2>Yamila Peña</h2>
+                <p class="role">Full Stack Dev. & Software Developer</p>
+                <div class="sidebar-socials">
+                    <a href="https://www.linkedin.com/in/yamilapeña" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/yamilacode" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/yamysystem" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/YamySystem" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                </div>
+                <p class="bio-short">Transformando ideas en aplicaciones web escalables, limpias y de alto impacto corporativo.</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-tab active" onclick="switchTab('inicio', event)"><i class="fas fa-terminal"></i> <span>Inicio</span></button>
+                <button class="nav-tab" onclick="switchTab('servicios', event)"><i class="fas fa-code"></i> <span>Servicios</span></button>
+                <button class="nav-tab" onclick="switchTab('proyectos', event)"><i class="fas fa-layer-group"></i> <span>Proyectos</span></button>
+                <button class="nav-tab" onclick="switchTab('contacto', event)"><i class="fas fa-paper-plane"></i> <span>Contacto</span></button>
+            </nav>
+        </aside>
+
+        <main class="app-main">
+
+            <section id="inicio" class="tab-content active">
+                <div class="hero-card-glass">
+                    <div class="hero-text-col">
+                        <span class="status-badge"><i class="fas fa-circle"></i> Soluciones Digitales a Medida</span>
+                        <h2 class="hero-3d-title"><span class="word"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span></span> <span class="word"><span class="letter">a</span></span>&nbsp;<span class="word"><span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span></span><br><span class="word"><span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span></span> <span class="word"><span class="letter">t</span><span class="letter">u</span></span> <span class="word"><span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></span></h2>
+                        <div class="section-title-line" aria-hidden="true"></div>
+                        <p>Diseñamos sitios web corporativos de alta conversión, landing pages dinámicas y sistemas de software interactivos. Entregamos soluciones tecnológicas modernas, priorizando el rendimiento extremo y la eficiencia de tu institución.</p>
+                        <div class="hero-actions">
+                           <button class="btn btn-primary" onclick="switchTab('proyectos', event)"><span>Ver Trabajos <i class="btn-arrow" aria-hidden="true">→</i></span></button>
+                           <button class="btn btn-outline" onclick="switchTab('contacto', event)"><span>Contactar <i class="btn-arrow" aria-hidden="true">→</i></span></button>
+                        </div>
+                    </div>
+                    <div class="hero-logo-tilt" id="heroLogoTilt">
+                        <canvas id="cageCanvas"></canvas>
+                        <img src="img/logotipo.png" alt="YamySystem Escudo" class="hero-logotipo-img">
+                        <div id="welcome-typewriter" class="welcome-typewriter"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="servicios" class="tab-content" aria-label="Servicios">
+                <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Servicios</span>
+                <div class="section-title-line" aria-hidden="true"></div>
+
+                <div class="services-controls">
+                    <button id="toggleServicesGrid" type="button" class="btn-live-crystal">
+                        <i class="fas fa-th-large"></i> <span>Ver Todos</span><span class="plus-icon" aria-hidden="true">+</span>
+                    </button>
+                </div>
+
+                <div class="services-grid-glass" id="servicesCarousel">
+                    <div class="glass-card" data-pos="0">
+                        <i class="fas fa-globe"></i>
+                        <h3>Desarrollo Web</h3>
+                        <p>Creación de sitios corporativos modernos, ultrarrápidos y optimizados strictly para posicionamiento web (SEO).</p>
+                    </div>
+
+                    <div class="glass-card" data-pos="1">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Aplicaciones de Software</h3>
+                        <p>Construcción de sistemas institucionales y plataformas interactivas adaptadas al flujo operativo exacto que necesites.</p>
+                    </div>
+
+                    <div class="glass-card" data-pos="2">
+                        <i class="fas fa-database"></i>
+                        <h3>Optimización & Código</h3>
+                        <p>Arquitecturas limpias, modulares y seguras utilizando tecnologías web de vanguardia.</p>
+                    </div>
+
+                    <div class="glass-card" data-pos="3">
+                        <i class="fas fa-plug"></i>
+                        <h3>APIs & Integraciones</h3>
+                        <p>Conexión de servicios externos, pasarelas de pago y desarrollo de módulos a medida para expandir las funciones de tu sistema.</p>
+                    </div>
+
+                    <div class="glass-card" data-pos="4">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Seguridad Web</h3>
+                        <p>Protección contra bots, ataques DDoS y vulnerabilidades. Implementación de WAF, anti-bot y buenas prácticas de seguridad.</p>
+                    </div>
+
+                    <div class="glass-card" data-pos="5">
+                        <i class="fas fa-headset"></i>
+                        <h3>Soporte & Mantenimiento</h3>
+                        <p>Actualizaciones, monitoreo y resolución de problemas para que tu sitio funcione sin interrupciones las 24 horas.</p>
+                    </div>
+                </div>
+
+                <div class="scroll-hint" aria-hidden="true">
+                    <span>Hacé scroll</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="proyectos" class="tab-content">
+                <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Trabajos</span>
+                <div class="section-title-line" aria-hidden="true"></div>
+
+                <div class="projects-controls">
+                    <button id="toggleGridView" type="button" class="btn-live-crystal">
+                        <i class="fas fa-th-large"></i> <span>Ver Todos</span><span class="plus-icon" aria-hidden="true">+</span>
+                    </button>
+                </div>
+
+                <div class="projects-carousel-wrap">
+                    <div class="fan-direction-indicator" aria-hidden="true" title="Dirección del abanico">
+                        <span class="fan-indicator-line"></span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+
+                    <button type="button" class="carousel-arrow arrow-left" onclick="rotateProjects(-1)" aria-label="Proyecto anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <div class="projects-grid-glass" id="projectsCarousel">
+
+                    <div class="glass-card project-card" data-pos="0">
+                        <div class="project-img-box stacked-gallery" onclick="openGallery([
+                            'img/proyect/block1.png', 
+                            'img/proyect/block2.png', 
+                            'img/proyect/block3.png'
+                        ])">
+                            <img src="img/proyect/block3.png" alt="Captura 3" class="stacked-img img-bottom">
+                            <img src="img/proyect/block2.png" alt="Captura 2" class="stacked-img img-middle">
+                            <img src="img/proyect/block1.png" alt="Captura 1" class="stacked-img img-top">
+                            
+                            <div class="zoom-icon-overlay"><i class="fas fa-layer-group"></i> Ver Galería</div>
+                        </div>
+                        <div class="project-details">
+                            <div class="project-header-tag">Sistema Web Institucional</div>
+                            <h3>Biblioteca Digital</h3>
+                            <p>Catálogo bibliográfico serverless y en tiempo real. Gestión de recursos literarios educativos con visor PDF integrado, panel de administración seguro y almacenamiento en la nube.</p>
+                            <div class="tech-tags">
+                                <span>JavaScript</span>
+                                <span>Firebase</span>
+                                <span>Tailwind</span>
+                            </div>
+                            <a href="https://yamilacode.github.io/bibliotecaDigital/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card project-card" data-pos="1">
+                        <div class="project-img-box stacked-gallery" onclick="openGallery([
+                            'img/proyect/lumina1.png', 
+                            'img/proyect/lumina2.png', 
+                            'img/proyect/lumina3.png'
+                        ])">
+                            <img src="img/proyect/lumina3.png" alt="Captura 3" class="stacked-img img-bottom">
+                            <img src="img/proyect/lumina2.png" alt="Captura 2" class="stacked-img img-middle">
+                            <img src="img/proyect/lumina1.png" alt="Captura 1" class="stacked-img img-top">
+                            
+                            <div class="zoom-icon-overlay"><i class="fas fa-layer-group"></i> Ver Galería</div>
+                        </div>
+                        <div class="project-details">
+                            <div class="project-header-tag">DISEÑO WEB INMERSIVO</div>
+                            <h3>Plataforma Lumina Salón</h3>
+                            <p>Interfaz inmersiva con efecto de tarjetas apiladas en el scroll, galería tipo coverflow y control de ambiente sonoro. Diseñada para destacar visualmente.</p>
+                            <div class="tech-tags"><span>UI/UX</span><span>JavaScript</span><span>CSS3</span></div>
+                            <a href="https://yamilacode.github.io/lumina-salon/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card project-card" data-pos="2">
+                        <div class="project-img-box stacked-gallery" onclick="openGallery([
+                            'img/proyect/abogado1.png', 
+                            'img/proyect/abogado2.png', 
+                            'img/proyect/abogado3.png'
+                        ])">
+                            <img src="img/proyect/abogado3.png" alt="Captura 3" class="stacked-img img-bottom">
+                            <img src="img/proyect/abogado2.png" alt="Captura 2" class="stacked-img img-middle">
+                            <img src="img/proyect/abogado1.png" alt="Captura 1" class="stacked-img img-top">
+                            
+                            <div class="zoom-icon-overlay"><i class="fas fa-layer-group"></i> Ver Galería</div>
+                        </div>
+                        <div class="project-details">
+                            <div class="project-header-tag">Plantilla Profesional</div>
+                            <h3>Estudio Jurídico Moderno</h3>
+                            <p>Diseño web corporativo optimizado para servicios legales, enfocado en transmitir confianza y captar clientes potenciales.</p>
+                            <div class="tech-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+                            <a href="https://yamilacode.github.io/abogados-landing-page/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card project-card" data-pos="3">
+                        <div class="project-img-box stacked-gallery" onclick="openGallery([
+                            'img/proyect/volta1.png', 
+                            'img/proyect/volta2.png', 
+                            'img/proyect/volta3.png'
+                        ])">
+                            <img src="img/proyect/volta3.png" alt="Captura 3" class="stacked-img img-bottom">
+                            <img src="img/proyect/volta2.png" alt="Captura 2" class="stacked-img img-middle">
+                            <img src="img/proyect/volta1.png" alt="Captura 1" class="stacked-img img-top">
+                            
+                            <div class="zoom-icon-overlay"><i class="fas fa-layer-group"></i> Ver Galería</div>
+                        </div>
+                        <div class="project-details">
+                            <div class="project-header-tag">WEB GENERATIVA</div>
+                            <h3>VOLTA — Estudio Digital</h3>
+                            <p>Portfolio one-page con fondo 3D de partículas en WebGL, 13 piezas generativas dibujadas con Canvas 2D, cursor custom, loader y micro-interacciones.</p>
+                            <div class="tech-tags"><span>Three.js</span><span>JavaScript</span><span>WebGL</span></div>
+                            <a href="https://yamilacode.github.io/volta-studio/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
+                        </div>
+                    </div>
+                    </div>
+
+                    <button type="button" class="carousel-arrow arrow-right" onclick="rotateProjects(1)" aria-label="Proyecto siguiente">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="contacto" class="tab-content" aria-label="Formulario de contacto">
+                <span class="status-badge"><i class="fas fa-circle"></i> Trabajemos Juntos</span>
+                <div class="section-title-line" aria-hidden="true"></div>
+                <div class="contact-card-glass">
+                    <div id="cat-container-contacto" class="cat-box-general">
+                        <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                    </div>
+                    <p class="contact-email"><i class="fas fa-envelope"></i> Formulario de Contacto</p>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" autocomplete="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="servicio">Servicio</label>
+                            <select id="servicio" name="servicio" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Desarrollo Web">Desarrollo Web</option>
+                                <option value="Aplicaciones de Software">Aplicaciones de Software</option>
+                                <option value="Optimización & Código">Optimización & Código</option>
+                                <option value="APIs & Integraciones">APIs & Integraciones</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" required></textarea>
+                        </div>
+
+                        <input type="hidden" name="title" id="title">
+                        <input type="hidden" name="name" id="name">
+
+                        <!-- Anti-bot: honeypot (invisible para humanos, los bots lo completan) -->
+                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                            <label for="website">No completar</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        <!-- Anti-bot: timestamp de carga del formulario -->
+                        <input type="hidden" id="form-loaded" name="form-loaded">
+
+                        <div class="form-submit-row">
+                            <button type="submit" class="btn-submit-compact"><span>Enviar</span></button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Control de Scroll Lateral Futurista -->
+            <div id="side-scroll-widget" class="side-scroll-widget" aria-label="Navegación de scroll">
+                <button type="button" class="side-scroll-btn btn-up" id="scrollUpBtn" title="Subir">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+                <div class="side-scroll-track">
+                    <div class="side-scroll-pulse"></div>
+                </div>
+                <button type="button" class="side-scroll-btn btn-down" id="scrollDownBtn" title="Bajar">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
+        <button class="bottom-nav-btn active" onclick="switchTab('inicio', event)">
+            <i class="fas fa-terminal"></i>
+            <span>Inicio</span>
+        </button>
+        <button class="bottom-nav-btn" onclick="switchTab('servicios', event)">
+            <i class="fas fa-code"></i>
+            <span>Servicios</span>
+        </button>
+        <button class="bottom-nav-btn" onclick="switchTab('proyectos', event)">
+            <i class="fas fa-layer-group"></i>
+            <span>Proyectos</span>
+        </button>
+        <button class="bottom-nav-btn" onclick="switchTab('contacto', event)">
+            <i class="fas fa-paper-plane"></i>
+            <span>Contacto</span>
+        </button>
+    </nav>
+
+    <div id="star-cursor" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2c1 6.5 3.5 9 10 10-6.5 1-9 3.5-10 10-1-6.5-3.5-9-10-10 6.5-1 9-3.5 10-10z"></path>
+        </svg>
+    </div>
+
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="cat-paw-clip" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,1 C0.3,1,0.15,0.85,0.15,0.65 A0.15,0.15 0 0,1 0.3,0.5 A0.1,0.1 0 0,0 0.4,0.4 A0.08,0.08 0 0,1 0.45,0.3 A0.08,0.08 0 0,1 0.5,0.4 A0.1,0.1 0 0,0 0.6,0.5 A0.15,0.15 0 0,1 0.75,0.65 C0.75,0.85,0.6,1,0.5,1 Z M0.25,0.4 A0.08,0.08 0 0,1 0.17,0.32 A0.12,0.12 0 0,1 0.25,0.2 A0.08,0.08 0 0,1 0.33,0.32 A0.08,0.08 0 0,1 0.25,0.4 Z M0.42,0.25 A0.07,0.07 0 0,1 0.35,0.18 A0.1,0.1 0 0,1 0.42,0.08 A0.07,0.07 0 0,1 0.49,0.18 A0.07,0.07 0 0,1 0.42,0.25 Z M0.58,0.25 A0.07,0.07 0 0,1 0.51,0.18 A0.1,0.1 0 0,1 0.58,0.08 A0.07,0.07 0 0,1 0.65,0.18 A0.07,0.07 0 0,1 0.58,0.25 Z M0.75,0.4 A0.08,0.08 0 0,1 0.67,0.32 A0.12,0.12 0 0,1 0.75,0.2 A0.08,0.08 0 0,1 0.83,0.32 A0.08,0.08 0 0,1 0.75,0.4 Z"></path>
+            </clipPath>
+        </defs>
+    </svg>
+
+    <div id="gallery-modal" class="gallery-modal">
+        <span class="modal-close" onclick="closeGallery()">&times;</span>
+        
+        <div class="modal-content">
+            <button class="nav-arrow prev-arrow" onclick="changeModalImage(-1)">&#10094;</button>
+            
+            <div class="modal-image-wrapper">
+                <img id="modal-current-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Captura del proyecto">
+            </div>
+            
+            <button class="nav-arrow next-arrow" onclick="changeModalImage(1)">&#10095;</button>
+        </div>
+        
+        <div id="modal-counter" class="modal-counter">1 / 3</div>
+    </div>
+
+    <div id="form-modal" class="form-modal" role="dialog" aria-modal="true" aria-labelledby="form-modal-title" aria-describedby="form-modal-message">
+        <div class="form-modal-card">
+            <div class="form-modal-icon" aria-hidden="true">
+                <svg class="icon-success" viewBox="0 0 52 52">
+                    <circle class="success-circle" cx="26" cy="26" r="24" fill="none"></circle>
+                    <path class="success-check" fill="none" d="M14 27 l8 8 l16 -16"></path>
+                </svg>
+                <svg class="icon-error" viewBox="0 0 52 52">
+                    <circle class="error-circle" cx="26" cy="26" r="24" fill="none"></circle>
+                    <path class="error-cross" fill="none" d="M18 18 l16 16"></path>
+                    <path class="error-cross" fill="none" d="M34 18 l-16 16"></path>
+                </svg>
+            </div>
+            <h3 id="form-modal-title">¡Mensaje enviado con éxito!</h3>
+            <p id="form-modal-message">Gracias por escribirnos, responderemos a la brevedad.</p>
+            <button type="button" class="btn-modal-close" onclick="closeFormModal()">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="scripts/three.min.js?v=3"></script>
+    <script src="scripts/scripts.js?v=25"></script>
+</body>
+</html>
