@@ -613,6 +613,10 @@ body::-webkit-scrollbar,
     margin: 0;
     padding: 0;
 }
+
+@media (min-width: 1025px) {
+    .projects-controls { right: clamp(1rem, 5vw, 2rem); }
+}
 #proyectos.tab-content.active, #servicios.tab-content.active { position: relative; }
 
 .plus-icon { display: none; }
