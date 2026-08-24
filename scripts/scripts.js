@@ -677,14 +677,14 @@ function rotateServices(direction) {
         track.classList.toggle('grid-mode', active);
         toggleBtn.classList.toggle('active', active);
         if (section) section.classList.toggle('grid-view-active', active);
-        const btnText = toggleBtn.querySelector('span');
+        const btnText = toggleBtn.querySelector('span:not(.plus-icon)');
         const btnIcon = toggleBtn.querySelector('i');
         if (active) {
-            btnText.textContent = 'Ver Stack 3D';
-            btnIcon.className = 'fas fa-sync-alt';
+            if (btnText) btnText.textContent = 'Ver menos';
+            if (btnIcon) btnIcon.className = 'fas fa-th-large';
         } else {
-            btnText.textContent = 'Ver Todos';
-            btnIcon.className = 'fas fa-th-large';
+            if (btnText) btnText.textContent = 'Ver más';
+            if (btnIcon) btnIcon.className = 'fas fa-th-large';
         }
     }
 
@@ -750,14 +750,14 @@ function rotateProjects(direction) {
         track.classList.toggle('grid-mode', active);
         toggleBtn.classList.toggle('active', active);
         if (section) section.classList.toggle('grid-view-active', active);
-        const btnText = toggleBtn.querySelector('span');
+        const btnText = toggleBtn.querySelector('span:not(.plus-icon)');
         const btnIcon = toggleBtn.querySelector('i');
         if (active) {
-            btnText.textContent = 'Ver Carrusel 3D';
-            btnIcon.className = 'fas fa-sync-alt';
+            if (btnText) btnText.textContent = 'Ver menos';
+            if (btnIcon) btnIcon.className = 'fas fa-th-large';
         } else {
-            btnText.textContent = 'Ver Todos';
-            btnIcon.className = 'fas fa-th-large';
+            if (btnText) btnText.textContent = 'Ver más';
+            if (btnIcon) btnIcon.className = 'fas fa-th-large';
         }
     }
 

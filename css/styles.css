@@ -623,38 +623,130 @@ body::-webkit-scrollbar,
    igual en móvil y en PC (por eso las reglas de abajo no están dentro de ningún @media) */
 .projects-controls, .services-controls {
     position: absolute;
-    top: -0.2rem;
+    top: -0.65rem;
     right: clamp(0.5rem, 3vw, 1.2rem);
     z-index: 30;
     margin: 0;
     padding: 0;
 }
 
-@media (min-width: 1025px) {
-    .projects-controls { right: clamp(1rem, 5vw, 2rem); }
-}
 #proyectos.tab-content.active, #servicios.tab-content.active { position: relative; }
 
-.plus-icon { display: none; }
+/* ===== BOTÓN DE CONTROL DE VISTA (PC VS MÓVIL) ===== */
 
-#toggleGridView.btn-live-crystal,
-#toggleServicesGrid.btn-live-crystal {
-    width: 42px; height: 42px; padding: 0; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+/* --- PC / DESKTOP (pantallas >= 1025px): Botón cuadrado compacto con icono de cuadraditos + Ver más / Ver menos --- */
+@media (min-width: 1025px) {
+    .projects-controls, .services-controls {
+        top: -0.55rem !important;
+        right: clamp(1rem, 4vw, 2.5rem) !important;
+    }
+
+    #toggleGridView.btn-live-crystal,
+    #toggleServicesGrid.btn-live-crystal {
+        width: auto !important;
+        height: 28px !important;
+        padding: 0 0.7rem !important;
+        border-radius: 6px !important; /* Cuadrado compacto sutil con bordes redondeados */
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.38rem !important;
+        background: rgba(8, 12, 28, 0.85) !important;
+        border: 1px solid rgba(139, 92, 246, 0.4) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(139, 92, 246, 0.2) !important;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+
+    #toggleGridView.btn-live-crystal::before, #toggleGridView.btn-live-crystal::after,
+    #toggleServicesGrid.btn-live-crystal::before, #toggleServicesGrid.btn-live-crystal::after {
+        border-radius: 5px !important;
+    }
+
+    #toggleGridView.btn-live-crystal i,
+    #toggleServicesGrid.btn-live-crystal i {
+        display: inline-block !important;
+        font-size: 0.8rem !important;
+        color: #d946ef !important;
+        filter: drop-shadow(0 0 5px rgba(217, 70, 239, 0.8)) !important;
+        transition: transform 0.3s ease !important;
+    }
+
+    #toggleGridView.btn-live-crystal span:not(.plus-icon),
+    #toggleServicesGrid.btn-live-crystal span:not(.plus-icon) {
+        display: inline-block !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 0.76rem !important;
+        letter-spacing: 0.25px !important;
+    }
+
+    #toggleGridView.btn-live-crystal .plus-icon,
+    #toggleServicesGrid.btn-live-crystal .plus-icon {
+        display: none !important; /* Ocultar signo + en PC */
+    }
+
+    #toggleGridView.btn-live-crystal:hover,
+    #toggleServicesGrid.btn-live-crystal:hover {
+        transform: translateY(-2px) !important;
+        border-color: var(--primary) !important;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.65), 0 0 18px rgba(139, 92, 246, 0.45) !important;
+    }
+
+    #toggleGridView.btn-live-crystal:hover i,
+    #toggleServicesGrid.btn-live-crystal:hover i {
+        transform: scale(1.12) !important;
+    }
 }
-#toggleGridView.btn-live-crystal i, #toggleServicesGrid.btn-live-crystal i,
-#toggleGridView.btn-live-crystal span:not(.plus-icon),
-#toggleServicesGrid.btn-live-crystal span:not(.plus-icon) { display: none; }
-#toggleGridView.btn-live-crystal::before, #toggleGridView.btn-live-crystal::after,
-#toggleServicesGrid.btn-live-crystal::before, #toggleServicesGrid.btn-live-crystal::after { border-radius: 50%; }
-#toggleGridView.btn-live-crystal .plus-icon,
-#toggleServicesGrid.btn-live-crystal .plus-icon {
-    display: block; position: relative; z-index: 2;
-    font-size: 1.3rem; line-height: 1; color: #fff; font-weight: 400;
-    transition: transform 0.3s ease;
+
+/* --- MÓVIL (smartphones / touch <= 1024px): Únicamente botón + redondo original --- */
+@media (max-width: 1024px) {
+    .projects-controls, .services-controls {
+        top: -0.1rem !important;
+        right: clamp(0.5rem, 3vw, 1.2rem) !important;
+    }
+
+    #toggleGridView.btn-live-crystal,
+    #toggleServicesGrid.btn-live-crystal {
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 50% !important; /* Botón redondo original en móvil */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(8, 12, 28, 0.85) !important;
+        border: 1.2px solid rgba(139, 92, 246, 0.45) !important;
+    }
+
+    #toggleGridView.btn-live-crystal::before, #toggleGridView.btn-live-crystal::after,
+    #toggleServicesGrid.btn-live-crystal::before, #toggleServicesGrid.btn-live-crystal::after {
+        border-radius: 50% !important;
+    }
+
+    #toggleGridView.btn-live-crystal i,
+    #toggleServicesGrid.btn-live-crystal i,
+    #toggleGridView.btn-live-crystal span:not(.plus-icon),
+    #toggleServicesGrid.btn-live-crystal span:not(.plus-icon) {
+        display: none !important; /* Ocultar icono de cuadraditos y texto en móvil */
+    }
+
+    #toggleGridView.btn-live-crystal .plus-icon,
+    #toggleServicesGrid.btn-live-crystal .plus-icon {
+        display: block !important;
+        position: relative !important;
+        z-index: 2 !important;
+        font-size: 1.15rem !important;
+        line-height: 1 !important;
+        color: #fff !important;
+        font-weight: 400 !important;
+        transition: transform 0.3s ease !important;
+    }
+
+    #toggleGridView.btn-live-crystal.active .plus-icon,
+    #toggleServicesGrid.btn-live-crystal.active .plus-icon {
+        transform: rotate(45deg) !important;
+    }
 }
-#toggleGridView.btn-live-crystal.active .plus-icon,
-#toggleServicesGrid.btn-live-crystal.active .plus-icon { transform: rotate(45deg); }
 
 .projects-grid-glass.grid-mode,
 .services-grid-glass.grid-mode {
@@ -681,11 +773,12 @@ body::-webkit-scrollbar,
         padding: clamp(1rem, 1.2vw, 1.4rem) !important;
     }
     .projects-grid-glass.grid-mode .project-img-box.stacked-gallery {
-        height: clamp(115px, 10vw, 150px) !important;
+        height: clamp(135px, 12vw, 175px) !important;
     }
     .projects-grid-glass.grid-mode .stacked-img {
-        top: clamp(10px, 1.2vw, 18px) !important;
-        height: clamp(80px, 7vw, 110px) !important;
+        top: clamp(8px, 1vw, 14px) !important;
+        height: clamp(105px, 9.5vw, 140px) !important;
+        width: 88% !important;
     }
 }
 
@@ -714,11 +807,12 @@ body::-webkit-scrollbar,
         line-height: 1.4 !important;
     }
     .projects-grid-glass.grid-mode .project-img-box.stacked-gallery {
-        height: 130px !important;
+        height: 145px !important;
     }
     .projects-grid-glass.grid-mode .stacked-img {
-        top: 14px !important;
-        height: 90px !important;
+        top: 10px !important;
+        height: 115px !important;
+        width: 88% !important;
     }
     .projects-grid-glass.grid-mode .project-details {
         padding: 0.85rem 1rem !important;
@@ -778,15 +872,17 @@ body::-webkit-scrollbar,
 }
 .projects-grid-glass.grid-mode .project-details h3 {
     font-size: clamp(1.05rem, 1.2vw, 1.4rem);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 .projects-grid-glass.grid-mode .project-details p {
-    font-size: clamp(0.8rem, 0.9vw, 0.98rem);
-    line-height: 1.4;
+    font-size: clamp(0.82rem, 0.92vw, 1rem);
+    line-height: 1.55 !important;
+    margin-top: 0.35rem !important;
+    margin-bottom: 0.75rem !important;
 }
 .projects-grid-glass.grid-mode .tech-tags {
-    margin: 0.45rem 0;
-    gap: 0.35rem;
+    margin: 0.65rem 0 0.85rem 0 !important;
+    gap: 0.4rem;
 }
 .projects-grid-glass.grid-mode .tech-tags span {
     font-size: clamp(0.68rem, 0.78vw, 0.85rem);
@@ -830,7 +926,7 @@ body::-webkit-scrollbar,
     overflow-x: hidden !important;
     overflow-y: auto !important;
     height: 100% !important;
-    padding-bottom: 1.2rem !important;
+    padding-bottom: clamp(3.5rem, 6vh, 5.5rem) !important;
     padding-right: clamp(1rem, 2.5vw, 4.5rem) !important;
 }
 
@@ -846,16 +942,9 @@ body::-webkit-scrollbar,
     }
 }
 
-/* En el efecto abanico 3D (carrusel), el hover-zoom de "Ver Galería" se ve roto porque
-   las tarjetas están rotadas/escaladas; sólo debe aparecer en modo grilla ("Ver Todos") */
-.projects-grid-glass:not(.grid-mode) .zoom-icon-overlay {
-    display: none !important;
-}
-
-/* En mobile el zoom de "Ver Galería" se saca por completo (abanico y grilla):
-   con pantallas chicas y touch, el hover queda pegado y tapa la tarjeta */
-@media (max-width: 1024px) {
-    .zoom-icon-overlay { display: none !important; }
+/* Ícono y "Ver Galería" habilitado en estado de abanico 3D (carrusel) y grilla */
+.projects-grid-glass .zoom-icon-overlay {
+    display: flex !important;
 }
 
 @media (min-width: 1025px) {
@@ -893,11 +982,11 @@ body::-webkit-scrollbar,
 
     /* data-pos: 0 = tarjeta activa/al frente ... 5 = la m├ís al fondo. Abanico exagerado hacia la derecha */
     .services-grid-glass .glass-card[data-pos="0"] { transform: translateY(-50%) translateX(0)                                   rotate(0deg)  scale(1);    opacity: 1;    z-index: 6; filter: none; }
-    .services-grid-glass .glass-card[data-pos="1"] { transform: translateY(-50%) translateX(clamp(140px, 15vw, 220px)) rotate(6deg)  scale(0.9);  opacity: 0.9; z-index: 5; filter: brightness(0.8) blur(0.3px); }
-    .services-grid-glass .glass-card[data-pos="2"] { transform: translateY(-50%) translateX(clamp(260px, 27vw, 400px)) rotate(12deg) scale(0.8);  opacity: 0.75; z-index: 4; filter: brightness(0.65) blur(0.8px); }
-    .services-grid-glass .glass-card[data-pos="3"] { transform: translateY(-50%) translateX(clamp(370px, 38vw, 570px)) rotate(18deg) scale(0.7);  opacity: 0.6; z-index: 3; filter: brightness(0.5) blur(1.2px); }
-    .services-grid-glass .glass-card[data-pos="4"] { transform: translateY(-50%) translateX(clamp(470px, 48vw, 720px)) rotate(24deg) scale(0.6);  opacity: 0.45; z-index: 2; filter: brightness(0.4) blur(1.5px); }
-    .services-grid-glass .glass-card[data-pos="5"] { transform: translateY(-50%) translateX(clamp(560px, 57vw, 860px)) rotate(30deg) scale(0.5);  opacity: 0.3; z-index: 1; filter: brightness(0.3) blur(2px); }
+    .services-grid-glass .glass-card[data-pos="1"] { transform: translateY(-50%) translateX(clamp(140px, 15vw, 220px)) rotate(6deg)  scale(0.92); opacity: 0.9; z-index: 5; filter: brightness(0.85); }
+    .services-grid-glass .glass-card[data-pos="2"] { transform: translateY(-50%) translateX(clamp(260px, 27vw, 400px)) rotate(12deg) scale(0.82); opacity: 0.75; z-index: 4; filter: brightness(0.72); }
+    .services-grid-glass .glass-card[data-pos="3"] { transform: translateY(-50%) translateX(clamp(370px, 38vw, 570px)) rotate(18deg) scale(0.74); opacity: 0.6; z-index: 3; filter: brightness(0.6); }
+    .services-grid-glass .glass-card[data-pos="4"] { transform: translateY(-50%) translateX(clamp(470px, 48vw, 720px)) rotate(24deg) scale(0.66); opacity: 0.45; z-index: 2; filter: brightness(0.5); }
+    .services-grid-glass .glass-card[data-pos="5"] { transform: translateY(-50%) translateX(clamp(560px, 57vw, 860px)) rotate(30deg) scale(0.58); opacity: 0.3; z-index: 1; filter: brightness(0.4); }
 
     .glass-card { width: 100%; max-width: none; }
     #servicios.tab-content.active, #proyectos.tab-content.active { overflow-x: visible; overflow-y: visible; align-items: flex-start; }
@@ -905,77 +994,64 @@ body::-webkit-scrollbar,
        ahí sí necesitamos scroll vertical y su barrita lateral (igual que el menú) */
     #servicios.tab-content.active.grid-view-active,
     #proyectos.tab-content.active.grid-view-active { overflow-x: hidden !important; overflow-y: auto !important; height: 100% !important; }
-
-    /* ===== Carrusel de Proyectos: Coverflow 3D Recto (Tarjetas erguidas sin inclinación 2D ni cortes) ===== */
-    .projects-carousel-wrap { position: relative; width: 100%; display: flex; align-items: flex-start; justify-content: center; overflow: visible; margin-top: 0.2rem; padding-top: 0; }
-
-    .projects-grid-glass {
-        position: relative; display: block; width: 100%; max-width: clamp(650px, 50vw, 1080px); margin: 0 auto;
-        min-height: clamp(320px, 27vw, 380px); padding: 0.2rem 1.5rem 0.2rem;
-        perspective: 1800px; perspective-origin: 50% 15%;
-        overflow: visible;
-    }
-    @media (min-width: 1600px) {
-        .projects-grid-glass { max-width: 920px; min-height: 400px; }
-        .projects-grid-glass {
-            transform: translateZ(-200px);
-        }
-        .projects-grid-glass .glass-card.project-card[data-pos="0"] {
-            transform: translateX(-50%) translateY(5px) rotate(0deg) rotateY(0deg) scale(0.92);
-        }
-        .projects-grid-glass .glass-card.project-card[data-pos="1"] {
-            transform: translateX(calc(-50% + clamp(170px, 19vw, 240px))) translateY(16px) translateZ(-150px) rotate(0deg) rotateY(-32deg) scale(0.75);
-        }
-        .projects-grid-glass .glass-card.project-card[data-pos="2"] {
-            transform: translateX(calc(-50% + clamp(300px, 33vw, 410px))) translateY(26px) translateZ(-300px) rotate(0deg) rotateY(-48deg) scale(0.62);
-        }
-        .projects-grid-glass .glass-card.project-card[data-pos="3"] {
-            transform: translateX(calc(-50% - clamp(170px, 19vw, 240px))) translateY(16px) translateZ(-150px) rotate(0deg) rotateY(32deg) scale(0.75);
-        }
-    }
-    .projects-grid-glass .glass-card.project-card {
-        position: absolute; top: 0px; left: 50%; width: clamp(220px, 18.5vw, 320px);
-        overflow: hidden; cursor: default;
-        transform-style: preserve-3d; backface-visibility: hidden;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.06);
-        transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.65s ease, filter 0.65s ease, box-shadow 0.65s ease, z-index 0s;
-    }
-
-    /* Coverflow Recto: Tarjetas erguidas (rotate 0deg) girando suavemente en 3D (rotateY) */
-    .projects-grid-glass .glass-card.project-card[data-pos="0"] {
-        transform: translateX(-50%) translateY(4px) rotate(0deg) rotateY(0deg) scale(0.92);
-        opacity: 1; z-index: 6; filter: none; pointer-events: auto;
-    }
-    .projects-grid-glass .glass-card.project-card[data-pos="1"] {
-        transform: translateX(calc(-50% + clamp(140px, 16vw, 210px))) translateY(15px) translateZ(-140px) rotate(0deg) rotateY(-32deg) scale(0.75);
-        opacity: 0.75; z-index: 5; filter: brightness(0.7) saturate(0.85); pointer-events: none;
-    }
-    .projects-grid-glass .glass-card.project-card[data-pos="2"] {
-        transform: translateX(calc(-50% + clamp(260px, 30vw, 380px))) translateY(25px) translateZ(-280px) rotate(0deg) rotateY(-48deg) scale(0.62);
-        opacity: 0.4; z-index: 3; filter: brightness(0.5) grayscale(0.3); pointer-events: none;
-    }
-    .projects-grid-glass .glass-card.project-card[data-pos="3"] {
-        transform: translateX(calc(-50% - clamp(140px, 16vw, 210px))) translateY(15px) translateZ(-140px) rotate(0deg) rotateY(32deg) scale(0.75);
-        opacity: 0.75; z-index: 5; filter: brightness(0.7) saturate(0.85); pointer-events: none;
-    }
-    .projects-grid-glass .glass-card.project-card[data-pos="0"]:hover {
-        cursor: pointer;
-        transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(0.97);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(139, 92, 246, 0.4);
-    }
-    .projects-grid-glass .project-details {
-        background: rgba(9, 12, 26, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-        position: relative; z-index: 2; border-radius: 0 0 18px 18px;
-        padding: clamp(0.5rem, 0.9vw, 1.1rem);
-    }
-    .projects-grid-glass .project-details p {
-        font-size: clamp(0.78rem, 0.85vw, 0.92rem); line-height: 1.35; max-height: 48px; overflow: hidden; margin-bottom: 0.4rem;
-    }
-
-    /* Reducción de espacio vacío inferior */
-    #proyectos.tab-content.active { padding-top: 0.2rem; padding-bottom: 0.2rem; justify-content: space-between; height: 100%; max-height: 100%; overflow: hidden !important; }
-    .projects-grid-glass { min-height: clamp(320px, 27vw, 380px); padding-bottom: 0.2rem; }
 }
+
+/* ===== Carrusel de Proyectos: Coverflow 3D Recto (Aplica a Móvil & PC con 100% de Nitidez) ===== */
+.projects-carousel-wrap { position: relative; width: 100%; display: flex; align-items: flex-start; justify-content: center; overflow: visible; margin-top: 0.2rem; padding-top: 0; }
+
+.projects-grid-glass {
+    position: relative; display: block; width: 100%; max-width: clamp(650px, 50vw, 1080px); margin: 0 auto;
+    min-height: clamp(330px, 27vw, 380px); padding: 0.2rem 1rem 0.2rem;
+    perspective: 1800px; perspective-origin: 50% 15%;
+    overflow: visible;
+}
+
+@media (min-width: 1600px) {
+    .projects-grid-glass { max-width: 920px; min-height: 400px; transform: translateZ(-200px); }
+}
+
+.projects-grid-glass .glass-card.project-card {
+    position: absolute; top: 0px; left: 50%; width: clamp(245px, 78vw, 320px);
+    overflow: hidden; cursor: default;
+    transform-style: flat; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255,255,255,0.06);
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.65s ease, filter 0.65s ease, box-shadow 0.65s ease, z-index 0s;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+}
+
+/* Coverflow Recto: Tarjeta frontal al 100% de nitidez en móvil y PC (scale 1 sin deformación ni desenfoque) */
+.projects-grid-glass .glass-card.project-card[data-pos="0"] {
+    transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(1);
+    opacity: 1; z-index: 6; filter: none; pointer-events: auto;
+}
+.projects-grid-glass .glass-card.project-card[data-pos="1"] {
+    transform: translateX(calc(-50% + clamp(55px, 16vw, 210px))) translateY(12px) translateZ(-130px) rotate(0deg) rotateY(-30deg) scale(0.82);
+    opacity: 0.85; z-index: 5; filter: brightness(0.8) saturate(0.9); pointer-events: none;
+}
+.projects-grid-glass .glass-card.project-card[data-pos="2"] {
+    transform: translateX(calc(-50% + clamp(100px, 30vw, 380px))) translateY(22px) translateZ(-260px) rotate(0deg) rotateY(-45deg) scale(0.7);
+    opacity: 0.5; z-index: 3; filter: brightness(0.65); pointer-events: none;
+}
+.projects-grid-glass .glass-card.project-card[data-pos="3"] {
+    transform: translateX(calc(-50% - clamp(55px, 16vw, 210px))) translateY(12px) translateZ(-130px) rotate(0deg) rotateY(30deg) scale(0.82);
+    opacity: 0.85; z-index: 5; filter: brightness(0.8) saturate(0.9); pointer-events: none;
+}
+.projects-grid-glass .glass-card.project-card[data-pos="0"]:hover {
+    cursor: pointer;
+    transform: translateX(-50%) translateY(-6px) rotate(0deg) rotateY(0deg) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75), 0 0 50px rgba(139, 92, 246, 0.45);
+}
+.projects-grid-glass .project-details {
+    background: rgba(10, 14, 30, 0.96);
+    position: relative; z-index: 2; border-radius: 0 0 18px 18px;
+    padding: clamp(0.5rem, 0.9vw, 1.1rem);
+}
+.projects-grid-glass .project-details p {
+    font-size: clamp(0.78rem, 0.85vw, 0.92rem); line-height: 1.35; max-height: none !important; overflow: visible !important; margin-top: 0; margin-bottom: 0.4rem;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+
+#proyectos.tab-content.active { padding-top: 0.2rem; padding-bottom: 0.2rem; justify-content: space-between; height: 100%; max-height: 100%; overflow: hidden !important; }
 
 .carousel-arrow {
     display: none !important;
@@ -1067,21 +1143,24 @@ body::-webkit-scrollbar,
 .glass-card.project-card { padding: 0 !important; display: flex; flex-direction: column; overflow: hidden; }
 
 .project-img-box.stacked-gallery {
-    position: relative; height: clamp(160px, 14vw, 230px); display: flex; align-items: center; justify-content: center;
-    overflow: hidden; cursor: pointer; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-glass); border-radius: 12px; 
+    position: relative; height: clamp(170px, 15vw, 240px); display: flex; align-items: center; justify-content: center;
+    overflow: hidden; cursor: pointer; background: rgba(3, 7, 18, 0.4); border: 1px solid var(--border-glass); border-radius: 12px; 
 }
 .stacked-img {
-    position: absolute; top: clamp(8px, 0.9vw, 14px); left: 50%; transform: translateX(-50%); width: 80%; height: clamp(135px, 12vw, 195px);
-    object-fit: cover; border-radius: 10px; border: 2px solid rgba(139, 92, 246, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.8); transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    position: absolute; top: clamp(8px, 0.9vw, 14px); left: 50%; transform: translateX(-50%); width: 88%; height: clamp(142px, 13vw, 205px);
+    object-fit: cover; object-position: top center; border-radius: 10px; border: 2px solid rgba(139, 92, 246, 0.45); box-shadow: 0 15px 35px rgba(0,0,0,0.8); transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden; transform-style: flat;
+    filter: contrast(1.03) brightness(1.02);
 }
 
-.img-bottom { transform: translateX(-65%) translateY(-2px) rotate(-10deg) scale(0.85); z-index: 1; opacity: 0.4; }
-.img-middle { transform: translateX(-35%) translateY(3px) rotate(8deg) scale(0.9); z-index: 2; opacity: 0.7; }
-.img-top { transform: translateX(-50%) translateY(6px) rotate(0deg) scale(1); z-index: 3; opacity: 1; }
+.img-bottom { transform: translateX(-65%) translateY(-2px) rotate(-8deg) scale(0.88); z-index: 1; opacity: 0.65; }
+.img-middle { transform: translateX(-35%) translateY(3px) rotate(6deg) scale(0.93); z-index: 2; opacity: 0.85; }
+.img-top { transform: translateX(-50%) translateY(4px) rotate(0deg) scale(1); z-index: 3; opacity: 1; filter: contrast(1.04) brightness(1.03); }
 
-.project-img-box.stacked-gallery:hover .img-bottom { transform: translateX(-85% ) translateY(-8px) rotate(-18deg) scale(0.9); opacity: 0.8; }
-.project-img-box.stacked-gallery:hover .img-middle { transform: translateX(-15%) translateY(-4px) rotate(18deg) scale(0.95); opacity: 0.9; }
-.project-img-box.stacked-gallery:hover .img-top { transform: translateX(-50%) translateY(10px) scale(1.05); border-color: rgba(217, 70, 239, 0.8); }
+.project-img-box.stacked-gallery:hover .img-bottom { transform: translateX(-85% ) translateY(-8px) rotate(-16deg) scale(0.9); opacity: 0.85; }
+.project-img-box.stacked-gallery:hover .img-middle { transform: translateX(-15%) translateY(-4px) rotate(16deg) scale(0.95); opacity: 0.95; }
+.project-img-box.stacked-gallery:hover .img-top { transform: translateX(-50%) translateY(8px) scale(1.04); border-color: rgba(217, 70, 239, 0.9); box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 20px rgba(217, 70, 239, 0.4); }
 
 
 .project-details { padding: clamp(0.8rem, 1.2vw, 1.8rem); display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; flex-grow: 1; }
@@ -1761,12 +1840,31 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 .modal-counter { color: #94a3b8; margin-top: 1.5rem; font-size: 0.95rem; letter-spacing: 1px; }
 
 .zoom-icon-overlay {
-    position: absolute; z-index: 10; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 11, 25, 0.65);
-    display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0;
-    transition: opacity 0.3s ease; color: #fff; font-weight: bold; font-size: 1.1rem; backdrop-filter: blur(2px);
+    position: absolute; z-index: 10; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(8, 12, 28, 0.78);
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.35rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    color: #ffffff; font-weight: 700; font-size: clamp(0.95rem, 1vw, 1.1rem); letter-spacing: 0.5px;
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    border-radius: 12px;
 }
-.zoom-icon-overlay i { font-size: 1.8rem; margin-bottom: 0.4rem; color: var(--accent); }
-.project-img-box.stacked-gallery:hover .zoom-icon-overlay { opacity: 1; }
+.zoom-icon-overlay i {
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
+    color: #d946ef;
+    filter: drop-shadow(0 0 12px rgba(217, 70, 239, 0.85));
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.project-img-box.stacked-gallery:hover .zoom-icon-overlay,
+.glass-card.project-card[data-pos="0"]:hover .zoom-icon-overlay,
+.glass-card.project-card:hover .zoom-icon-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+.project-img-box.stacked-gallery:hover .zoom-icon-overlay i,
+.glass-card.project-card[data-pos="0"]:hover .zoom-icon-overlay i {
+    transform: scale(1.15) translateY(-3px);
+}
 
 .welcome-typewriter {
     position: absolute;
@@ -1919,18 +2017,20 @@ vertical-align: text-bottom;
     .projects-carousel-wrap { 
         position: relative; width: 100%; display: flex; align-items: flex-start; 
         justify-content: center; overflow: visible; 
-        margin-top: 1.5rem; /* Antes estaba en -0.8rem */
+        margin-top: 1.5rem;
     }
     .projects-grid-glass .glass-card.project-card[data-pos="0"] {
-        -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(255,255,255,0.1) 100%);
-        transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(0.88); /* Cambiá el translateY(-30px) a 0px */
-        opacity: 1; z-index: 6; filter: none; pointer-events: auto;
+        -webkit-box-reflect: none !important;
+        transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(1) !important;
+        opacity: 1; z-index: 6; filter: none !important; pointer-events: auto;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
     }
     .services-grid-glass {
         position: relative; display: block; width: 100%; max-width: min(420px, 92vw);
         margin: 0 auto; min-height: clamp(280px, 56vh, 400px); padding: 0; cursor: pointer;
         user-select: none; perspective: 1400px; overflow: visible;
-        margin-top: 1.5rem; /* Agregá esta línea */
+        margin-top: 1.5rem;
     }
 }
 
