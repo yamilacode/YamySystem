@@ -510,22 +510,30 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeFormModal();
 });
 
-// ===== OCULTAR PANTALLA DE CARGA INMEDIATAMENTE AL ESTAR LISTO =====
+// ===== PANTALLA DE CARGA (PRELOADER) DE 1.8 SEGUNDOS =====
+const pageStartTime = performance.now();
+
 function hidePreloader() {
     const preloader = document.getElementById('loader-wrapper');
-    if (preloader && !preloader.classList.contains('fade-out')) {
+    if (!preloader || preloader.classList.contains('fade-out')) return;
+
+    const elapsed = performance.now() - pageStartTime;
+    const minTime = 1800; // 1.8s para mostrar sutilmente la animación Michilactic
+    const remainingDelay = Math.max(0, minTime - elapsed);
+
+    setTimeout(() => {
         preloader.classList.add('fade-out');
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 300);
-    }
+        }, 400);
+    }, remainingDelay);
 }
 
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
+if (document.readyState === 'complete') {
     hidePreloader();
 } else {
-    document.addEventListener('DOMContentLoaded', hidePreloader);
     window.addEventListener('load', hidePreloader);
+    document.addEventListener('DOMContentLoaded', hidePreloader);
 }
 
 // =======================================================
