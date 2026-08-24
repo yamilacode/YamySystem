@@ -179,23 +179,7 @@
 
             <div class="profile-widget">
                 <div class="profile-avatar">
-                    <svg class="profile-avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M8.6 12.6 L7.4 8.4 L10.6 10.5 Z" fill="#eef2ff"/>
-                        <path d="M15.4 12.6 L16.6 8.4 L13.4 10.5 Z" fill="#eef2ff"/>
-                        <path d="M8.7 12.3 L8.2 9.6 L10.3 11.1 Z" fill="#c4b5fd"/>
-                        <path d="M15.3 12.3 L15.8 9.6 L13.7 11.1 Z" fill="#c4b5fd"/>
-                        <circle cx="12" cy="14.2" r="4.1" fill="#eef2ff"/>
-                        <circle cx="10.4" cy="13.8" r="0.7" fill="#0f172a"/>
-                        <circle cx="13.6" cy="13.8" r="0.7" fill="#0f172a"/>
-                        <path d="M11.2 15.6 L12 16.4 L12.8 15.6" fill="#d946ef"/>
-                        <path d="M12 16.4 v 0.5 M12 16.9 c -0.7 0.5 -1.4 0.4 -1.7 -0.2 M12 16.9 c 0.7 0.5 1.4 0.4 1.7 -0.2" stroke="#94a3b8" stroke-width="0.5" fill="none" stroke-linecap="round"/>
-                        <path d="M7.4 14.6 h -1.6 M7.7 16 h -1.8 M16.6 14.6 h 1.6 M16.3 16 h 1.8" stroke="#94a3b8" stroke-width="0.5" stroke-linecap="round"/>
-                        <circle cx="12" cy="12" r="9.2" fill="rgba(139,92,246,0.22)" stroke="rgba(139,92,246,0.95)" stroke-width="1.2"/>
-                        <path d="M6.6 9.4 A 6.8 6.8 0 0 1 12 3.8" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1" stroke-linecap="round"/>
-                        <circle cx="7.4" cy="7.4" r="1.1" fill="rgba(255,255,255,0.35)"/>
-                        <ellipse cx="12" cy="20.6" rx="5.4" ry="1.5" fill="#a78bfa"/>
-                        <ellipse cx="12" cy="20.2" rx="4.4" ry="1" fill="#8b5cf6"/>
-                    </svg>
+                    <img src="img/perfil.png" alt="Yamila Peña" class="profile-avatar-img">
                 </div>
                 <h2>Yamila Peña</h2>
                 <p class="role">Full Stack Dev. & Software Developer</p>
@@ -220,25 +204,196 @@
 
             <section id="inicio" class="tab-content active">
                 <div class="hero-card-glass">
+                    <!-- Marcos de esquina HUD -->
+                    <div class="hud-corner-frame top-left" aria-hidden="true"></div>
+                    <div class="hud-corner-frame top-right" aria-hidden="true"></div>
+                    <div class="hud-corner-frame bottom-left" aria-hidden="true"></div>
+                    <div class="hud-corner-frame bottom-right" aria-hidden="true"></div>
+
+                    <!-- Circuitos Cibernéticos Verticales a los Costados (Derecha e Izquierda) -->
+                    <svg class="tech-edge-vertical-right" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M55 0 V110 H25 V240 H45 V400 H15" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                        <path d="M35 30 V140 H10 V310 H30 V440" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M25 110 H5" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                        <path d="M45 240 H15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                        <circle cx="5" cy="110" r="3" fill="currentColor" opacity="0.8"/>
+                        <circle cx="15" cy="240" r="3" fill="currentColor" opacity="0.8"/>
+                        <rect x="12" y="397" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="27" y="437" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                    </svg>
+
+                    <svg class="tech-edge-vertical-left" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M10 0 V130 H35 V270 H15 V420" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                        <path d="M30 40 V170 H50 V380" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M35 130 H60" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                        <path d="M15 270 H40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                        <circle cx="60" cy="130" r="3" fill="currentColor" opacity="0.8"/>
+                        <circle cx="40" cy="270" r="3" fill="currentColor" opacity="0.8"/>
+                        <rect x="27" y="37" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="42" y="377" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                    </svg>
+
+                    <!-- Dot Matrix en lateral derecho e izquierdo -->
+                    <svg class="dot-matrix-side-right" viewBox="0 0 32 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <g fill="currentColor">
+                            <circle cx="4" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="20" cy="8" r="1.5"/><circle cx="28" cy="8" r="1.5"/>
+                            <circle cx="4" cy="20" r="1.5"/><circle cx="12" cy="20" r="1.5"/><circle cx="20" cy="20" r="1.5"/><circle cx="28" cy="20" r="1.5"/>
+                            <circle cx="4" cy="32" r="1.5"/><circle cx="12" cy="32" r="1.5"/><circle cx="20" cy="32" r="1.5"/><circle cx="28" cy="32" r="1.5"/>
+                            <circle cx="4" cy="44" r="1.5"/><circle cx="12" cy="44" r="1.5"/><circle cx="20" cy="44" r="1.5"/><circle cx="28" cy="44" r="1.5"/>
+                            <circle cx="4" cy="56" r="1.5"/><circle cx="12" cy="56" r="1.5"/><circle cx="20" cy="56" r="1.5"/><circle cx="28" cy="56" r="1.5"/>
+                            <circle cx="4" cy="68" r="1.5"/><circle cx="12" cy="68" r="1.5"/><circle cx="20" cy="68" r="1.5"/><circle cx="28" cy="68" r="1.5"/>
+                            <circle cx="4" cy="80" r="1.5"/><circle cx="12" cy="80" r="1.5"/><circle cx="20" cy="80" r="1.5"/><circle cx="28" cy="80" r="1.5"/>
+                            <circle cx="4" cy="92" r="1.5"/><circle cx="12" cy="92" r="1.5"/><circle cx="20" cy="92" r="1.5"/><circle cx="28" cy="92" r="1.5"/>
+                            <circle cx="4" cy="104" r="1.5"/><circle cx="12" cy="104" r="1.5"/><circle cx="20" cy="104" r="1.5"/><circle cx="28" cy="104" r="1.5"/>
+                            <circle cx="4" cy="116" r="1.5"/><circle cx="12" cy="116" r="1.5"/><circle cx="20" cy="116" r="1.5"/><circle cx="28" cy="116" r="1.5"/>
+                        </g>
+                    </svg>
+
+                    <!-- Líneas de circuitos cibernéticos de esquina -->
+                    <svg class="tech-circuit-lines top-right" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M10 20 H80 V90 H150" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M40 0 V50 H110 V130" stroke="currentColor" stroke-width="1.2" opacity="0.45"/>
+                        <path d="M120 20 V70 H160" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+                        <path d="M70 110 V150 H130" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                        <circle cx="150" cy="90" r="3.5" fill="currentColor"/>
+                        <circle cx="110" cy="130" r="3" fill="currentColor"/>
+                        <circle cx="80" cy="90" r="2.5" fill="currentColor"/>
+                        <circle cx="40" cy="50" r="2.5" fill="currentColor"/>
+                        <circle cx="130" cy="150" r="2" fill="currentColor"/>
+                    </svg>
+
+                    <!-- Grilla decorativa Dot Matrix 5x5 -->
+                    <svg class="dot-matrix-5x5 bottom-left" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="5" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="25" cy="5" r="1.5"/><circle cx="35" cy="5" r="1.5"/><circle cx="45" cy="5" r="1.5"/>
+                        <circle cx="5" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><circle cx="25" cy="15" r="1.5"/><circle cx="35" cy="15" r="1.5"/><circle cx="45" cy="15" r="1.5"/>
+                        <circle cx="5" cy="25" r="1.5"/><circle cx="15" cy="25" r="1.5"/><circle cx="25" cy="25" r="1.5"/><circle cx="35" cy="25" r="1.5"/><circle cx="45" cy="25" r="1.5"/>
+                        <circle cx="5" cy="35" r="1.5"/><circle cx="15" cy="35" r="1.5"/><circle cx="25" cy="35" r="1.5"/><circle cx="35" cy="35" r="1.5"/><circle cx="45" cy="35" r="1.5"/>
+                        <circle cx="5" cy="45" r="1.5"/><circle cx="15" cy="45" r="1.5"/><circle cx="25" cy="45" r="1.5"/><circle cx="35" cy="45" r="1.5"/><circle cx="45" cy="45" r="1.5"/>
+                    </svg>
+
                     <div class="hero-text-col">
                         <span class="status-badge"><i class="fas fa-circle"></i> Soluciones Digitales a Medida</span>
-                        <h2 class="hero-3d-title"><span class="word"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span></span> <span class="word"><span class="letter">a</span></span>&nbsp;<span class="word"><span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span></span><br><span class="word"><span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span></span> <span class="word"><span class="letter">t</span><span class="letter">u</span></span> <span class="word"><span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></span></h2>
                         <div class="section-title-line" aria-hidden="true"></div>
+                        <h2 class="hero-3d-title"><span class="word"><span class="letter">S</span><span class="letter">o</span><span class="letter">f</span><span class="letter">t</span><span class="letter">w</span><span class="letter">a</span><span class="letter">r</span><span class="letter">e</span></span> <span class="word"><span class="letter">a</span></span>&nbsp;<span class="word"><span class="letter">M</span><span class="letter">e</span><span class="letter">d</span><span class="letter">i</span><span class="letter">d</span><span class="letter">a</span></span><br><span class="word"><span class="letter">E</span><span class="letter">s</span><span class="letter">c</span><span class="letter">a</span><span class="letter">l</span><span class="letter">a</span><span class="letter">r</span></span> <span class="word"><span class="letter">t</span><span class="letter">u</span></span> <span class="word"><span class="letter">N</span><span class="letter">e</span><span class="letter">g</span><span class="letter">o</span><span class="letter">c</span><span class="letter">i</span><span class="letter">o</span></span></h2>
                         <p>Diseñamos sitios web corporativos de alta conversión, landing pages dinámicas y sistemas de software interactivos. Entregamos soluciones tecnológicas modernas, priorizando el rendimiento extremo y la eficiencia de tu institución.</p>
                         <div class="hero-actions">
                            <button class="btn btn-primary" onclick="switchTab('proyectos', event)"><span>Ver Trabajos <i class="btn-arrow" aria-hidden="true">→</i></span></button>
                            <button class="btn btn-outline" onclick="switchTab('contacto', event)"><span>Contactar <i class="btn-arrow" aria-hidden="true">→</i></span></button>
                         </div>
+
+                        <!-- Logos de Instituciones & Certificaciones (Google, Cisco, UPSO) -->
+                        <div class="hero-certifications">
+                            <div class="cert-badges">
+                                <div class="cert-item" title="Google">
+                                    <svg class="cert-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 15.907 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+                                    </svg>
+                                    <span>Google</span>
+                                </div>
+                                <div class="cert-item" title="Cisco">
+                                    <svg class="cert-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M1.8 11.5h1.4v5H1.8zm3.2-3.2h1.4v8.2H5zm3.2-3.2h1.4v11.4H8.2zm3.2-2.5h1.4v13.9h-1.4zm3.2 0h1.4v13.9h-1.4zm3.2 2.5h1.4v11.4h-1.4zm3.2 3.2h1.4v8.2V8.3zm3.2 3.2h1.4v5h-1.4z"/>
+                                    </svg>
+                                    <span>Cisco</span>
+                                </div>
+                                <div class="cert-item" title="UPSO - Universidad Provincial del Sudoeste">
+                                    <svg class="cert-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4l7 3.82 7-3.82v-4L12 17l-7-3.82z"/>
+                                    </svg>
+                                    <span>UPSO</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="hero-logo-tilt" id="heroLogoTilt">
+                        <div class="tech-frame-accent" aria-hidden="true"></div>
                         <canvas id="cageCanvas"></canvas>
                         <img src="img/logotipo.png" alt="YamySystem Escudo" class="hero-logotipo-img">
                         <div id="welcome-typewriter" class="welcome-typewriter"></div>
                     </div>
                 </div>
+
+                <!-- Decorador Futurista Horizontal Inferior (Bottom Tech Baseline Bar) -->
+                <div class="tech-bottom-footer-wrap" aria-hidden="true">
+                    <svg class="tech-bottom-baseline" viewBox="0 0 800 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 18 H220 L240 30 H560 L580 18 H800" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M40 18 V6 H160 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M640 18 V30 H760 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M300 30 H500" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity="0.45"/>
+                        <circle cx="240" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <circle cx="560" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <rect x="157" y="3" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="637" y="27" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <g fill="currentColor" opacity="0.45">
+                            <circle cx="350" cy="18" r="1.5"/><circle cx="360" cy="18" r="1.5"/><circle cx="370" cy="18" r="1.5"/>
+                            <circle cx="380" cy="18" r="1.5"/><circle cx="390" cy="18" r="1.5"/><circle cx="400" cy="18" r="1.5"/>
+                            <circle cx="410" cy="18" r="1.5"/><circle cx="420" cy="18" r="1.5"/><circle cx="430" cy="18" r="1.5"/>
+                            <circle cx="440" cy="18" r="1.5"/><circle cx="450" cy="18" r="1.5"/>
+                        </g>
+                    </svg>
+                </div>
             </section>
 
             <section id="servicios" class="tab-content" aria-label="Servicios">
+                <!-- Circuitos Cibernéticos Verticales Lateral Derecho e Izquierdo -->
+                <svg class="tech-edge-vertical-right" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M55 0 V110 H25 V240 H45 V400 H15" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M35 30 V140 H10 V310 H30 V440" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M25 110 H5" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M45 240 H15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="5" cy="110" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="15" cy="240" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="12" y="397" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="27" y="437" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <svg class="tech-edge-vertical-left" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M10 0 V130 H35 V270 H15 V420" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M30 40 V170 H50 V380" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M35 130 H60" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M15 270 H40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="60" cy="130" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="40" cy="270" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="27" y="37" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="42" y="377" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <!-- Dot Matrix Lateral -->
+                <svg class="dot-matrix-side-right" viewBox="0 0 32 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="currentColor">
+                        <circle cx="4" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="20" cy="8" r="1.5"/><circle cx="28" cy="8" r="1.5"/>
+                        <circle cx="4" cy="20" r="1.5"/><circle cx="12" cy="20" r="1.5"/><circle cx="20" cy="20" r="1.5"/><circle cx="28" cy="20" r="1.5"/>
+                        <circle cx="4" cy="32" r="1.5"/><circle cx="12" cy="32" r="1.5"/><circle cx="20" cy="32" r="1.5"/><circle cx="28" cy="32" r="1.5"/>
+                        <circle cx="4" cy="44" r="1.5"/><circle cx="12" cy="44" r="1.5"/><circle cx="20" cy="44" r="1.5"/><circle cx="28" cy="44" r="1.5"/>
+                        <circle cx="4" cy="56" r="1.5"/><circle cx="12" cy="56" r="1.5"/><circle cx="20" cy="56" r="1.5"/><circle cx="28" cy="56" r="1.5"/>
+                        <circle cx="4" cy="68" r="1.5"/><circle cx="12" cy="68" r="1.5"/><circle cx="20" cy="68" r="1.5"/><circle cx="28" cy="68" r="1.5"/>
+                        <circle cx="4" cy="80" r="1.5"/><circle cx="12" cy="80" r="1.5"/><circle cx="20" cy="80" r="1.5"/><circle cx="28" cy="80" r="1.5"/>
+                        <circle cx="4" cy="92" r="1.5"/><circle cx="12" cy="92" r="1.5"/><circle cx="20" cy="92" r="1.5"/><circle cx="28" cy="92" r="1.5"/>
+                        <circle cx="4" cy="104" r="1.5"/><circle cx="12" cy="104" r="1.5"/><circle cx="20" cy="104" r="1.5"/><circle cx="28" cy="104" r="1.5"/>
+                        <circle cx="4" cy="116" r="1.5"/><circle cx="12" cy="116" r="1.5"/><circle cx="20" cy="116" r="1.5"/><circle cx="28" cy="116" r="1.5"/>
+                    </g>
+                </svg>
+
+                <!-- Líneas de circuitos cibernéticos SVG -->
+                <svg class="tech-circuit-lines header-circuit" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M150 10 V70 H70 V150" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M120 40 H40 V110 H0" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M90 100 V160" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                    <circle cx="70" cy="150" r="3.5" fill="currentColor"/>
+                    <circle cx="40" cy="110" r="3" fill="currentColor"/>
+                    <circle cx="70" cy="70" r="2.5" fill="currentColor"/>
+                    <circle cx="120" cy="40" r="2" fill="currentColor"/>
+                </svg>
+
+                <!-- Grilla decorativa Dot Matrix 5x5 -->
+                <svg class="dot-matrix-5x5 header-dots" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="5" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="25" cy="5" r="1.5"/><circle cx="35" cy="5" r="1.5"/><circle cx="45" cy="5" r="1.5"/>
+                    <circle cx="5" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><circle cx="25" cy="15" r="1.5"/><circle cx="35" cy="15" r="1.5"/><circle cx="45" cy="15" r="1.5"/>
+                    <circle cx="5" cy="25" r="1.5"/><circle cx="15" cy="25" r="1.5"/><circle cx="25" cy="25" r="1.5"/><circle cx="35" cy="25" r="1.5"/><circle cx="45" cy="25" r="1.5"/>
+                    <circle cx="5" cy="35" r="1.5"/><circle cx="15" cy="35" r="1.5"/><circle cx="25" cy="35" r="1.5"/><circle cx="35" cy="35" r="1.5"/><circle cx="45" cy="35" r="1.5"/>
+                    <circle cx="5" cy="45" r="1.5"/><circle cx="15" cy="45" r="1.5"/><circle cx="25" cy="45" r="1.5"/><circle cx="35" cy="45" r="1.5"/><circle cx="45" cy="45" r="1.5"/>
+                </svg>
+
                 <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Servicios</span>
                 <div class="section-title-line" aria-hidden="true"></div>
 
@@ -290,9 +445,88 @@
                     <span>Hacé scroll</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
+
+                <!-- Decorador Futurista Horizontal Inferior (Bottom Tech Baseline Bar) -->
+                <div class="tech-bottom-footer-wrap" aria-hidden="true">
+                    <svg class="tech-bottom-baseline" viewBox="0 0 800 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 18 H220 L240 30 H560 L580 18 H800" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M40 18 V6 H160 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M640 18 V30 H760 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M300 30 H500" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity="0.45"/>
+                        <circle cx="240" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <circle cx="560" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <rect x="157" y="3" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="637" y="27" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <g fill="currentColor" opacity="0.45">
+                            <circle cx="350" cy="18" r="1.5"/><circle cx="360" cy="18" r="1.5"/><circle cx="370" cy="18" r="1.5"/>
+                            <circle cx="380" cy="18" r="1.5"/><circle cx="390" cy="18" r="1.5"/><circle cx="400" cy="18" r="1.5"/>
+                            <circle cx="410" cy="18" r="1.5"/><circle cx="420" cy="18" r="1.5"/><circle cx="430" cy="18" r="1.5"/>
+                            <circle cx="440" cy="18" r="1.5"/><circle cx="450" cy="18" r="1.5"/>
+                        </g>
+                    </svg>
+                </div>
             </section>
 
             <section id="proyectos" class="tab-content">
+                <!-- Circuitos Cibernéticos Verticales Lateral Derecho e Izquierdo -->
+                <svg class="tech-edge-vertical-right" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M55 0 V110 H25 V240 H45 V400 H15" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M35 30 V140 H10 V310 H30 V440" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M25 110 H5" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M45 240 H15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="5" cy="110" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="15" cy="240" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="12" y="397" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="27" y="437" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <svg class="tech-edge-vertical-left" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M10 0 V130 H35 V270 H15 V420" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M30 40 V170 H50 V380" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M35 130 H60" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M15 270 H40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="60" cy="130" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="40" cy="270" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="27" y="37" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="42" y="377" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <!-- Dot Matrix Lateral -->
+                <svg class="dot-matrix-side-right" viewBox="0 0 32 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="currentColor">
+                        <circle cx="4" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="20" cy="8" r="1.5"/><circle cx="28" cy="8" r="1.5"/>
+                        <circle cx="4" cy="20" r="1.5"/><circle cx="12" cy="20" r="1.5"/><circle cx="20" cy="20" r="1.5"/><circle cx="28" cy="20" r="1.5"/>
+                        <circle cx="4" cy="32" r="1.5"/><circle cx="12" cy="32" r="1.5"/><circle cx="20" cy="32" r="1.5"/><circle cx="28" cy="32" r="1.5"/>
+                        <circle cx="4" cy="44" r="1.5"/><circle cx="12" cy="44" r="1.5"/><circle cx="20" cy="44" r="1.5"/><circle cx="28" cy="44" r="1.5"/>
+                        <circle cx="4" cy="56" r="1.5"/><circle cx="12" cy="56" r="1.5"/><circle cx="20" cy="56" r="1.5"/><circle cx="28" cy="56" r="1.5"/>
+                        <circle cx="4" cy="68" r="1.5"/><circle cx="12" cy="68" r="1.5"/><circle cx="20" cy="68" r="1.5"/><circle cx="28" cy="68" r="1.5"/>
+                        <circle cx="4" cy="80" r="1.5"/><circle cx="12" cy="80" r="1.5"/><circle cx="20" cy="80" r="1.5"/><circle cx="28" cy="80" r="1.5"/>
+                        <circle cx="4" cy="92" r="1.5"/><circle cx="12" cy="92" r="1.5"/><circle cx="20" cy="92" r="1.5"/><circle cx="28" cy="92" r="1.5"/>
+                        <circle cx="4" cy="104" r="1.5"/><circle cx="12" cy="104" r="1.5"/><circle cx="20" cy="104" r="1.5"/><circle cx="28" cy="104" r="1.5"/>
+                        <circle cx="4" cy="116" r="1.5"/><circle cx="12" cy="116" r="1.5"/><circle cx="20" cy="116" r="1.5"/><circle cx="28" cy="116" r="1.5"/>
+                    </g>
+                </svg>
+
+                <!-- Líneas de circuitos cibernéticos SVG -->
+                <svg class="tech-circuit-lines side-circuit" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M10 30 H90 V100 H160" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                    <path d="M50 0 V60 H120 V140" stroke="currentColor" stroke-width="1.2" opacity="0.45"/>
+                    <path d="M130 30 V80 H160" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+                    <circle cx="160" cy="100" r="3.5" fill="currentColor"/>
+                    <circle cx="120" cy="140" r="3" fill="currentColor"/>
+                    <circle cx="90" cy="100" r="2.5" fill="currentColor"/>
+                    <circle cx="50" cy="60" r="2.5" fill="currentColor"/>
+                </svg>
+
+                <!-- Grilla decorativa Dot Matrix 5x5 -->
+                <svg class="dot-matrix-5x5 corner-dots" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="5" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="25" cy="5" r="1.5"/><circle cx="35" cy="5" r="1.5"/><circle cx="45" cy="5" r="1.5"/>
+                    <circle cx="5" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><circle cx="25" cy="15" r="1.5"/><circle cx="35" cy="15" r="1.5"/><circle cx="45" cy="15" r="1.5"/>
+                    <circle cx="5" cy="25" r="1.5"/><circle cx="15" cy="25" r="1.5"/><circle cx="25" cy="25" r="1.5"/><circle cx="35" cy="25" r="1.5"/><circle cx="45" cy="25" r="1.5"/>
+                    <circle cx="5" cy="35" r="1.5"/><circle cx="15" cy="35" r="1.5"/><circle cx="25" cy="35" r="1.5"/><circle cx="35" cy="35" r="1.5"/><circle cx="45" cy="35" r="1.5"/>
+                    <circle cx="5" cy="45" r="1.5"/><circle cx="15" cy="45" r="1.5"/><circle cx="25" cy="45" r="1.5"/><circle cx="35" cy="45" r="1.5"/><circle cx="45" cy="45" r="1.5"/>
+                </svg>
+
                 <span class="status-badge"><i class="fas fa-circle"></i> Nuestros Trabajos</span>
                 <div class="section-title-line" aria-hidden="true"></div>
 
@@ -307,10 +541,6 @@
                         <span class="fan-indicator-line"></span>
                         <i class="fas fa-chevron-right"></i>
                     </div>
-
-                    <button type="button" class="carousel-arrow arrow-left" onclick="rotateProjects(-1)" aria-label="Proyecto anterior">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
 
                     <div class="projects-grid-glass" id="projectsCarousel">
 
@@ -329,7 +559,7 @@
                         <div class="project-details">
                             <div class="project-header-tag">Sistema Web Institucional</div>
                             <h3>Biblioteca Digital</h3>
-                            <p>Catálogo bibliográfico serverless y en tiempo real. Gestión de recursos literarios educativos con visor PDF integrado, panel de administración seguro y almacenamiento en la nube.</p>
+                            <p>Catálogo bibliográfico serverless. Gestión de recursos literarios educativos, panel de administración seguro y almacenamiento en la nube.</p>
                             <div class="tech-tags">
                                 <span>JavaScript</span>
                                 <span>Firebase</span>
@@ -401,18 +631,99 @@
                             <a href="https://yamilacode.github.io/volta-studio/" target="_blank" class="btn-live-crystal"><span>Ver en Vivo</span></a>
                         </div>
                     </div>
-                    </div>
+                </div>
+            </div>
 
-                    <button type="button" class="carousel-arrow arrow-right" onclick="rotateProjects(1)" aria-label="Proyecto siguiente">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                <!-- Decorador Futurista Horizontal Inferior (Bottom Tech Baseline Bar) -->
+                <div class="tech-bottom-footer-wrap" aria-hidden="true">
+                    <svg class="tech-bottom-baseline" viewBox="0 0 800 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 18 H220 L240 30 H560 L580 18 H800" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M40 18 V6 H160 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M640 18 V30 H760 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M300 30 H500" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity="0.45"/>
+                        <circle cx="240" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <circle cx="560" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <rect x="157" y="3" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="637" y="27" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <g fill="currentColor" opacity="0.45">
+                            <circle cx="350" cy="18" r="1.5"/><circle cx="360" cy="18" r="1.5"/><circle cx="370" cy="18" r="1.5"/>
+                            <circle cx="380" cy="18" r="1.5"/><circle cx="390" cy="18" r="1.5"/><circle cx="400" cy="18" r="1.5"/>
+                            <circle cx="410" cy="18" r="1.5"/><circle cx="420" cy="18" r="1.5"/><circle cx="430" cy="18" r="1.5"/>
+                            <circle cx="440" cy="18" r="1.5"/><circle cx="450" cy="18" r="1.5"/>
+                        </g>
+                    </svg>
                 </div>
             </section>
 
             <section id="contacto" class="tab-content" aria-label="Formulario de contacto">
+                <!-- Circuitos Cibernéticos Verticales Lateral Derecho e Izquierdo (Fuera de la tarjeta) -->
+                <svg class="tech-edge-vertical-right" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M55 0 V110 H25 V240 H45 V400 H15" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M35 30 V140 H10 V310 H30 V440" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M25 110 H5" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M45 240 H15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="5" cy="110" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="15" cy="240" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="12" y="397" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="27" y="437" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <svg class="tech-edge-vertical-left" viewBox="0 0 65 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M10 0 V130 H35 V270 H15 V420" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M30 40 V170 H50 V380" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                    <path d="M35 130 H60" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <path d="M15 270 H40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    <circle cx="60" cy="130" r="3" fill="currentColor" opacity="0.8"/>
+                    <circle cx="40" cy="270" r="3" fill="currentColor" opacity="0.8"/>
+                    <rect x="27" y="37" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                    <rect x="42" y="377" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                </svg>
+
+                <!-- Dot Matrix Lateral -->
+                <svg class="dot-matrix-side-right" viewBox="0 0 32 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="currentColor">
+                        <circle cx="4" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="20" cy="8" r="1.5"/><circle cx="28" cy="8" r="1.5"/>
+                        <circle cx="4" cy="20" r="1.5"/><circle cx="12" cy="20" r="1.5"/><circle cx="20" cy="20" r="1.5"/><circle cx="28" cy="20" r="1.5"/>
+                        <circle cx="4" cy="32" r="1.5"/><circle cx="12" cy="32" r="1.5"/><circle cx="20" cy="32" r="1.5"/><circle cx="28" cy="32" r="1.5"/>
+                        <circle cx="4" cy="44" r="1.5"/><circle cx="12" cy="44" r="1.5"/><circle cx="20" cy="44" r="1.5"/><circle cx="28" cy="44" r="1.5"/>
+                        <circle cx="4" cy="56" r="1.5"/><circle cx="12" cy="56" r="1.5"/><circle cx="20" cy="56" r="1.5"/><circle cx="28" cy="56" r="1.5"/>
+                        <circle cx="4" cy="68" r="1.5"/><circle cx="12" cy="68" r="1.5"/><circle cx="20" cy="68" r="1.5"/><circle cx="28" cy="68" r="1.5"/>
+                        <circle cx="4" cy="80" r="1.5"/><circle cx="12" cy="80" r="1.5"/><circle cx="20" cy="80" r="1.5"/><circle cx="28" cy="80" r="1.5"/>
+                        <circle cx="4" cy="92" r="1.5"/><circle cx="12" cy="92" r="1.5"/><circle cx="20" cy="92" r="1.5"/><circle cx="28" cy="92" r="1.5"/>
+                        <circle cx="4" cy="104" r="1.5"/><circle cx="12" cy="104" r="1.5"/><circle cx="20" cy="104" r="1.5"/><circle cx="28" cy="104" r="1.5"/>
+                        <circle cx="4" cy="116" r="1.5"/><circle cx="12" cy="116" r="1.5"/><circle cx="20" cy="116" r="1.5"/><circle cx="28" cy="116" r="1.5"/>
+                    </g>
+                </svg>
+
                 <span class="status-badge"><i class="fas fa-circle"></i> Trabajemos Juntos</span>
                 <div class="section-title-line" aria-hidden="true"></div>
                 <div class="contact-card-glass">
+                    <!-- Marcos de esquina HUD -->
+                    <div class="hud-corner-frame top-left" aria-hidden="true"></div>
+                    <div class="hud-corner-frame top-right" aria-hidden="true"></div>
+                    <div class="hud-corner-frame bottom-left" aria-hidden="true"></div>
+                    <div class="hud-corner-frame bottom-right" aria-hidden="true"></div>
+
+                    <!-- Líneas de circuitos cibernéticos SVG de esquina -->
+                    <svg class="tech-circuit-lines top-right" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M150 20 H80 V90 H10" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M120 0 V50 H50 V130" stroke="currentColor" stroke-width="1.2" opacity="0.45"/>
+                        <path d="M40 20 V70 H0" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+                        <circle cx="10" cy="90" r="3.5" fill="currentColor"/>
+                        <circle cx="50" cy="130" r="3" fill="currentColor"/>
+                        <circle cx="80" cy="90" r="2.5" fill="currentColor"/>
+                        <circle cx="120" cy="50" r="2.5" fill="currentColor"/>
+                    </svg>
+
+                    <!-- Grilla decorativa Dot Matrix 5x5 -->
+                    <svg class="dot-matrix-5x5 bottom-left" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="5" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="25" cy="5" r="1.5"/><circle cx="35" cy="5" r="1.5"/><circle cx="45" cy="5" r="1.5"/>
+                        <circle cx="5" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><circle cx="25" cy="15" r="1.5"/><circle cx="35" cy="15" r="1.5"/><circle cx="45" cy="15" r="1.5"/>
+                        <circle cx="5" cy="25" r="1.5"/><circle cx="15" cy="25" r="1.5"/><circle cx="25" cy="25" r="1.5"/><circle cx="35" cy="25" r="1.5"/><circle cx="45" cy="25" r="1.5"/>
+                        <circle cx="5" cy="35" r="1.5"/><circle cx="15" cy="35" r="1.5"/><circle cx="25" cy="35" r="1.5"/><circle cx="35" cy="35" r="1.5"/><circle cx="45" cy="35" r="1.5"/>
+                        <circle cx="5" cy="45" r="1.5"/><circle cx="15" cy="45" r="1.5"/><circle cx="25" cy="45" r="1.5"/><circle cx="35" cy="45" r="1.5"/><circle cx="45" cy="45" r="1.5"/>
+                    </svg>
+
                     <div id="cat-container-contacto" class="cat-box-general">
                         <lottie-player id="peep-contacto" src="json/WhiteCat.json" background="transparent" speed="1" loop autoplay></lottie-player>
                     </div>
@@ -459,6 +770,26 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- Decorador Futurista Horizontal Inferior (Bottom Tech Baseline Bar) -->
+                <div class="tech-bottom-footer-wrap" aria-hidden="true">
+                    <svg class="tech-bottom-baseline" viewBox="0 0 800 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 18 H220 L240 30 H560 L580 18 H800" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
+                        <path d="M40 18 V6 H160 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M640 18 V30 H760 V18" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+                        <path d="M300 30 H500" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity="0.45"/>
+                        <circle cx="240" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <circle cx="560" cy="30" r="3.5" fill="currentColor" opacity="0.85"/>
+                        <rect x="157" y="3" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <rect x="637" y="27" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/>
+                        <g fill="currentColor" opacity="0.45">
+                            <circle cx="350" cy="18" r="1.5"/><circle cx="360" cy="18" r="1.5"/><circle cx="370" cy="18" r="1.5"/>
+                            <circle cx="380" cy="18" r="1.5"/><circle cx="390" cy="18" r="1.5"/><circle cx="400" cy="18" r="1.5"/>
+                            <circle cx="410" cy="18" r="1.5"/><circle cx="420" cy="18" r="1.5"/><circle cx="430" cy="18" r="1.5"/>
+                            <circle cx="440" cy="18" r="1.5"/><circle cx="450" cy="18" r="1.5"/>
+                        </g>
+                    </svg>
+                </div>
             </section>
 
             <!-- Control de Scroll Lateral Futurista -->
@@ -473,6 +804,8 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
             </div>
+
+
 
         </main>
     </div>

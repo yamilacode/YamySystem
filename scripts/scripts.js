@@ -648,12 +648,16 @@ function rotateServices(direction) {
     const track = document.getElementById('servicesCarousel');
     if (!track) return;
 
-    // Click en cualquier parte del stack: pasa a la siguiente tarjeta
-    track.addEventListener('click', () => rotateServices(1));
+    // Click en cualquier parte del stack: pasa a la siguiente tarjeta (solo en modo 3D)
+    track.addEventListener('click', () => {
+        if (track.classList.contains('grid-mode')) return;
+        rotateServices(1);
+    });
 
     // Rueda del mouse sobre el stack: gira sin scrollear la página, con un pequeño freno anti-rebote
     let wheelLocked = false;
     track.addEventListener('wheel', (e) => {
+        if (track.classList.contains('grid-mode')) return;
         e.preventDefault();
         if (wheelLocked) return;
         wheelLocked = true;
@@ -719,12 +723,14 @@ function rotateProjects(direction) {
     // o cualquier otro elemento interactivo: esos deben abrir su propia acción
     // y dejar la tarjeta activa quieta, sin pasar a la siguiente.
     track.addEventListener('click', (e) => {
+        if (track.classList.contains('grid-mode')) return;
         if (e.target.closest('.stacked-gallery, .btn-live-crystal, a, button')) return;
         rotateProjects(1);
     });
 
     let wheelLocked = false;
     track.addEventListener('wheel', (e) => {
+        if (track.classList.contains('grid-mode')) return;
         e.preventDefault();
         if (wheelLocked) return;
         wheelLocked = true;
@@ -829,8 +835,8 @@ function rotateProjects(direction) {
     var output1 = 'Bienvenido a YamySystem Tu idea, hecha código';
     var output2 = '< undefined';
 
-    var htmlLine1 = '<span class="tw-violet">var</span> <span class="tw-white">str</span> <span class="tw-violet">=</span> <span class="tw-green">"Tu idea, hecha código"</span>';
-    var htmlLine2 = '<span class="tw-cyan">console</span><span class="tw-violet">.log</span><span class="tw-violet">(</span><span class="tw-green">"Bienvenido a YamySystem "</span> <span class="tw-green">+</span> <span class="tw-white">str</span><span class="tw-violet">)</span>';
+    var htmlLine1 = '<span class="tw-violet">const</span> <span class="tw-white">str</span> <span class="tw-violet">=</span> <span class="tw-green">"Tu idea, hecha código";</span>';
+    var htmlLine2 = '<span class="tw-cyan">console</span><span class="tw-violet">.log</span><span class="tw-violet">(</span><span class="tw-green">"Bienvenido a YamySystem "</span> <span class="tw-green">$</span><span class="tw-white">{str}</span><span class="tw-violet">);</span>';
     var htmlOut1 = '<span class="tw-white" style="opacity:0.75">' + output1 + '</span>';
     var htmlOut2 = '<span class="tw-white" style="opacity:0.65">&lt; undefined</span>';
 
