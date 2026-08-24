@@ -1415,7 +1415,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 .speech-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
 
 /* ======================================================= */
-/* SISTEMA DE MASCOTAS INDEPENDIENTES (ALINEADOS A TìTULOS)*/
+/* SISTEMA DE MASCOTAS INDEPENDIENTES (ALINEADOS A TÍTULOS)*/
 /* ======================================================= */
 .cat-box-general {
     position: absolute; z-index: 6; pointer-events: none;
@@ -1428,25 +1428,29 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 .cat-box-general lottie-player {
     position: absolute !important; top: 0 !important; left: 0 !important;
     width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important;
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
-/* --- Gato del Header: sale del botn (derecha), camina hacia la izquierda y se sienta --- */
+/* --- Gato del Header: camina desde "Desarrollo Web & Software" y se sienta junto al botón de paleta --- */
 #cat-container-header { 
     position: absolute; 
-    top: 40%; 
-    right: 130px; /* Este es el PUNTO DE LLEGADA donde se sienta */
+    top: 50%; 
+    transform: translateY(-50%); 
+    left: clamp(220px, 20vw, 380px); 
     z-index: 10; 
     pointer-events: none; 
     display: block; 
-    /* Cambiamos a 'linear' para que camine a velocidad constante y no parezca que patina */
-    animation: walkToLeft 5s linear forwards; 
 }
-
-/* --- Gato del Header: sale de "Desarrollo Web & Software" (izquierda), camina a la derecha y se sienta en el bot├│n de colores --- */
-/* --- Gato del Header: camina suavemente desde "Desarrollo Web & Software" hasta el bot├│n de colores --- */
-#cat-container-header { position: absolute; top: 50%; transform: translateY(-50%); left: clamp(220px, 20vw, 380px); z-index: 10; pointer-events: none; display: block; }
-#cat-container-header #walk-header { animation: walkHeaderMove 12s linear forwards; transform: scaleX(1); }
-#cat-container-header #sit-header { opacity: 0; animation: walkHeaderSit 12s linear forwards; transform: scaleX(1); }
+#cat-container-header #walk-header { 
+    animation: walkHeaderMove 8s linear forwards; 
+    will-change: transform, opacity;
+}
+#cat-container-header #sit-header { 
+    opacity: 0; 
+    animation: walkHeaderSit 8s linear forwards; 
+    will-change: transform, opacity;
+}
 
 .input-cat-wrapper {
     position: relative;
@@ -1456,27 +1460,51 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 /* --- Gato del Formulario de Contacto: fijado 100% exacto respecto al borde del input Email --- */
 #cat-container-contacto {
     position: absolute;
-    bottom: calc(100% - -5px);
+    bottom: calc(100% - -4px);
     right: 12px;
-    width: clamp(65px, 6vw, 95px) !important;
-    height: clamp(65px, 6vw, 95px) !important;
+    width: clamp(150px, 14vw, 220px) !important;
+    height: clamp(150px, 14vw, 220px) !important;
     z-index: 8;
     pointer-events: none;
     display: block !important;
     transform: none !important;
 }
 
+/* --- Transición vectorial SVG sintonizada al instante exacto de contacto con el botón --- */
 @keyframes walkHeaderMove {
-    0%    { transform: translateX(0); }
-    100%  { transform: translateX(calc(95vw - clamp(320px, 30vw, 580px))); display: none; }
-}
-@keyframes walkHeaderSit {
-    0%, 98%  { transform: translateX(calc(95vw - clamp(320px, 30vw, 580px))); opacity: 0; }
-    100%     { transform: translateX(calc(95vw - clamp(320px, 30vw, 580px))); opacity: 1; }
+    0% {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    98.5% {
+        /* Camina durante todo el trayecto hasta tocar el botón de colores */
+        transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        /* Al tocar el botón, se oculta instantáneamente */
+        transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
-#cat-container-header #walk-header { animation: walkHeaderMove 12s linear forwards; transform: scaleX(1); }
-#cat-container-header #sit-header { opacity: 0; animation: walkHeaderSit 12s linear forwards; transform: scaleX(1); }
+@keyframes walkHeaderSit {
+    0%, 98% {
+        /* Permanece completamente oculto hasta que el gato caminando toca el botón */
+        transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
+        opacity: 0;
+        visibility: hidden;
+    }
+    99.5%, 100% {
+        /* En el milisegundo en que toca el botón, aparece ya sentado y permanece allí */
+        transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
 /* ======================================================= */
 /* MOBILE-ONLY ELEMENTS                                    */
 /* ======================================================= */
