@@ -510,18 +510,23 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeFormModal();
 });
 
-// ===== OCULTAR PANTALLA DE CARGA con TIEMPO MÍNIMO =====
-window.addEventListener('load', () => {
+// ===== OCULTAR PANTALLA DE CARGA INMEDIATAMENTE AL ESTAR LISTO =====
+function hidePreloader() {
     const preloader = document.getElementById('loader-wrapper');
-    if (preloader) {
+    if (preloader && !preloader.classList.contains('fade-out')) {
+        preloader.classList.add('fade-out');
         setTimeout(() => {
-            preloader.classList.add('fade-out');
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 700);
-        }, 2800);
+            preloader.style.display = 'none';
+        }, 300);
     }
-});
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    hidePreloader();
+} else {
+    document.addEventListener('DOMContentLoaded', hidePreloader);
+    window.addEventListener('load', hidePreloader);
+}
 
 // =======================================================
 // LÓGICA DEL CARRUSEL / MODAL GLOBAL DE PROYECTOS

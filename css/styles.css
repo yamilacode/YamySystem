@@ -621,9 +621,17 @@ body::-webkit-scrollbar,
 /* ===== Botón "Ver Todos" y modo grilla para Servicios (anula el stack 3D en cualquier tamaño) ===== */
 /* Ambos botones van redondos con "+", a la altura del título, en la esquina derecha —
    igual en móvil y en PC (por eso las reglas de abajo no están dentro de ningún @media) */
-.projects-controls, .services-controls {
+.projects-controls {
     position: absolute;
-    top: -0.65rem;
+    top: 0.35rem;
+    right: clamp(0.5rem, 3vw, 1.2rem);
+    z-index: 30;
+    margin: 0;
+    padding: 0;
+}
+.services-controls {
+    position: absolute;
+    top: 0.35rem;
     right: clamp(0.5rem, 3vw, 1.2rem);
     z-index: 30;
     margin: 0;
@@ -636,8 +644,12 @@ body::-webkit-scrollbar,
 
 /* --- PC / DESKTOP (pantallas >= 1025px): Botón cuadrado compacto con icono de cuadraditos + Ver más / Ver menos --- */
 @media (min-width: 1025px) {
-    .projects-controls, .services-controls {
-        top: -0.55rem !important;
+    .projects-controls {
+        top: 0.35rem !important;
+        right: clamp(1rem, 4vw, 2.5rem) !important;
+    }
+    .services-controls {
+        top: 0.35rem !important;
         right: clamp(1rem, 4vw, 2.5rem) !important;
     }
 
@@ -654,7 +666,7 @@ body::-webkit-scrollbar,
         background: rgba(8, 12, 28, 0.85) !important;
         border: 1px solid rgba(139, 92, 246, 0.4) !important;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(139, 92, 246, 0.2) !important;
-        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
     }
 
     #toggleGridView.btn-live-crystal::before, #toggleGridView.btn-live-crystal::after,
@@ -687,21 +699,25 @@ body::-webkit-scrollbar,
 
     #toggleGridView.btn-live-crystal:hover,
     #toggleServicesGrid.btn-live-crystal:hover {
-        transform: translateY(-2px) !important;
+        transform: none !important; /* Totalmente fijo, sin desplazarse ni saltar */
         border-color: var(--primary) !important;
         box-shadow: 0 5px 16px rgba(0, 0, 0, 0.65), 0 0 18px rgba(139, 92, 246, 0.45) !important;
     }
 
     #toggleGridView.btn-live-crystal:hover i,
     #toggleServicesGrid.btn-live-crystal:hover i {
-        transform: scale(1.12) !important;
+        transform: none !important;
     }
 }
 
 /* --- MÓVIL (smartphones / touch <= 1024px): Únicamente botón + redondo original --- */
 @media (max-width: 1024px) {
-    .projects-controls, .services-controls {
-        top: -0.1rem !important;
+    .projects-controls {
+        top: -0.12rem !important;
+        right: clamp(0.5rem, 3vw, 1.2rem) !important;
+    }
+    .services-controls {
+        top: -0.12rem !important;
         right: clamp(0.5rem, 3vw, 1.2rem) !important;
     }
 
@@ -1207,7 +1223,7 @@ body::-webkit-scrollbar,
 .btn-primary:hover .btn-arrow, .btn-outline:hover .btn-arrow { transform: translateX(5px); }
 
 /* ======================================================= */
-/* INSTITUCIONES & LOGOS HERO (Google, Cisco, UPSO)        */
+/* INSTITUCIONES & LOGOS HERO        */
 /* ======================================================= */
 .hero-certifications {
     display: flex;
@@ -1432,14 +1448,22 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 #cat-container-header #walk-header { animation: walkHeaderMove 12s linear forwards; transform: scaleX(1); }
 #cat-container-header #sit-header { opacity: 0; animation: walkHeaderSit 12s linear forwards; transform: scaleX(1); }
 
-/* --- Gato del Formulario de Contacto: se asoma arriba de la tarjeta --- */
+.input-cat-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* --- Gato del Formulario de Contacto: fijado 100% exacto respecto al borde del input Email --- */
 #cat-container-contacto {
     position: absolute;
-    top: clamp( 10px, -4vw, -14px);
-    right: 14px;
+    bottom: calc(100% - -5px);
+    right: 12px;
+    width: clamp(65px, 6vw, 95px) !important;
+    height: clamp(65px, 6vw, 95px) !important;
     z-index: 8;
     pointer-events: none;
-    display: block;
+    display: block !important;
+    transform: none !important;
 }
 
 @keyframes walkHeaderMove {
@@ -1617,7 +1641,6 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     #inicio.tab-content.active { overflow-y: auto !important; }
     #servicios.tab-content.active { padding-top: 0.5rem; }
     #proyectos.tab-content.active, #contacto.tab-content.active { padding-top: 0.5rem; }
-    #contacto #cat-container-contacto { display: none !important; }
     #proyectos.tab-content.active { position: relative; }
     .hero-logo-tilt { width: 100px; height: 100px; margin: 0 auto; }
     .hero-logo-tilt .hero-logotipo-img { width: 100%; height: 100%; }
@@ -1792,7 +1815,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: radial-gradient(ellipse at 50% 40%, #0d1428 0%, #070b19 70%);
     display: flex; justify-content: center; align-items: center; z-index: 99999;
-    opacity: 1; transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 1; transition: opacity 0.3s ease;
 }
 
 .preloader-inner { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
