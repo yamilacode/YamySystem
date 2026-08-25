@@ -852,14 +852,15 @@ body::-webkit-scrollbar,
     }
 }
 
-.projects-grid-glass.grid-mode .glass-card.project-card {
+.projects-grid-glass.grid-mode .glass-card.project-card,
+.projects-grid-glass.grid-mode .glass-card.project-card[data-pos] {
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
     transform: none !important;
     opacity: 1 !important;
     filter: none !important;
-    margin: 0 auto;
+    margin: 0 auto !important;
     width: 100% !important;
     height: 100% !important;
     display: flex !important;
@@ -1026,7 +1027,7 @@ body::-webkit-scrollbar,
     .projects-grid-glass { max-width: 920px; min-height: 400px; transform: translateZ(-200px); }
 }
 
-.projects-grid-glass .glass-card.project-card {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card {
     position: absolute; top: 0px; left: 50%; width: clamp(245px, 78vw, 320px);
     overflow: hidden; cursor: default;
     transform-style: flat; backface-visibility: hidden; -webkit-backface-visibility: hidden;
@@ -1036,23 +1037,23 @@ body::-webkit-scrollbar,
 }
 
 /* Coverflow Recto: Tarjeta frontal al 100% de nitidez en móvil y PC (scale 1 sin deformación ni desenfoque) */
-.projects-grid-glass .glass-card.project-card[data-pos="0"] {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="0"] {
     transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(1);
     opacity: 1; z-index: 6; filter: none; pointer-events: auto;
 }
-.projects-grid-glass .glass-card.project-card[data-pos="1"] {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="1"] {
     transform: translateX(calc(-50% + clamp(55px, 16vw, 210px))) translateY(12px) translateZ(-130px) rotate(0deg) rotateY(-30deg) scale(0.82);
     opacity: 0.85; z-index: 5; filter: brightness(0.8) saturate(0.9); pointer-events: none;
 }
-.projects-grid-glass .glass-card.project-card[data-pos="2"] {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="2"] {
     transform: translateX(calc(-50% + clamp(100px, 30vw, 380px))) translateY(22px) translateZ(-260px) rotate(0deg) rotateY(-45deg) scale(0.7);
     opacity: 0.5; z-index: 3; filter: brightness(0.65); pointer-events: none;
 }
-.projects-grid-glass .glass-card.project-card[data-pos="3"] {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="3"] {
     transform: translateX(calc(-50% - clamp(55px, 16vw, 210px))) translateY(12px) translateZ(-130px) rotate(0deg) rotateY(30deg) scale(0.82);
     opacity: 0.85; z-index: 5; filter: brightness(0.8) saturate(0.9); pointer-events: none;
 }
-.projects-grid-glass .glass-card.project-card[data-pos="0"]:hover {
+.projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="0"]:hover {
     cursor: pointer;
     transform: translateX(-50%) translateY(-6px) rotate(0deg) rotateY(0deg) scale(1.02);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75), 0 0 50px rgba(139, 92, 246, 0.45);
@@ -1466,7 +1467,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     height: clamp(150px, 14vw, 220px) !important;
     z-index: 8;
     pointer-events: none;
-    display: block !important;
+    display: block;
     transform: none !important;
 }
 
@@ -1743,7 +1744,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     .services-grid-glass .glass-card[data-pos="5"] { transform: translateX(-50%) translateY(clamp(50px, 12.5vw, 82px)) scale(0.7);  opacity: 0.26; z-index: 1; filter: brightness(0.32); }
 
     .projects-grid-glass { grid-template-columns: 1fr; }
-    #cat-container-header, .speech-bubble { display: none !important; }
+    #cat-container-header, #cat-container-contacto, .speech-bubble { display: none !important; }
     .telegram-float { bottom: 20px; right: 20px; }
 
 /* Mobile Projects: fan carousel like desktop */
@@ -1755,7 +1756,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
         perspective: 1250px; perspective-origin: 50% 0%;
         overflow: visible;
     }
-    .projects-grid-glass .glass-card.project-card {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card {
         position: absolute; top: 0; left: 50%; width: clamp(231px, 68.25vw, 336px);
         overflow: hidden; cursor: default;
         transform-style: preserve-3d; backface-visibility: hidden;
@@ -1766,20 +1767,20 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
         border: 1px solid rgba(139, 92, 246, 0.38);
         background-clip: padding-box;
     }
-    .projects-grid-glass .glass-card.project-card[data-pos="0"] {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="0"] {
         -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(255,255,255,0.1) 100%);
         transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(0.88);
         opacity: 1; z-index: 6; filter: none; pointer-events: auto;
     }
-    .projects-grid-glass .glass-card.project-card[data-pos="1"] {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="1"] {
         transform: translateX(calc(-50% + clamp(50px, 13vw, 90px))) translateY(clamp(4px, 2vw, 25px)) rotate(11deg) rotateY(-31deg) scale(0.68);
         opacity: 0.7; z-index: 5; filter: brightness(0.65) saturate(0.85); pointer-events: none;
     }
-    .projects-grid-glass .glass-card.project-card[data-pos="3"] {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="3"] {
         transform: translateX(calc(-50% - clamp(50px, 13vw, 90px))) translateY(clamp(4px, 2vw, 25px)) rotate(-11deg) rotateY(31deg) scale(0.68);
         opacity: 0.7; z-index: 5; filter: brightness(0.65) saturate(0.85); pointer-events: none;
     }
-    .projects-grid-glass .glass-card.project-card[data-pos="2"] {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="2"] {
         transform: translateX(calc(-50% + clamp(105px, 25vw, 165px))) translateY(clamp(26px, 5.25vw, 60px)) rotate(23deg) rotateY(-46deg) scale(0.48);
         opacity: 0.35; z-index: 3; filter: brightness(0.45) grayscale(0.35); pointer-events: none;
     }
@@ -2070,7 +2071,7 @@ vertical-align: text-bottom;
         justify-content: center; overflow: visible; 
         margin-top: 1.5rem;
     }
-    .projects-grid-glass .glass-card.project-card[data-pos="0"] {
+    .projects-grid-glass:not(.grid-mode) .glass-card.project-card[data-pos="0"] {
         -webkit-box-reflect: none !important;
         transform: translateX(-50%) translateY(0px) rotate(0deg) rotateY(0deg) scale(1) !important;
         opacity: 1; z-index: 6; filter: none !important; pointer-events: auto;
