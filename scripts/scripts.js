@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })();
     if (!renderer) return;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, smallMobile ? 1.0 : 1.25));
+    renderer.setPixelRatio(1.0);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
@@ -47,8 +47,8 @@ window.addEventListener('DOMContentLoaded', () => {
     tctx.fillRect(0, 0, 64, 64);
     const dotTex = new THREE.CanvasTexture(texCanvas);
 
-    // ---- NODOS DE LA RED (Optimizado para alto rendimiento) ----
-    const N = smallMobile ? 25 : mobile ? 45 : 75;
+    // ---- NODOS DE LA RED (Optimizado ultra liviano 30 FPS) ----
+    const N = smallMobile ? 12 : mobile ? 18 : 25;
     const nodePos = new Float32Array(N * 3);
     const nodeBase = new Float32Array(N * 3);
     const nodeSeed = new Float32Array(N);
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
     scene.add(nodePoints);
 
     // ---- LÍNEAS DE CONEXIÓN ENTRE NODOS ----
-    const MAX_LINES = 450;
+    const MAX_LINES = 90;
     const linePos = new Float32Array(MAX_LINES * 6);
     const lineCol = new Float32Array(MAX_LINES * 6);
     const lineGeo = new THREE.BufferGeometry();
@@ -328,8 +328,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!REDUCED) requestAnimationFrame(animate);
         if (!isTabVisible) return;
 
-        // Throttle fluido (~45-60 FPS) para evitar sobrecarga de GPU
-        if (now - (window._lastFPS || 0) < 18) return;
+        // Limitar a 30 FPS estrictos para liberar la GPU completamente al grabar video
+        if (now - (window._lastFPS || 0) < 32) return;
         window._lastFPS = now;
 
         const dt = Math.min(0.05, (now - last) / 1000);
@@ -1042,7 +1042,7 @@ function rotateProjects(direction) {
             if (document.hidden) return;
             var inicioTab = document.getElementById('inicio');
             if (inicioTab && !inicioTab.classList.contains('active')) return;
-            if (now - lastCageFrame < 24) return;
+            if (now - lastCageFrame < 42) return; // Limitar jaula 3D a ~24 FPS
             lastCageFrame = now;
             var t = Date.now() * 0.001;
 
