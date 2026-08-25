@@ -981,6 +981,9 @@ body::-webkit-scrollbar,
         box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.6), 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(139, 92, 246, 0.15);
         transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.55s ease, filter 0.55s ease, box-shadow 0.55s ease, z-index 0s;
         transform-style: preserve-3d; /* permite que el ícono "flote" en el eje Z por encima de la tarjeta */
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
     .services-grid-glass .glass-card i {
         font-size: clamp(1.8rem, 2vw, 3.2rem); margin-bottom: 0.5rem;
@@ -1035,7 +1038,7 @@ body::-webkit-scrollbar,
     transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.65s ease, filter 0.65s ease, box-shadow 0.65s ease, z-index 0s;
     -webkit-font-smoothing: antialiased !important; -moz-osx-font-smoothing: grayscale !important; text-rendering: optimizeLegibility !important;
     backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
-    will-change: auto !important;
+    will-change: transform, opacity !important;
 }
 
 /* Coverflow Recto: Tarjeta frontal al 100% de nitidez en móvil y PC (scale 1 sin deformación ni desenfoque) */
@@ -1861,7 +1864,7 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
         background-clip: padding-box;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        will-change: auto !important;
+        will-change: transform, opacity !important;
         -webkit-font-smoothing: antialiased !important;
         -moz-osx-font-smoothing: grayscale !important;
         text-rendering: optimizeLegibility !important;

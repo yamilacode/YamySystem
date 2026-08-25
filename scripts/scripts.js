@@ -315,10 +315,18 @@ window.addEventListener('DOMContentLoaded', () => {
         renderer.render(scene, cam);
     }
 
-    // ---- Reloj y bucle (Pausa automática en pestaña inactiva) ----
+    // ---- Reloj y bucle (Pausa automática en pestaña inactiva y fuera de vista) ----
     let clockT = 0;
     let last = performance.now();
     let isTabVisible = !document.hidden;
+    let isCanvasVisible = true;
+
+    if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+            if (entries[0]) isCanvasVisible = entries[0].isIntersecting;
+        }, { threshold: 0.05 });
+        obs.observe(canvas);
+    }
 
     document.addEventListener('visibilitychange', () => {
         isTabVisible = !document.hidden;
@@ -326,7 +334,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function animate(now) {
         if (!REDUCED) requestAnimationFrame(animate);
-        if (!isTabVisible) return;
+        if (!isTabVisible || !isCanvasVisible) return;
 
         // Limitar a 30 FPS estrictos para liberar la GPU completamente al grabar video
         if (now - (window._lastFPS || 0) < 32) return;
@@ -713,6 +721,24 @@ function rotateServices(direction) {
         rotateServices(e.deltaY > 0 ? 1 : -1);
         setTimeout(() => { wheelLocked = false; }, 350);
     }, { passive: false });
+
+    // Gestos táctiles de deslizamiento (swipe) para móviles
+    let touchStartX = 0;
+    let touchStartY = 0;
+    track.addEventListener('touchstart', (e) => {
+        if (track.classList.contains('grid-mode') || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        if (track.classList.contains('grid-mode') || !e.changedTouches.length) return;
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+            rotateServices(diffX < 0 ? 1 : -1);
+        }
+    }, { passive: true });
 })();
 
 // ===== VISTA GRILLA PARA SERVICIOS (botón "Ver Todos", igual que Proyectos) =====
@@ -786,6 +812,25 @@ function rotateProjects(direction) {
         rotateProjects(e.deltaY > 0 ? 1 : -1);
         setTimeout(() => { wheelLocked = false; }, 350);
     }, { passive: false });
+
+    // Gestos táctiles de deslizamiento (swipe) en abanico de proyectos para móviles
+    let touchStartX = 0;
+    let touchStartY = 0;
+    track.addEventListener('touchstart', (e) => {
+        if (track.classList.contains('grid-mode') || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        if (track.classList.contains('grid-mode') || !e.changedTouches.length) return;
+        if (e.target.closest('.stacked-gallery, .btn-live-crystal, a, button')) return;
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+            rotateProjects(diffX < 0 ? 1 : -1);
+        }
+    }, { passive: true });
 })();
 
 // ===== VISTA GRILLA PARA PROYECTOS (botón "Ver Todos") =====
