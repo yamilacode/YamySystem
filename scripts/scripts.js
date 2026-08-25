@@ -423,7 +423,7 @@ if (contactForm) {
         if (formLoaded) {
             const loadTime = parseInt(formLoaded.value, 10);
             const now = Date.now();
-            if (!loadTime || (now - loadTime) < 3000) {
+            if (!loadTime || (now - loadTime) < 1500) {
                 openFormModal('success');
                 return;
             }
