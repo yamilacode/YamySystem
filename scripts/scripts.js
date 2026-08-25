@@ -527,21 +527,6 @@ function revealContentFromSkeleton() {
     });
 }
 
-function loadLazyLotties() {
-    const lazyPlayers = document.querySelectorAll('lottie-player[data-src]');
-    lazyPlayers.forEach(player => {
-        const dataSrc = player.getAttribute('data-src');
-        if (dataSrc) {
-            if (typeof player.load === 'function') {
-                player.load(dataSrc);
-            } else {
-                player.setAttribute('src', dataSrc);
-            }
-            player.removeAttribute('data-src');
-        }
-    });
-}
-
 // ===== PANTALLA DE CARGA (PRELOADER) DE 1.8 SEGUNDOS =====
 const pageStartTime = performance.now();
 
@@ -556,7 +541,6 @@ function hidePreloader() {
     setTimeout(() => {
         preloader.classList.add('fade-out');
         revealContentFromSkeleton();
-        loadLazyLotties();
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 400);
@@ -1151,4 +1135,71 @@ function rotateProjects(direction) {
     // Evaluación inicial y periódica ligera por carga de imágenes/lottie
     setTimeout(checkScrollNeeded, 200);
     setInterval(checkScrollNeeded, 1500);
+})();
+
+// =======================================================
+// SEGUIMIENTO EXCLUSIVO DE LAS PUPILAS DEL GATO DE CONTACTO
+// =======================================================
+(function initContactPupilTracking() {
+    const catContainer = document.getElementById('cat-container-contacto');
+    if (!catContainer) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = 0;
+    let currentY = 0;
+    let ticking = false;
+
+    function onMouseMove(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!ticking) {
+            requestAnimationFrame(updatePupilPosition);
+            ticking = true;
+        }
+    }
+
+    function updatePupilPosition() {
+        ticking = false;
+        const pupils = catContainer.querySelectorAll('.cat-pupil');
+        if (!pupils.length) return;
+
+        const rect = catContainer.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0 || rect.bottom < 0 || rect.top > window.innerHeight) {
+            return;
+        }
+
+        // Centro aproximado de los ojos
+        const catX = rect.left + rect.width * 0.5;
+        const catY = rect.top + rect.height * 0.35;
+
+        const dx = mouseX - catX;
+        const dy = mouseY - catY;
+        const dist = Math.hypot(dx, dy);
+
+        // Desplazamiento de las pupilas dentro del iris
+        const maxOffset = Math.min(14, dist / 20);
+        const angle = Math.atan2(dy, dx);
+
+        const targetX = Math.cos(angle) * maxOffset;
+        const targetY = Math.sin(angle) * maxOffset;
+
+        // Suavizado fluido a 60fps
+        currentX += (targetX - currentX) * 0.18;
+        currentY += (targetY - currentY) * 0.18;
+
+        const strX = currentX.toFixed(2);
+        const strY = currentY.toFixed(2);
+
+        pupils.forEach(pupil => {
+            pupil.style.transform = `translate(${strX}px, ${strY}px)`;
+        });
+
+        if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+            requestAnimationFrame(updatePupilPosition);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
 })();

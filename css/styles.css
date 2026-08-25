@@ -413,10 +413,10 @@ body::-webkit-scrollbar,
 }
 .contact-card-glass {
     background: rgba(10, 15, 30, 0.62); border: 1px solid rgba(139, 92, 246, 0.35);
-    padding: clamp(2.2rem, 3.5vw, 3.8rem) clamp(2rem, 3vw, 3.5rem); border-radius: 20px; 
+    padding: clamp(1.5rem, 3vh, 3.5rem) clamp(1.5rem, 2.5vw, 3rem); border-radius: 20px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 40px rgba(139, 92, 246, 0.06);
-    margin-bottom: 1.5rem; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-    width: 95%; max-width: 1150px; margin-left: auto; margin-right: auto; position: relative;
+    margin-bottom: 0.25rem; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+    width: 100%; max-width: 1450px; margin-left: auto; margin-right: auto; position: relative;
 }
 .hero-text-col { flex: 1; min-width: 0; text-align: left; }
 
@@ -1304,28 +1304,58 @@ body::-webkit-scrollbar,
 /* ======================================================= */
 /* FORMULARIO DE CONTACTO                                  */
 /* ======================================================= */
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 1.8vw, 2.2rem); }
-.form-group { margin-bottom: clamp(1.2rem, 1.8vw, 2.2rem); }
-.form-group label { display: block; font-size: clamp(0.95rem, 1.05vw, 1.15rem); margin-bottom: 0.45rem; color: var(--text-muted); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 1.8vw, 2.5rem); }
+.form-group { margin-bottom: clamp(0.9rem, 1.4vh, 1.8rem); }
+.form-group label { display: block; font-size: clamp(0.95rem, 1.05vw, 1.15rem); margin-bottom: 0.45rem; color: var(--text-muted); font-weight: 500; }
 
 .form-group input, .form-group select, .form-group textarea {
-    width: 100%; padding: clamp(0.85rem, 1.1vw, 1.25rem) clamp(1rem, 1.3vw, 1.5rem); background: rgba(3, 7, 18, 0.7);
-    border: 1px solid var(--border-glass); border-radius: 10px; color: #fff;
-    font-size: clamp(1rem, 1.1vw, 1.25rem); backdrop-filter: blur(10px);
+    width: 100%;
+    padding: clamp(0.85rem, 1.3vh, 1.25rem) clamp(1.1rem, 1.4vw, 1.6rem);
+    background: #080c1d !important; /* Fondo sólido opaco sin transparencia */
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    color: #fff;
+    font-size: clamp(1.02rem, 1.1vw, 1.25rem);
+    min-height: 52px;
     transform-style: preserve-3d;
     transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
-.form-group select option { background-color: #0f172a; color: #fff; padding: 10px; }
+
+.optional-label {
+    font-size: 0.85em;
+    color: var(--accent);
+    opacity: 0.8;
+    font-weight: normal;
+    margin-left: 0.25rem;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.95em;
+}
+
+.form-group select option { background-color: #0f172a; color: #fff; padding: 12px; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
     outline: none; border-color: var(--primary);
     transform: translateZ(20px) translateY(-4px) scale(1.01);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(217, 70, 239, 0.25);
     z-index: 10;
 }
-.form-group textarea { resize: vertical; min-height: clamp(140px, 16vw, 230px); }
-.contact-email { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; color: var(--primary); font-weight: 600; font-size: clamp(1.15rem, 1.35vw, 1.55rem);}
-.form-submit-row { text-align: right; }
-.btn-submit-compact { padding: clamp(0.85rem, 1.1vw, 1.25rem) clamp(2.5rem, 3.5vw, 4.5rem); font-size: clamp(1.05rem, 1.2vw, 1.35rem); }
+.form-group textarea { resize: vertical; min-height: clamp(120px, 14vh, 220px); }
+.contact-email { display: flex; align-items: center; gap: 0.5rem; margin-bottom: clamp(0.7rem, 1.2vh, 1.4rem); color: var(--primary); font-weight: 600; font-size: clamp(1.15rem, 1.35vw, 1.55rem);}
+.form-submit-row { text-align: right; margin-top: clamp(0.5rem, 0.9vh, 1.2rem); }
+.btn-submit-compact { padding: clamp(0.8rem, 1.2vh, 1.35rem) clamp(2.8rem, 3.5vw, 4.8rem); font-size: clamp(1.05rem, 1.2vw, 1.35rem); }
+
+@media (max-height: 850px) {
+    .contact-card-glass { padding: 1.2rem 1.8rem 1.4rem !important; margin-bottom: 0.2rem !important; }
+    .form-group { margin-bottom: 0.7rem !important; }
+    .form-group label { font-size: 0.9rem !important; margin-bottom: 0.3rem !important; }
+    .form-group input, .form-group select { padding: 0.75rem 1rem !important; font-size: 0.98rem !important; min-height: 44px !important; }
+    .form-group textarea { min-height: 110px !important; padding: 0.75rem 1rem !important; font-size: 0.98rem !important; }
+    .contact-email { margin-bottom: 0.7rem !important; font-size: 1.15rem !important; }
+    .btn-submit-compact { padding: 0.75rem 2.4rem !important; font-size: 1.05rem !important; }
+}
 
 /* ======================================================= */
 /* MODAL DE ESTADO DEL FORMULARIO                          */
@@ -1443,15 +1473,17 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 /* ======================================================= */
 .cat-box-general {
     position: absolute; z-index: 6; pointer-events: none;
-    filter: drop-shadow(0 5px 15px rgba(139, 92, 246, 0.4));
+    filter: drop-shadow(0 5px 15px rgba(var(--primary-rgb), 0.45));
+    transition: filter 0.4s ease;
     /* Gato escala fluido pero sin deformarse */
     width: clamp(90px, 8vw, 140px); 
     height: clamp(90px, 8vw, 140px); 
     display: none;
 }
-.cat-box-general lottie-player {
+.cat-box-general img {
     position: absolute !important; top: 0 !important; left: 0 !important;
     width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important;
+    object-fit: contain;
     will-change: transform, opacity;
     transform: translateZ(0);
 }
@@ -1481,17 +1513,55 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     width: 100%;
 }
 
-/* --- Gato del Formulario de Contacto: fijado 100% exacto respecto al borde del input Email --- */
+.input-cat-wrapper input {
+    position: relative;
+    z-index: 2; /* El campo de email queda por delante del gato */
+}
+
+/* --- Gato del Formulario de Contacto: cara grande sin cuerpo, posicionado detrás de la caja de email --- */
 #cat-container-contacto {
     position: absolute;
-    bottom: calc(100% - -4px);
-    right: 12px;
-    width: clamp(150px, 14vw, 220px) !important;
-    height: clamp(150px, 14vw, 220px) !important;
-    z-index: 8;
+    bottom: 100%;
+    right: 20px;
+    width: clamp(50px, 8vw, 130px) !important;
+    height: clamp(50px, 12vw, 130px) !important;
+    z-index: 1; /* Detrás del campo de email */
     pointer-events: none;
     display: block;
-    transform: none !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+    animation: catUpDownContinuous 5s ease-in-out infinite;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Al enfocar/hacer clic en el campo de email o campos del formulario, el gato se queda quieto subido arriba */
+.input-cat-wrapper:focus-within #cat-container-contacto,
+#contactForm:focus-within #cat-container-contacto {
+    animation: none !important;
+    transform: translateY(20px) !important; /* Permanece arriba quieto sobre el borde */
+}
+
+/* Animación continua: asoma la carita grande sobre el borde y se oculta detrás de la caja */
+@keyframes catUpDownContinuous {
+    0%, 100% {
+        transform: translateY(45px); /* Bajar: completamente oculto detrás de la caja de email */
+    }
+    40%, 65% {
+        transform: translateY(20px); /* Subir: asoma la cara, ojos y boquita por encima del borde */
+    }
+}
+
+#peep-contacto {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cat-pupil {
+    will-change: transform;
+    transition: transform 0.08s ease-out;
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
 /* --- Transición vectorial SVG sintonizada al instante exacto de contacto con el botón --- */
@@ -1507,8 +1577,8 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
         opacity: 1;
         visibility: visible;
     }
-    100% {
-        /* Al tocar el botón, se oculta instantáneamente */
+    99.5%, 100% {
+        /* Se oculta al momento exacto de sentarse */
         transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
         opacity: 0;
         visibility: hidden;
@@ -1516,14 +1586,14 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
 }
 
 @keyframes walkHeaderSit {
-    0%, 98% {
-        /* Permanece completamente oculto hasta que el gato caminando toca el botón */
+    0%, 98.5% {
+        /* Permanece completamente oculto mientras el gato camina */
         transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
         opacity: 0;
         visibility: hidden;
     }
     99.5%, 100% {
-        /* En el milisegundo en que toca el botón, aparece ya sentado y permanece allí */
+        /* En el milisegundo en que llega al botón, aparece sentado en la misma posición */
         transform: translateX(calc(100vw - clamp(220px, 20vw, 380px) - clamp(1.5rem, 4vw, 5rem) - clamp(90px, 8vw, 140px) - 15px)) translateZ(0);
         opacity: 1;
         visibility: visible;
@@ -2003,7 +2073,7 @@ vertical-align: text-bottom;
     .project-details p { font-size: clamp(1rem, 1.1vw, 1.3rem); }
     .project-header-tag { font-size: clamp(0.9rem, 1vw, 1.1rem); }
     
-    .contact-card-glass { max-width: clamp(650px, 62vw, 1000px); }
+    .contact-card-glass { max-width: clamp(750px, 72vw, 1250px); }
     .form-group input, .form-group select, .form-group textarea { font-size: clamp(1.1rem, 1.2vw, 1.5rem); }
 }
 
@@ -2030,7 +2100,7 @@ vertical-align: text-bottom;
     .project-details p { font-size: clamp(1.1rem, 1.1vw, 1.4rem); }
     .project-header-tag { font-size: clamp(1rem, 1vw, 1.2rem); }
     
-    .contact-card-glass { max-width: clamp(750px, 62vw, 1300px); }
+    .contact-card-glass { max-width: clamp(850px, 70vw, 1500px); }
     .form-group input, .form-group select, .form-group textarea { font-size: clamp(1.2rem, 1.2vw, 1.6rem); }
 }
 
