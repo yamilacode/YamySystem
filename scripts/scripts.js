@@ -328,13 +328,13 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!REDUCED) requestAnimationFrame(animate);
         if (!isTabVisible) return;
 
-        // Render only every 2 frames to halve GPU usage (effectively ~15fps visual, ~30fps GPU)
-        // This dramatically reduces GPU load while the animation still appears smooth
+        // Skip every 3 frames to further reduce GPU usage
+        // Animation still appears smooth but with less GPU load
         if (window._frameCounter === undefined) window._frameCounter = 0;
         window._frameCounter++;
-        if (window._frameCounter % 2 !== 0) return; // Skip every other frame
-        // Reset counter after 2 frames to keep it bounded
-        if (window._frameCounter > 10) window._frameCounter = 0;
+        if (window._frameCounter % 3 !== 0) return; // Skip every 3rd frame
+        // Reset counter after 3 frames to keep it bounded
+        if (window._frameCounter > 15) window._frameCounter = 0;
 
         // Throttle to reduce GPU spikes
         if (now - (window._lastFPS || 0) < 33) return;
