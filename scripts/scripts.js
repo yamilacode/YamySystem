@@ -47,8 +47,8 @@ window.addEventListener('DOMContentLoaded', () => {
     tctx.fillRect(0, 0, 64, 64);
     const dotTex = new THREE.CanvasTexture(texCanvas);
 
-    // ---- NODOS DE LA RED ----
-    const N = smallMobile ? 80 : mobile ? 140 : 200;
+    // ---- NODOS DE LA RED (Optimizado para alto rendimiento) ----
+    const N = smallMobile ? 35 : mobile ? 60 : 100;
     const nodePos = new Float32Array(N * 3);
     const nodeBase = new Float32Array(N * 3);
     const nodeSeed = new Float32Array(N);
@@ -315,11 +315,18 @@ window.addEventListener('DOMContentLoaded', () => {
         renderer.render(scene, cam);
     }
 
-    // ---- Reloj y bucle ----
+    // ---- Reloj y bucle (Pausa automática en pestaña inactiva) ----
     let clockT = 0;
     let last = performance.now();
+    let isTabVisible = !document.hidden;
+
+    document.addEventListener('visibilitychange', () => {
+        isTabVisible = !document.hidden;
+    });
+
     function animate(now) {
         if (!REDUCED) requestAnimationFrame(animate);
+        if (!isTabVisible) return;
         const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
         clockT += dt;
@@ -510,6 +517,31 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeFormModal();
 });
 
+// ===== GESTOR DE CARGA POR PARTES Y SKELETON LOADERS =====
+function revealContentFromSkeleton() {
+    document.querySelectorAll('.skeleton-placeholder').forEach(el => {
+        el.classList.add('hidden');
+    });
+    document.querySelectorAll('.content-lazy-loaded').forEach(el => {
+        el.classList.add('loaded');
+    });
+}
+
+function loadLazyLotties() {
+    const lazyPlayers = document.querySelectorAll('lottie-player[data-src]');
+    lazyPlayers.forEach(player => {
+        const dataSrc = player.getAttribute('data-src');
+        if (dataSrc) {
+            if (typeof player.load === 'function') {
+                player.load(dataSrc);
+            } else {
+                player.setAttribute('src', dataSrc);
+            }
+            player.removeAttribute('data-src');
+        }
+    });
+}
+
 // ===== PANTALLA DE CARGA (PRELOADER) DE 1.8 SEGUNDOS =====
 const pageStartTime = performance.now();
 
@@ -523,6 +555,8 @@ function hidePreloader() {
 
     setTimeout(() => {
         preloader.classList.add('fade-out');
+        revealContentFromSkeleton();
+        loadLazyLotties();
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 400);
