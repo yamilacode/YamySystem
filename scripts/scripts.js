@@ -14,14 +14,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const renderer = (() => {
         try {
-            return new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+            return new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: 'default' });
         } catch (err) {
             document.body.classList.add('no-webgl');
             return null;
         }
     })();
     if (!renderer) return;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, smallMobile ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, smallMobile ? 1.0 : 1.25));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const dotTex = new THREE.CanvasTexture(texCanvas);
 
     // ---- NODOS DE LA RED (Optimizado para alto rendimiento) ----
-    const N = smallMobile ? 35 : mobile ? 60 : 100;
+    const N = smallMobile ? 25 : mobile ? 45 : 75;
     const nodePos = new Float32Array(N * 3);
     const nodeBase = new Float32Array(N * 3);
     const nodeSeed = new Float32Array(N);
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
     scene.add(nodePoints);
 
     // ---- LÍNEAS DE CONEXIÓN ENTRE NODOS ----
-    const MAX_LINES = 1000;
+    const MAX_LINES = 450;
     const linePos = new Float32Array(MAX_LINES * 6);
     const lineCol = new Float32Array(MAX_LINES * 6);
     const lineGeo = new THREE.BufferGeometry();
@@ -328,16 +328,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!REDUCED) requestAnimationFrame(animate);
         if (!isTabVisible) return;
 
-        // Skip every 3 frames to further reduce GPU usage
-        // Animation still appears smooth but with less GPU load
-        if (window._frameCounter === undefined) window._frameCounter = 0;
-        window._frameCounter++;
-        if (window._frameCounter % 3 !== 0) return; // Skip every 3rd frame
-        // Reset counter after 3 frames to keep it bounded
-        if (window._frameCounter > 15) window._frameCounter = 0;
-
-        // Throttle to reduce GPU spikes
-        if (now - (window._lastFPS || 0) < 33) return;
+        // Throttle fluido (~45-60 FPS) para evitar sobrecarga de GPU
+        if (now - (window._lastFPS || 0) < 18) return;
         window._lastFPS = now;
 
         const dt = Math.min(0.05, (now - last) / 1000);
@@ -625,10 +617,19 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!starCursor) return;
 
     let tx = 0, ty = 0, cx = 0, cy = 0, lx = 0, ly = 0;
+    let isRunning = false;
+
+    function startLoop() {
+        if (!isRunning) {
+            isRunning = true;
+            requestAnimationFrame(followStar);
+        }
+    }
 
     document.addEventListener('mousemove', (e) => {
         tx = e.clientX;
         ty = e.clientY;
+        startLoop();
     });
 
     document.addEventListener('mouseover', (e) => {
@@ -657,9 +658,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         lx = cx;
         ly = cy;
-        requestAnimationFrame(followStar);
+
+        if (Math.abs(tx - cx) > 0.2 || Math.abs(ty - cy) > 0.2) {
+            requestAnimationFrame(followStar);
+        } else {
+            isRunning = false;
+        }
     }
-    followStar();
 });
 
 // ===== DEEP LINK POR HASH (ej: index.html#contacto) =====
@@ -865,7 +870,10 @@ function rotateProjects(direction) {
     initAllCards();
 
     const observer = new MutationObserver(() => { initAllCards(); });
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+    const mainContainer = document.querySelector('.app-main');
+    if (mainContainer) {
+        observer.observe(mainContainer, { childList: true, subtree: true });
+    }
 })();
 
 // ===== WELCOME CODE: se escribe como código =====
@@ -974,9 +982,9 @@ function rotateProjects(direction) {
         if (!cv || typeof THREE === 'undefined') { console.warn('[CAGE] skip:', !cv ? 'no canvas' : 'no THREE'); return; }
 
         var S = cv.clientWidth || 280;
-        var ren = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
+        var ren = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: false });
         if (!ren.getContext()) { console.warn('[CAGE] no WebGL context'); return; }
-        ren.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        ren.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
         ren.setClearColor(0x000000, 0);
         ren.setSize(S, S, false);
 
@@ -1028,8 +1036,14 @@ function rotateProjects(direction) {
         window.addEventListener('resize', resizeCage);
 
         var rotY = 0, rotX = 0;
-        function animate() {
+        var lastCageFrame = 0;
+        function animate(now) {
             requestAnimationFrame(animate);
+            if (document.hidden) return;
+            var inicioTab = document.getElementById('inicio');
+            if (inicioTab && !inicioTab.classList.contains('active')) return;
+            if (now - lastCageFrame < 24) return;
+            lastCageFrame = now;
             var t = Date.now() * 0.001;
 
             var m = window._cageMouse ? window._cageMouse.get() : { rx: 0, ry: 0 };
