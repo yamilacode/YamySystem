@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const dotTex = new THREE.CanvasTexture(texCanvas);
 
     // ---- NODOS DE LA RED ----
-    const N = smallMobile ? 80 : mobile ? 140 : 280;
+    const N = smallMobile ? 80 : mobile ? 140 : 200;
     const nodePos = new Float32Array(N * 3);
     const nodeBase = new Float32Array(N * 3);
     const nodeSeed = new Float32Array(N);
