@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const renderer = (() => {
         try {
-            return new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: 'default' });
+            return new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: 'low-power' });
         } catch (err) {
             document.body.classList.add('no-webgl');
             return null;
@@ -47,24 +47,23 @@ window.addEventListener('DOMContentLoaded', () => {
     tctx.fillRect(0, 0, 64, 64);
     const dotTex = new THREE.CanvasTexture(texCanvas);
 
-    // ---- NODOS DE LA RED (Optimizado ultra liviano 30 FPS) ----
-    const N = smallMobile ? 12 : mobile ? 18 : 25;
+    // ---- NODOS DE LA RED (ESCULTURA 3D RÍGIDA DE ALAMBRE - CONSTELACIÓN MASIVA 300 NODOS) ----
+    const plexusGroup = new THREE.Group();
+    scene.add(plexusGroup);
+
+    const N = smallMobile ? 100 : mobile ? 180 : 300;
     const nodePos = new Float32Array(N * 3);
-    const nodeBase = new Float32Array(N * 3);
-    const nodeSeed = new Float32Array(N);
     const nodeCol = new Float32Array(N * 3);
 
     for (let i = 0; i < N; i++) {
         const i3 = i * 3;
-        const x = (Math.random() - 0.5) * 30;
-        const y = (Math.random() - 0.5) * 18;
-        const z = (Math.random() - 0.5) * 14 - 4;
-        nodeBase[i3] = x; nodeBase[i3 + 1] = y; nodeBase[i3 + 2] = z;
+        const x = (Math.random() - 0.5) * 42;
+        const y = (Math.random() - 0.5) * 26;
+        const z = (Math.random() - 0.5) * 22 - 4;
         nodePos[i3] = x; nodePos[i3 + 1] = y; nodePos[i3 + 2] = z;
-        nodeSeed[i] = Math.random() * Math.PI * 2;
         const roll = Math.random();
         const c = roll < 0.34 ? cCyan : roll < 0.62 ? cPurple : roll < 0.8 ? cMagenta : cWhite;
-        const bright = 0.55 + Math.random() * 0.45;
+        const bright = 0.6 + Math.random() * 0.4;
         nodeCol[i3] = c.r * bright; nodeCol[i3 + 1] = c.g * bright; nodeCol[i3 + 2] = c.b * bright;
     }
 
@@ -72,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
     nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePos, 3));
     nodeGeo.setAttribute('color', new THREE.BufferAttribute(nodeCol, 3));
     const nodeMat = new THREE.PointsMaterial({
-        size: smallMobile ? 0.18 : 0.22,
+        size: smallMobile ? 0.15 : 0.18,
         map: dotTex,
         vertexColors: true,
         transparent: true,
@@ -82,29 +81,48 @@ window.addEventListener('DOMContentLoaded', () => {
         sizeAttenuation: true
     });
     const nodePoints = new THREE.Points(nodeGeo, nodeMat);
-    scene.add(nodePoints);
+    plexusGroup.add(nodePoints);
 
-    // ---- LÍNEAS DE CONEXIÓN ENTRE NODOS ----
-    const MAX_LINES = 90;
-    const linePos = new Float32Array(MAX_LINES * 6);
-    const lineCol = new Float32Array(MAX_LINES * 6);
+    // ---- LÍNEAS DE CONEXIÓN ESTÁTICAS (Pre-calculadas al cargar) ----
+    const lineThresh = smallMobile ? 3.4 : mobile ? 3.8 : 4.1;
+    const lineThresh2 = lineThresh * lineThresh;
+    const linePosArr = [];
+    const lineColArr = [];
+
+    for (let i = 0; i < N; i++) {
+        const i3 = i * 3;
+        const xi = nodePos[i3], yi = nodePos[i3 + 1], zi = nodePos[i3 + 2];
+        for (let j = i + 1; j < N; j++) {
+            const j3 = j * 3;
+            const dx = xi - nodePos[j3], dy = yi - nodePos[j3 + 1], dz = zi - nodePos[j3 + 2];
+            const d2 = dx * dx + dy * dy + dz * dz;
+            if (d2 < lineThresh2) {
+                const a = 1 - Math.sqrt(d2) / lineThresh;
+                const b = a * 0.7;
+                linePosArr.push(xi, yi, zi, nodePos[j3], nodePos[j3 + 1], nodePos[j3 + 2]);
+                lineColArr.push(
+                    nodeCol[i3] * b, nodeCol[i3 + 1] * b, nodeCol[i3 + 2] * b,
+                    nodeCol[j3] * b, nodeCol[j3 + 1] * b, nodeCol[j3 + 2] * b
+                );
+            }
+        }
+    }
+
     const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos, 3).setUsage(THREE.DynamicDrawUsage));
-    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineCol, 3).setUsage(THREE.DynamicDrawUsage));
-    lineGeo.setDrawRange(0, 0);
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePosArr), 3));
+    lineGeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(lineColArr), 3));
     const lineMat = new THREE.LineBasicMaterial({
         vertexColors: true,
         transparent: true,
-        opacity: 1,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending,
         depthWrite: false
     });
     const lineSegs = new THREE.LineSegments(lineGeo, lineMat);
-    scene.add(lineSegs);
+    plexusGroup.add(lineSegs);
 
-    // ---- TRIÁNGULOS DE NEÓN FLOTANTES (degradado cian → púrpura → magenta) ----
-    const TRI = smallMobile ? 2 : mobile ? 4 : 9;
-    const triState = [];
+    // ---- TRIÁNGULOS DE NEÓN RÍGIDOS EN LA ESCULTURA ----
+    const TRI = smallMobile ? 35 : mobile ? 60 : 100;
     for (let i = 0; i < TRI; i++) {
         const g = new THREE.BufferGeometry();
         const s = 0.9 + Math.random() * 1.3;
@@ -127,44 +145,16 @@ window.addEventListener('DOMContentLoaded', () => {
         const m = new THREE.MeshBasicMaterial({
             vertexColors: true,
             transparent: true,
-            opacity: 0.24 + Math.random() * 0.2,
+            opacity: 0.25 + Math.random() * 0.2,
             side: THREE.DoubleSide,
             blending: THREE.AdditiveBlending,
             depthWrite: false
         });
         const mesh = new THREE.Mesh(g, m);
-        const bx = (Math.random() - 0.5) * 26;
-        const by = (Math.random() - 0.5) * 15;
-        const bz = -3 - Math.random() * 9;
-        mesh.position.set(bx, by, bz);
+        mesh.position.set((Math.random() - 0.5) * 26, (Math.random() - 0.5) * 15, -3 - Math.random() * 9);
         mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-        scene.add(mesh);
-        triState.push({
-            mesh: mesh, bx: bx, by: by, bz: bz,
-            rotSpeed: 0.12 + Math.random() * 0.3,
-            phase: Math.random() * Math.PI * 2,
-            floatAmp: 0.5 + Math.random() * 0.8,
-            floatSpeed: 0.3 + Math.random() * 0.45,
-            baseOpacity: m.opacity
-        });
+        plexusGroup.add(mesh);
     }
-
-    // ---- NODO FANTASMA DEL CURSOR ----
-    const cursorArr = new Float32Array([0, 0, -8]);
-    const cursorGeo = new THREE.BufferGeometry();
-    cursorGeo.setAttribute('position', new THREE.BufferAttribute(cursorArr, 3));
-    const cursorMat = new THREE.PointsMaterial({
-        size: 0.6,
-        map: dotTex,
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        sizeAttenuation: true
-    });
-    const cursorPoints = new THREE.Points(cursorGeo, cursorMat);
-    scene.add(cursorPoints);
 
     // ---- MOUSE / TOUCH ----
     const pointer = { x: 0, y: 0, vx: 0, vy: 0, active: false };
@@ -180,10 +170,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // ---- PARALLAX DE CÁMARA POR SECCIÓN (perspectiva 3D) ----
     const views = {
-        inicio:    { x: 0,    y: 0.4,  z: 13,   lx: 0,    ly: 0    },
-        servicios: { x: 2.5,  y: -5.0, z: 10.4, lx: 1.6,  ly: 0.9  },
-        proyectos: { x: -2.2, y: 5.5,  z: 10.6, lx: -1.5, ly: -1.0 },
-        contacto:  { x: 2.9,  y: -6.2, z: 9.8,  lx: 1.9,  ly: 1.3  }
+        inicio: { x: 0, y: 0.4, z: 13, lx: 0, ly: 0 },
+        servicios: { x: 2.5, y: -5.0, z: 10.4, lx: 1.6, ly: 0.9 },
+        proyectos: { x: -2.2, y: 5.5, z: 10.6, lx: -1.5, ly: -1.0 },
+        contacto: { x: 2.9, y: -6.2, z: 9.8, lx: 1.9, ly: 1.3 }
     };
     let view = views.inicio;
     const current = { x: 0, y: 0.4, z: 13, lx: 0, ly: 0 };
@@ -192,109 +182,11 @@ window.addEventListener('DOMContentLoaded', () => {
         view = views[name] || views.inicio;
     };
 
-    // ---- LÓGICA POR FRAME ----
-    const lineThresh = 2.4;
-    const lineThresh2 = lineThresh * lineThresh;
-    const cursorThresh = 3.6;
-    const cursorThresh2 = cursorThresh * cursorThresh;
-
+    // ---- LÓGICA POR FRAME (0% RECALCULO DE DISTANCIAS) ----
     function draw(t, dt) {
-        // Flotación lenta de los nodos + atracción/repulsión del cursor
-        for (let i = 0; i < N; i++) {
-            const i3 = i * 3;
-            const bx = nodeBase[i3], by = nodeBase[i3 + 1], bz = nodeBase[i3 + 2];
-            const tx = bx + Math.sin(t * 0.35 + nodeSeed[i]) * 0.9;
-            const ty = by + Math.cos(t * 0.3 + nodeSeed[i] * 1.3) * 0.9;
-            const tz = bz + Math.sin(t * 0.25 + nodeSeed[i] * 0.7) * 0.6;
-            let px = nodePos[i3], py = nodePos[i3 + 1], pz = nodePos[i3 + 2];
-            const k = Math.min(1, dt * 1.8);
-            px += (tx - px) * k;
-            py += (ty - py) * k;
-            pz += (tz - pz) * k;
-
-            if (pointer.active) {
-                const wx = pointer.x * 16, wy = pointer.y * 9, wz = -8;
-                const dx = px - wx, dy = py - wy, dz = pz - wz;
-                const d2 = dx * dx + dy * dy + dz * dz;
-                if (d2 > 0.001 && d2 < 12) {
-                    const dist = Math.sqrt(d2);
-                    const f = (1 - d2 / 12) * dt * 5;
-                    const inv = f / dist;
-                    px += dx * inv * 1.5;
-                    py += dy * inv * 1.5;
-                    pz += dz * inv * 1.5;
-                } else if (d2 >= 12 && d2 < cursorThresh2 * 2) {
-                    const dist = Math.sqrt(d2);
-                    const f = (1 - d2 / (cursorThresh2 * 2)) * dt * 1.4;
-                    const inv = f / dist;
-                    px -= dx * inv;
-                    py -= dy * inv;
-                    pz -= dz * inv;
-                }
-            }
-            nodePos[i3] = px; nodePos[i3 + 1] = py; nodePos[i3 + 2] = pz;
-        }
-        nodeGeo.attributes.position.needsUpdate = true;
-
-        // Conexiones nodo ↔ nodo
-        let lc = 0;
-        for (let i = 0; i < N; i++) {
-            const i3 = i * 3;
-            const xi = nodePos[i3], yi = nodePos[i3 + 1], zi = nodePos[i3 + 2];
-            for (let j = i + 1; j < N; j++) {
-                const j3 = j * 3;
-                const dx = xi - nodePos[j3], dy = yi - nodePos[j3 + 1], dz = zi - nodePos[j3 + 2];
-                const d2 = dx * dx + dy * dy + dz * dz;
-                if (d2 < lineThresh2 && lc < MAX_LINES) {
-                    const a = 1 - Math.sqrt(d2) / lineThresh;
-                    const o = lc * 6;
-                    linePos[o] = xi; linePos[o + 1] = yi; linePos[o + 2] = zi;
-                    linePos[o + 3] = nodePos[j3]; linePos[o + 4] = nodePos[j3 + 1]; linePos[o + 5] = nodePos[j3 + 2];
-                    const b = a * 0.75;
-                    lineCol[o] = nodeCol[i3] * b; lineCol[o + 1] = nodeCol[i3 + 1] * b; lineCol[o + 2] = nodeCol[i3 + 2] * b;
-                    lineCol[o + 3] = nodeCol[j3] * b; lineCol[o + 4] = nodeCol[j3 + 1] * b; lineCol[o + 5] = nodeCol[j3 + 2] * b;
-                    lc++;
-                }
-            }
-        }
-
-        // Conexiones cursor nodos (el cursor actúa como nodo con gravedad)
-        if (pointer.active) {
-            const wx = pointer.x * 16, wy = pointer.y * 9, wz = -8;
-            cursorArr[0] = wx; cursorArr[1] = wy; cursorArr[2] = wz;
-            for (let i = 0; i < N && lc < MAX_LINES; i++) {
-                const i3 = i * 3;
-                const dx = wx - nodePos[i3], dy = wy - nodePos[i3 + 1], dz = wz - nodePos[i3 + 2];
-                const d2 = dx * dx + dy * dy + dz * dz;
-                if (d2 < cursorThresh2) {
-                    const a = 1 - Math.sqrt(d2) / cursorThresh;
-                    const o = lc * 6;
-                    linePos[o] = wx; linePos[o + 1] = wy; linePos[o + 2] = wz;
-                    linePos[o + 3] = nodePos[i3]; linePos[o + 4] = nodePos[i3 + 1]; linePos[o + 5] = nodePos[i3 + 2];
-                    const b = a * 0.9;
-                    lineCol[o] = 0.55 * b; lineCol[o + 1] = 0.85 * b; lineCol[o + 2] = b;
-                    lineCol[o + 3] = nodeCol[i3] * b; lineCol[o + 4] = nodeCol[i3 + 1] * b; lineCol[o + 5] = nodeCol[i3 + 2] * b;
-                    lc++;
-                }
-            }
-        } else {
-            cursorArr[0] = 999; cursorArr[1] = 999; cursorArr[2] = 999;
-        }
-        cursorGeo.attributes.position.needsUpdate = true;
-        lineGeo.setDrawRange(0, lc);
-        lineGeo.attributes.position.needsUpdate = true;
-        lineGeo.attributes.color.needsUpdate = true;
-
-        // Triángulos: flotación + rotación + pulso de opacidad
-        for (let i = 0; i < TRI; i++) {
-            const st = triState[i];
-            st.mesh.rotation.x += st.rotSpeed * dt;
-            st.mesh.rotation.y += st.rotSpeed * 0.6 * dt;
-            st.mesh.position.x = st.bx + Math.sin(t * st.floatSpeed + st.phase) * 1.3;
-            st.mesh.position.y = st.by + Math.cos(t * st.floatSpeed * 0.8 + st.phase) * 1.1;
-            st.mesh.position.z = st.bz + Math.sin(t * st.floatSpeed * 0.6 + st.phase * 2) * 0.6;
-            st.mesh.material.opacity = st.baseOpacity + Math.sin(t * 0.7 + st.phase) * 0.05;
-        }
+        // Rotación global 3D de la "escultura de alambre"
+        plexusGroup.rotation.y += 0.06 * dt;
+        plexusGroup.rotation.x += 0.02 * dt;
 
         // Parallax de cámara (transición suave al cambiar de sección)
         const pk = Math.min(1, dt * 3.5);
@@ -304,7 +196,7 @@ window.addEventListener('DOMContentLoaded', () => {
         current.lx += (view.lx - current.lx) * pk;
         current.ly += (view.ly - current.ly) * pk;
 
-        // Sutil seguimiento del cursor (cámara viva)
+        // Sutil seguimiento del cursor (perspectiva viva)
         const swayX = pointer.active ? pointer.x * 0.5 : 0;
         const swayY = pointer.active ? pointer.y * 0.3 : 0;
         cam.position.x = current.x + swayX;
@@ -336,8 +228,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!REDUCED) requestAnimationFrame(animate);
         if (!isTabVisible || !isCanvasVisible) return;
 
-        // Limitar a 30 FPS estrictos para liberar la GPU completamente al grabar video
-        if (now - (window._lastFPS || 0) < 32) return;
+        // Limitar a ~18 FPS (50ms) para reducir la carga de renderizado WebGL al mínimo
+        if (now - (window._lastFPS || 0) < 50) return;
         window._lastFPS = now;
 
         const dt = Math.min(0.05, (now - last) / 1000);
@@ -366,7 +258,7 @@ function switchTab(tabId, event) {
     document.querySelectorAll('.nav-tab, .bottom-nav-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    
+
     const targetTab = document.getElementById(tabId);
     if (targetTab) targetTab.classList.add('active');
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
@@ -381,9 +273,9 @@ function switchTab(tabId, event) {
     if (tabId === 'proyectos') {
         const catPeeping = document.getElementById(`peep-${tabId}`);
         if (catPeeping) {
-            catPeeping.loopCount = 0; 
-            catPeeping.seek(0);       
-            catPeeping.play();        
+            catPeeping.loopCount = 0;
+            catPeeping.seek(0);
+            catPeeping.play();
         }
     }
     if (tabId === 'contacto') {
@@ -397,15 +289,15 @@ function switchTab(tabId, event) {
 // ===== CONGELAR GATOS ASOMADIZOS (DESPUÉS DE 2 VECES) =====
 window.addEventListener('DOMContentLoaded', () => {
     const peepingCats = ['peep-proyectos'];
-    
+
     peepingCats.forEach(id => {
         const cat = document.getElementById(id);
         if (cat) {
-            cat.loopCount = 0; 
+            cat.loopCount = 0;
             cat.addEventListener('loopComplete', () => {
                 cat.loopCount++;
                 if (cat.loopCount >= 2) {
-                    cat.pause(); 
+                    cat.pause();
                 }
             });
         }
@@ -428,7 +320,7 @@ if (contactForm) {
         formLoadedInit.value = Date.now();
     }
 
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         // === ANTI-BOTS: Honeypot ===
@@ -458,17 +350,17 @@ if (contactForm) {
 
         const nombreInput = document.getElementById('nombre');
         const mensajeInput = document.getElementById('mensaje');
-        
+
         if (nombreInput) nombreInput.value = sanitizeInput(nombreInput.value);
         if (mensajeInput) mensajeInput.value = sanitizeInput(mensajeInput.value);
-        
+
         const servicioSelect = document.getElementById('servicio');
         const titleField = document.getElementById('title');
         const nameField = document.getElementById('name');
-        
+
         if (titleField && servicioSelect) titleField.value = servicioSelect.value;
         if (nameField && nombreInput) nameField.value = nombreInput.value;
-        
+
         const btn = e.target.querySelector('button[type="submit"]');
         const originalText = btn.textContent;
         btn.textContent = 'Enviando...';
@@ -576,9 +468,9 @@ let currentImageIndex = 0;
 function openGallery(imagesArray) {
     currentProjectImages = imagesArray;
     currentImageIndex = 0;
-    
+
     updateModalImage();
-    
+
     const modal = document.getElementById('gallery-modal');
     if (modal) modal.classList.add('modal-active');
 }
@@ -590,20 +482,20 @@ function closeGallery() {
 
 function changeModalImage(direction) {
     currentImageIndex += direction;
-    
+
     if (currentImageIndex >= currentProjectImages.length) {
         currentImageIndex = 0;
     } else if (currentImageIndex < 0) {
         currentImageIndex = currentProjectImages.length - 1;
     }
-    
+
     updateModalImage();
 }
 
 function updateModalImage() {
     const modalImg = document.getElementById('modal-current-img');
     const counter = document.getElementById('modal-counter');
-    
+
     if (modalImg && currentProjectImages.length > 0) {
         modalImg.src = currentProjectImages[currentImageIndex];
         if (counter) {
@@ -964,7 +856,7 @@ function rotateProjects(direction) {
             typeTimer = setTimeout(typeChar, speed);
         } else {
             el.innerHTML = fullHTML + '<span class="tw-cursor"></span>';
-            hideTimer = setTimeout(function() { el.classList.remove('active'); }, 4500);
+            hideTimer = setTimeout(function () { el.classList.remove('active'); }, 4500);
         }
     }
 
@@ -979,10 +871,10 @@ function rotateProjects(direction) {
 
     wrap.addEventListener('mouseenter', startTyping);
 
-    wrap.addEventListener('mouseleave', function() {
+    wrap.addEventListener('mouseleave', function () {
         clearTimeout(typeTimer);
         clearTimeout(hideTimer);
-        setTimeout(function() {
+        setTimeout(function () {
             el.classList.remove('active');
             el.innerHTML = '';
             i = 0;
@@ -1000,7 +892,7 @@ function rotateProjects(direction) {
     var targetRX = 0, targetRY = 0;
     var isHovering = false;
 
-    wrap.addEventListener('mousemove', function(e) {
+    wrap.addEventListener('mousemove', function (e) {
         var r = wrap.getBoundingClientRect();
         var x = (e.clientX - r.left) / r.width - 0.5;
         var y = (e.clientY - r.top) / r.height - 0.5;
@@ -1010,14 +902,14 @@ function rotateProjects(direction) {
         if (!isHovering) { isHovering = true; wrap.style.animationPlayState = 'paused'; }
     });
 
-    wrap.addEventListener('mouseleave', function() {
+    wrap.addEventListener('mouseleave', function () {
         img.style.transform = 'rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
         targetRY = 0; targetRX = 0;
         isHovering = false;
         wrap.style.animationPlayState = 'running';
     });
 
-    window._cageMouse = { get: function() { return { rx: targetRX, ry: targetRY }; } };
+    window._cageMouse = { get: function () { return { rx: targetRX, ry: targetRY }; } };
 })();
 
 // ===== ICOSAEDRO CAGE: jaula 3D plexus alrededor del logo =====
@@ -1027,9 +919,9 @@ function rotateProjects(direction) {
         if (!cv || typeof THREE === 'undefined') { console.warn('[CAGE] skip:', !cv ? 'no canvas' : 'no THREE'); return; }
 
         var S = cv.clientWidth || 280;
-        var ren = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: false });
+        var ren = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: false, powerPreference: 'low-power' });
         if (!ren.getContext()) { console.warn('[CAGE] no WebGL context'); return; }
-        ren.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+        ren.setPixelRatio(1.0);
         ren.setClearColor(0x000000, 0);
         ren.setSize(S, S, false);
 
@@ -1041,17 +933,17 @@ function rotateProjects(direction) {
         var ico = new THREE.IcosahedronGeometry(1.6, 0);
 
         var edges = new THREE.EdgesGeometry(ico);
-        var lineMat = new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.6, linewidth: 2 });
+        var lineMat = new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.5, linewidth: 1.5 });
         group.add(new THREE.LineSegments(edges, lineMat));
 
         var edges2 = new THREE.EdgesGeometry(ico);
-        var lineMat2 = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.35, linewidth: 2 });
+        var lineMat2 = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3, linewidth: 1.5 });
         var wf2 = new THREE.LineSegments(edges2, lineMat2);
         wf2.scale.set(1.04, 1.04, 1.04);
         group.add(wf2);
 
         var pos = ico.getAttribute('position');
-        var nodeGeo = new THREE.SphereGeometry(0.06, 8, 8);
+        var nodeGeo = new THREE.SphereGeometry(0.06, 6, 6);
         var nodes = [];
         var seen = {};
         for (var i = 0; i < pos.count; i++) {
@@ -1059,7 +951,7 @@ function rotateProjects(direction) {
             if (!seen[key]) {
                 seen[key] = true;
                 var isCyan = nodes.length % 2 === 0;
-                var mat = new THREE.MeshBasicMaterial({ color: isCyan ? 0x22d3ee : 0x8b5cf6, transparent: true, opacity: 0.9 });
+                var mat = new THREE.MeshBasicMaterial({ color: isCyan ? 0x22d3ee : 0x8b5cf6, transparent: true, opacity: 0.85 });
                 var sphere = new THREE.Mesh(nodeGeo, mat);
                 sphere.position.set(pos.getX(i), pos.getY(i), pos.getZ(i));
                 group.add(sphere);
@@ -1080,16 +972,24 @@ function rotateProjects(direction) {
         }
         window.addEventListener('resize', resizeCage);
 
+        var isCageVisible = true;
+        if ('IntersectionObserver' in window) {
+            var cageObs = new IntersectionObserver(function (entries) {
+                if (entries[0]) isCageVisible = entries[0].isIntersecting;
+            }, { threshold: 0.05 });
+            cageObs.observe(cv);
+        }
+
         var rotY = 0, rotX = 0;
         var lastCageFrame = 0;
         function animate(now) {
             requestAnimationFrame(animate);
-            if (document.hidden) return;
+            if (document.hidden || !isCageVisible) return;
             var inicioTab = document.getElementById('inicio');
             if (inicioTab && !inicioTab.classList.contains('active')) return;
-            if (now - lastCageFrame < 42) return; // Limitar jaula 3D a ~24 FPS
+            if (now - lastCageFrame < 66) return; // Limitar jaula 3D a ~15 FPS para ultra ahorro GPU
             lastCageFrame = now;
-            var t = Date.now() * 0.001;
+            var t = now * 0.001;
 
             var m = window._cageMouse ? window._cageMouse.get() : { rx: 0, ry: 0 };
             rotY += (m.ry - rotY) * 0.12;
@@ -1097,20 +997,11 @@ function rotateProjects(direction) {
 
             group.rotation.y = rotY + t * 0.3;
             group.rotation.x = rotX + Math.sin(t * 0.5) * 0.15;
-            var breath = 1 + Math.sin(t * 0.8) * 0.04;
-            group.scale.set(breath, breath, breath);
-            lineMat.opacity = 0.4 + Math.sin(t * 1.2) * 0.2;
-            lineMat2.opacity = 0.25 + Math.sin(t * 1.2 + 1) * 0.15;
-            for (var i = 0; i < nodes.length; i++) {
-                nodes[i].material.opacity = 0.5 + Math.sin(t * 2 + i * 1.1) * 0.4;
-                var s = 0.7 + Math.sin(t * 2.5 + i * 0.9) * 0.5;
-                nodes[i].scale.set(s, s, s);
-            }
             ren.render(scene, cam);
         }
         animate();
         console.log('[CAGE] initialized OK');
-    } catch(e) { console.error('[CAGE] ERROR:', e.message); }
+    } catch (e) { console.error('[CAGE] ERROR:', e.message); }
 })();
 
 // =======================================================
@@ -1168,7 +1059,7 @@ function rotateProjects(direction) {
             // Estado deshabilitado sutil según la posición actual del scroll
             const atTop = tab.scrollTop <= 5;
             const atBottom = tab.scrollTop + tab.clientHeight >= tab.scrollHeight - 5;
-            
+
             upBtn.classList.toggle('disabled', atTop);
             downBtn.classList.toggle('disabled', atBottom);
         } else {
