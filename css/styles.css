@@ -1840,6 +1840,9 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     .services-grid-glass .glass-card[data-pos="5"] { transform: translateX(-50%) translateY(clamp(50px, 12.5vw, 82px)) scale(0.7);  opacity: 0.26; z-index: 1; filter: brightness(0.32); }
 
     .projects-grid-glass { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .form-submit-row { text-align: center; margin-top: 1rem; }
+    .btn-submit-compact { width: 100%; display: inline-flex; justify-content: center; align-items: center; }
     #cat-container-header, #cat-container-contacto, .speech-bubble { display: none !important; }
     .telegram-float { bottom: 20px; right: 20px; }
 
@@ -1934,9 +1937,10 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
         background-clip: padding-box;
         box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4), 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(139, 92, 246, 0.1);
     }
-    .contact-card-glass { padding: 0.8rem; }
-    .form-group label { font-size: 0.72rem; }
-    .form-group input, .form-group select, .form-group textarea { font-size: 0.82rem; padding: 0.5rem; }
+    .contact-card-glass { padding: 1rem 0.9rem; }
+    .form-group label { font-size: 0.88rem; margin-bottom: 0.35rem; }
+    .form-group input, .form-group select, .form-group textarea { font-size: 0.95rem; padding: 0.7rem 0.85rem; min-height: 46px; }
+    .form-group textarea { min-height: 110px; }
     .form-submit-row { text-align: center; }
     .telegram-float { width: 42px; height: 42px; font-size: 1.1rem; bottom: 20px; right: 20px; }
     .status-badge { font-size: 0.65rem; padding: 0.25rem 0.6rem; margin-bottom: 0.6rem !important; }
