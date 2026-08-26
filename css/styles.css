@@ -1840,9 +1840,6 @@ body.dashboard-body, body.dashboard-body * { cursor: none !important; }
     .services-grid-glass .glass-card[data-pos="5"] { transform: translateX(-50%) translateY(clamp(50px, 12.5vw, 82px)) scale(0.7);  opacity: 0.26; z-index: 1; filter: brightness(0.32); }
 
     .projects-grid-glass { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; gap: 0; }
-    .form-submit-row { text-align: center; margin-top: 1rem; }
-    .btn-submit-compact { width: 100%; display: inline-flex; justify-content: center; align-items: center; }
     #cat-container-header, #cat-container-contacto, .speech-bubble { display: none !important; }
     .telegram-float { bottom: 20px; right: 20px; }
 
@@ -2393,7 +2390,7 @@ vertical-align: text-bottom;
     50% { opacity: 0.3; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
     .tech-circuit-lines {
         width: 80px !important;
         height: 80px !important;
@@ -2401,6 +2398,44 @@ vertical-align: text-bottom;
     }
     .dot-matrix-5x5.header-dots {
         display: none;
+    }
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+    .form-group {
+        margin-bottom: 1.15rem !important;
+    }
+    .form-group label {
+        font-size: 0.88rem !important;
+        margin-bottom: 0.4rem !important;
+        color: rgba(226, 232, 240, 0.9) !important;
+        font-weight: 500;
+        display: block;
+    }
+    .form-group input, 
+    .form-group select {
+        padding: 0.75rem 0.9rem !important;
+        font-size: 0.95rem !important;
+        min-height: 46px !important;
+        border-radius: 12px !important;
+    }
+    .form-group textarea {
+        min-height: 100px !important;
+        padding: 0.75rem 0.9rem !important;
+        font-size: 0.95rem !important;
+        border-radius: 12px !important;
+    }
+    .form-submit-row {
+        text-align: center !important;
+        margin-top: 1.2rem !important;
+    }
+    .btn-submit-compact {
+        width: 100% !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0.85rem 1.5rem !important;
     }
 }
 
