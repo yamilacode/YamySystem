@@ -1,82 +1,323 @@
 // =======================================================
-// RED NEURONAL IA 2D ULTRA-LIGERA (PURE HTML5 CANVAS)
-// Nodos cibernéticos y conexiones neón (Cian, Púrpura, Magenta)
-// Consumo de CPU/GPU ~0%, 120 FPS fluido en móviles sin Three.js
+// FONDO PLEXUS 3D INTERACTIVO (THREE.JS)
+// Red neuronal: nodos conectados por líneas, triángulos
+// de neón cian/púrpura, cursor con gravedad y parallax
+// de cámara al cambiar de sección.
 // =======================================================
 window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('bg-canvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!canvas || !window.THREE) return;
 
     const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobile = window.innerWidth < 720;
+    const smallMobile = window.innerWidth < 400;
 
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
+    const renderer = (() => {
+        try {
+            return new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: 'default' });
+        } catch (err) {
+            document.body.classList.add('no-webgl');
+            return null;
+        }
+    })();
+    if (!renderer) return;
+    renderer.setPixelRatio(1.0);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
-        ctx.scale(dpr, dpr);
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 140);
+    cam.position.set(0, 0, 13);
+    cam.lookAt(0, 0, -3);
+
+    // ---- PALETA NEÓN: cian, púrpura y magenta ----
+    const cCyan = new THREE.Color(0x22d3ee);
+    const cPurple = new THREE.Color(0x8b5cf6);
+    const cMagenta = new THREE.Color(0xd946ef);
+    const cWhite = new THREE.Color(0xffffff);
+
+    // Textura de nodo suave (punto difuminado)
+    const texCanvas = document.createElement('canvas');
+    texCanvas.width = texCanvas.height = 64;
+    const tctx = texCanvas.getContext('2d');
+    const grad = tctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.35, 'rgba(255,255,255,0.55)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    tctx.fillStyle = grad;
+    tctx.fillRect(0, 0, 64, 64);
+    const dotTex = new THREE.CanvasTexture(texCanvas);
+
+    // ---- NODOS DE LA RED (Optimizado ultra liviano 30 FPS) ----
+    const N = smallMobile ? 12 : mobile ? 18 : 25;
+    const nodePos = new Float32Array(N * 3);
+    const nodeBase = new Float32Array(N * 3);
+    const nodeSeed = new Float32Array(N);
+    const nodeCol = new Float32Array(N * 3);
+
+    for (let i = 0; i < N; i++) {
+        const i3 = i * 3;
+        const x = (Math.random() - 0.5) * 30;
+        const y = (Math.random() - 0.5) * 18;
+        const z = (Math.random() - 0.5) * 14 - 4;
+        nodeBase[i3] = x; nodeBase[i3 + 1] = y; nodeBase[i3 + 2] = z;
+        nodePos[i3] = x; nodePos[i3 + 1] = y; nodePos[i3 + 2] = z;
+        nodeSeed[i] = Math.random() * Math.PI * 2;
+        const roll = Math.random();
+        const c = roll < 0.34 ? cCyan : roll < 0.62 ? cPurple : roll < 0.8 ? cMagenta : cWhite;
+        const bright = 0.55 + Math.random() * 0.45;
+        nodeCol[i3] = c.r * bright; nodeCol[i3 + 1] = c.g * bright; nodeCol[i3 + 2] = c.b * bright;
     }
-    resize();
-    window.addEventListener('resize', resize);
 
-    // Configuración según dispositivo para maximizar rendimiento
-    const isMobile = window.innerWidth < 768;
-    const isSmall = window.innerWidth < 400;
-    const NUM_NODES = isSmall ? 14 : isMobile ? 22 : 36;
-    const MAX_DIST = isMobile ? 120 : 160;
+    const nodeGeo = new THREE.BufferGeometry();
+    nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePos, 3));
+    nodeGeo.setAttribute('color', new THREE.BufferAttribute(nodeCol, 3));
+    const nodeMat = new THREE.PointsMaterial({
+        size: smallMobile ? 0.18 : 0.22,
+        map: dotTex,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.95,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        sizeAttenuation: true
+    });
+    const nodePoints = new THREE.Points(nodeGeo, nodeMat);
+    scene.add(nodePoints);
 
-    // Paleta Neón Cyberpunk / IA
-    const colors = [
-        { r: 34,  g: 211, b: 238 }, // Cyan (#22d3ee)
-        { r: 139, g: 92,  b: 246 }, // Purple (#8b5cf6)
-        { r: 217, g: 70,  b: 239 }, // Magenta (#d946ef)
-        { r: 255, g: 255, b: 255 }  // White accent
-    ];
+    // ---- LÍNEAS DE CONEXIÓN ENTRE NODOS ----
+    const MAX_LINES = 90;
+    const linePos = new Float32Array(MAX_LINES * 6);
+    const lineCol = new Float32Array(MAX_LINES * 6);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos, 3).setUsage(THREE.DynamicDrawUsage));
+    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineCol, 3).setUsage(THREE.DynamicDrawUsage));
+    lineGeo.setDrawRange(0, 0);
+    const lineMat = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 1,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    });
+    const lineSegs = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(lineSegs);
 
-    // Generar Nodos de la Red IA
-    const nodes = [];
-    for (let i = 0; i < NUM_NODES; i++) {
-        const col = colors[Math.floor(Math.random() * colors.length)];
-        nodes.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
-            vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
-            radius: Math.random() * 1.8 + 1.2,
-            color: col,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: 0.02 + Math.random() * 0.03
+    // ---- TRIÁNGULOS DE NEÓN FLOTANTES (degradado cian → púrpura → magenta) ----
+    const TRI = smallMobile ? 2 : mobile ? 4 : 9;
+    const triState = [];
+    for (let i = 0; i < TRI; i++) {
+        const g = new THREE.BufferGeometry();
+        const s = 0.9 + Math.random() * 1.3;
+        const off = (Math.random() - 0.5) * s * 0.6;
+        const positions = new Float32Array([
+            off, -s * 0.55, 0,
+            -s * 0.62, s * 0.38, 0,
+            s * 0.66, s * 0.34, 0
+        ]);
+        g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const colors = new Float32Array(9);
+        const gradCols = [cCyan, cPurple, cMagenta];
+        for (let v = 0; v < 3; v++) {
+            const b = 0.55 + Math.random() * 0.4;
+            colors[v * 3] = gradCols[v].r * b;
+            colors[v * 3 + 1] = gradCols[v].g * b;
+            colors[v * 3 + 2] = gradCols[v].b * b;
+        }
+        g.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        const m = new THREE.MeshBasicMaterial({
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.24 + Math.random() * 0.2,
+            side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        const mesh = new THREE.Mesh(g, m);
+        const bx = (Math.random() - 0.5) * 26;
+        const by = (Math.random() - 0.5) * 15;
+        const bz = -3 - Math.random() * 9;
+        mesh.position.set(bx, by, bz);
+        mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        scene.add(mesh);
+        triState.push({
+            mesh: mesh, bx: bx, by: by, bz: bz,
+            rotSpeed: 0.12 + Math.random() * 0.3,
+            phase: Math.random() * Math.PI * 2,
+            floatAmp: 0.5 + Math.random() * 0.8,
+            floatSpeed: 0.3 + Math.random() * 0.45,
+            baseOpacity: m.opacity
         });
     }
 
-    // Posición del Cursor / Touch
-    const pointer = { x: -999, y: -999, active: false };
+    // ---- NODO FANTASMA DEL CURSOR ----
+    const cursorArr = new Float32Array([0, 0, -8]);
+    const cursorGeo = new THREE.BufferGeometry();
+    cursorGeo.setAttribute('position', new THREE.BufferAttribute(cursorArr, 3));
+    const cursorMat = new THREE.PointsMaterial({
+        size: 0.6,
+        map: dotTex,
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        sizeAttenuation: true
+    });
+    const cursorPoints = new THREE.Points(cursorGeo, cursorMat);
+    scene.add(cursorPoints);
+
+    // ---- MOUSE / TOUCH ----
+    const pointer = { x: 0, y: 0, vx: 0, vy: 0, active: false };
     window.addEventListener('pointermove', (e) => {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
+        const nx = (e.clientX / window.innerWidth) * 2 - 1;
+        const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+        pointer.vx = nx - pointer.x;
+        pointer.vy = ny - pointer.y;
+        pointer.x = nx; pointer.y = ny;
         pointer.active = true;
     });
     window.addEventListener('pointerleave', () => { pointer.active = false; });
 
-    // Secciones y Parallax sutil
-    const sectionOffsets = { inicio: 0, servicios: 25, proyectos: -25, contacto: 15 };
-    let targetOffsetY = 0;
-    let currentOffsetY = 0;
+    // ---- PARALLAX DE CÁMARA POR SECCIÓN (perspectiva 3D) ----
+    const views = {
+        inicio:    { x: 0,    y: 0.4,  z: 13,   lx: 0,    ly: 0    },
+        servicios: { x: 2.5,  y: -5.0, z: 10.4, lx: 1.6,  ly: 0.9  },
+        proyectos: { x: -2.2, y: 5.5,  z: 10.6, lx: -1.5, ly: -1.0 },
+        contacto:  { x: 2.9,  y: -6.2, z: 9.8,  lx: 1.9,  ly: 1.3  }
+    };
+    let view = views.inicio;
+    const current = { x: 0, y: 0.4, z: 13, lx: 0, ly: 0 };
+
     window.particleFormation = (name) => {
-        targetOffsetY = sectionOffsets[name] || 0;
+        view = views[name] || views.inicio;
     };
 
-    // Control de Visibilidad (Pausa total si la pestaña no está activa o el canvas sale de vista)
+    // ---- LÓGICA POR FRAME ----
+    const lineThresh = 2.4;
+    const lineThresh2 = lineThresh * lineThresh;
+    const cursorThresh = 3.6;
+    const cursorThresh2 = cursorThresh * cursorThresh;
+
+    function draw(t, dt) {
+        // Flotación lenta de los nodos + atracción/repulsión del cursor
+        for (let i = 0; i < N; i++) {
+            const i3 = i * 3;
+            const bx = nodeBase[i3], by = nodeBase[i3 + 1], bz = nodeBase[i3 + 2];
+            const tx = bx + Math.sin(t * 0.35 + nodeSeed[i]) * 0.9;
+            const ty = by + Math.cos(t * 0.3 + nodeSeed[i] * 1.3) * 0.9;
+            const tz = bz + Math.sin(t * 0.25 + nodeSeed[i] * 0.7) * 0.6;
+            let px = nodePos[i3], py = nodePos[i3 + 1], pz = nodePos[i3 + 2];
+            const k = Math.min(1, dt * 1.8);
+            px += (tx - px) * k;
+            py += (ty - py) * k;
+            pz += (tz - pz) * k;
+
+            if (pointer.active) {
+                const wx = pointer.x * 16, wy = pointer.y * 9, wz = -8;
+                const dx = px - wx, dy = py - wy, dz = pz - wz;
+                const d2 = dx * dx + dy * dy + dz * dz;
+                if (d2 > 0.001 && d2 < 12) {
+                    const dist = Math.sqrt(d2);
+                    const f = (1 - d2 / 12) * dt * 5;
+                    const inv = f / dist;
+                    px += dx * inv * 1.5;
+                    py += dy * inv * 1.5;
+                    pz += dz * inv * 1.5;
+                } else if (d2 >= 12 && d2 < cursorThresh2 * 2) {
+                    const dist = Math.sqrt(d2);
+                    const f = (1 - d2 / (cursorThresh2 * 2)) * dt * 1.4;
+                    const inv = f / dist;
+                    px -= dx * inv;
+                    py -= dy * inv;
+                    pz -= dz * inv;
+                }
+            }
+            nodePos[i3] = px; nodePos[i3 + 1] = py; nodePos[i3 + 2] = pz;
+        }
+        nodeGeo.attributes.position.needsUpdate = true;
+
+        // Conexiones nodo ↔ nodo
+        let lc = 0;
+        for (let i = 0; i < N; i++) {
+            const i3 = i * 3;
+            const xi = nodePos[i3], yi = nodePos[i3 + 1], zi = nodePos[i3 + 2];
+            for (let j = i + 1; j < N; j++) {
+                const j3 = j * 3;
+                const dx = xi - nodePos[j3], dy = yi - nodePos[j3 + 1], dz = zi - nodePos[j3 + 2];
+                const d2 = dx * dx + dy * dy + dz * dz;
+                if (d2 < lineThresh2 && lc < MAX_LINES) {
+                    const a = 1 - Math.sqrt(d2) / lineThresh;
+                    const o = lc * 6;
+                    linePos[o] = xi; linePos[o + 1] = yi; linePos[o + 2] = zi;
+                    linePos[o + 3] = nodePos[j3]; linePos[o + 4] = nodePos[j3 + 1]; linePos[o + 5] = nodePos[j3 + 2];
+                    const b = a * 0.75;
+                    lineCol[o] = nodeCol[i3] * b; lineCol[o + 1] = nodeCol[i3 + 1] * b; lineCol[o + 2] = nodeCol[i3 + 2] * b;
+                    lineCol[o + 3] = nodeCol[j3] * b; lineCol[o + 4] = nodeCol[j3 + 1] * b; lineCol[o + 5] = nodeCol[j3 + 2] * b;
+                    lc++;
+                }
+            }
+        }
+
+        // Conexiones cursor nodos (el cursor actúa como nodo con gravedad)
+        if (pointer.active) {
+            const wx = pointer.x * 16, wy = pointer.y * 9, wz = -8;
+            cursorArr[0] = wx; cursorArr[1] = wy; cursorArr[2] = wz;
+            for (let i = 0; i < N && lc < MAX_LINES; i++) {
+                const i3 = i * 3;
+                const dx = wx - nodePos[i3], dy = wy - nodePos[i3 + 1], dz = wz - nodePos[i3 + 2];
+                const d2 = dx * dx + dy * dy + dz * dz;
+                if (d2 < cursorThresh2) {
+                    const a = 1 - Math.sqrt(d2) / cursorThresh;
+                    const o = lc * 6;
+                    linePos[o] = wx; linePos[o + 1] = wy; linePos[o + 2] = wz;
+                    linePos[o + 3] = nodePos[i3]; linePos[o + 4] = nodePos[i3 + 1]; linePos[o + 5] = nodePos[i3 + 2];
+                    const b = a * 0.9;
+                    lineCol[o] = 0.55 * b; lineCol[o + 1] = 0.85 * b; lineCol[o + 2] = b;
+                    lineCol[o + 3] = nodeCol[i3] * b; lineCol[o + 4] = nodeCol[i3 + 1] * b; lineCol[o + 5] = nodeCol[i3 + 2] * b;
+                    lc++;
+                }
+            }
+        } else {
+            cursorArr[0] = 999; cursorArr[1] = 999; cursorArr[2] = 999;
+        }
+        cursorGeo.attributes.position.needsUpdate = true;
+        lineGeo.setDrawRange(0, lc);
+        lineGeo.attributes.position.needsUpdate = true;
+        lineGeo.attributes.color.needsUpdate = true;
+
+        // Triángulos: flotación + rotación + pulso de opacidad
+        for (let i = 0; i < TRI; i++) {
+            const st = triState[i];
+            st.mesh.rotation.x += st.rotSpeed * dt;
+            st.mesh.rotation.y += st.rotSpeed * 0.6 * dt;
+            st.mesh.position.x = st.bx + Math.sin(t * st.floatSpeed + st.phase) * 1.3;
+            st.mesh.position.y = st.by + Math.cos(t * st.floatSpeed * 0.8 + st.phase) * 1.1;
+            st.mesh.position.z = st.bz + Math.sin(t * st.floatSpeed * 0.6 + st.phase * 2) * 0.6;
+            st.mesh.material.opacity = st.baseOpacity + Math.sin(t * 0.7 + st.phase) * 0.05;
+        }
+
+        // Parallax de cámara (transición suave al cambiar de sección)
+        const pk = Math.min(1, dt * 3.5);
+        current.x += (view.x - current.x) * pk;
+        current.y += (view.y - current.y) * pk;
+        current.z += (view.z - current.z) * pk;
+        current.lx += (view.lx - current.lx) * pk;
+        current.ly += (view.ly - current.ly) * pk;
+
+        // Sutil seguimiento del cursor (cámara viva)
+        const swayX = pointer.active ? pointer.x * 0.5 : 0;
+        const swayY = pointer.active ? pointer.y * 0.3 : 0;
+        cam.position.x = current.x + swayX;
+        cam.position.y = current.y + swayY;
+        cam.position.z = current.z;
+        cam.lookAt(current.lx + swayX * 0.6, current.ly + swayY * 0.6, -3);
+
+        renderer.render(scene, cam);
+    }
+
+    // ---- Reloj y bucle (Pausa automática en pestaña inactiva y fuera de vista) ----
+    let clockT = 0;
+    let last = performance.now();
     let isTabVisible = !document.hidden;
     let isCanvasVisible = true;
 
@@ -86,107 +327,35 @@ window.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.05 });
         obs.observe(canvas);
     }
+
     document.addEventListener('visibilitychange', () => {
         isTabVisible = !document.hidden;
     });
 
-    let lastTime = performance.now();
-
-    function draw() {
-        ctx.clearRect(0, 0, width, height);
-
-        // Transición suave de offset de sección
-        currentOffsetY += (targetOffsetY - currentOffsetY) * 0.05;
-
-        // Dibujar Conexiones entre Nodos (Red Neuronal)
-        const maxDist2 = MAX_DIST * MAX_DIST;
-        for (let i = 0; i < NUM_NODES; i++) {
-            const na = nodes[i];
-            const ay = na.y + currentOffsetY;
-
-            for (let j = i + 1; j < NUM_NODES; j++) {
-                const nb = nodes[j];
-                const by = nb.y + currentOffsetY;
-                const dx = na.x - nb.x;
-                const dy = ay - by;
-                const dist2 = dx * dx + dy * dy;
-
-                if (dist2 < maxDist2) {
-                    const alpha = (1 - Math.sqrt(dist2) / MAX_DIST) * 0.42;
-                    ctx.strokeStyle = `rgba(${na.color.r}, ${na.color.g}, ${na.color.b}, ${alpha})`;
-                    ctx.lineWidth = alpha * 1.4;
-                    ctx.beginPath();
-                    ctx.moveTo(na.x, ay);
-                    ctx.lineTo(nb.x, by);
-                    ctx.stroke();
-                }
-            }
-
-            // Conexión interactiva cibernética con el cursor
-            if (pointer.active) {
-                const dx = na.x - pointer.x;
-                const dy = ay - pointer.y;
-                const dist2 = dx * dx + dy * dy;
-                const cursorMax = 170;
-                if (dist2 < cursorMax * cursorMax) {
-                    const alpha = (1 - Math.sqrt(dist2) / cursorMax) * 0.55;
-                    ctx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
-                    ctx.lineWidth = alpha * 1.6;
-                    ctx.beginPath();
-                    ctx.moveTo(na.x, ay);
-                    ctx.lineTo(pointer.x, pointer.y);
-                    ctx.stroke();
-                }
-            }
-        }
-
-        // Dibujar Nodos e Interacción de Movimiento
-        for (let i = 0; i < NUM_NODES; i++) {
-            const n = nodes[i];
-
-            // Movimiento continuo
-            n.x += n.vx;
-            n.y += n.vy;
-
-            // Rebote suave en bordes
-            if (n.x < 0 || n.x > width) n.vx *= -1;
-            if (n.y < 0 || n.y > height) n.vy *= -1;
-
-            // Pulso de brillo neón
-            n.pulse += n.pulseSpeed;
-            const currentRadius = n.radius + Math.sin(n.pulse) * 0.6;
-            const drawY = n.y + currentOffsetY;
-
-            // Punto central luminoso
-            ctx.fillStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.88)`;
-            ctx.beginPath();
-            ctx.arc(n.x, drawY, Math.max(0.5, currentRadius), 0, Math.PI * 2);
-            ctx.fill();
-
-            // Brillo resplandeciente sutil (Glow)
-            ctx.fillStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.22)`;
-            ctx.beginPath();
-            ctx.arc(n.x, drawY, Math.max(1, currentRadius * 2.2), 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function loop(now) {
-        if (!REDUCED) requestAnimationFrame(loop);
+    function animate(now) {
+        if (!REDUCED) requestAnimationFrame(animate);
         if (!isTabVisible || !isCanvasVisible) return;
 
-        // Freno inteligente anti-sobrecarga (60 FPS estables)
-        if (now - lastTime < 16) return;
-        lastTime = now;
+        // Limitar a 30 FPS estrictos para liberar la GPU completamente al grabar video
+        if (now - (window._lastFPS || 0) < 32) return;
+        window._lastFPS = now;
 
-        draw();
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        clockT += dt;
+        draw(clockT, dt);
     }
-
     if (REDUCED) {
-        draw();
+        draw(0, 0.016);
     } else {
-        loop(performance.now());
+        animate(performance.now());
     }
+
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        cam.aspect = window.innerWidth / window.innerHeight;
+        cam.updateProjectionMatrix();
+    });
 });
 
 // ===== CONTROL DE PESTAÑAS Y MENÚ FLOTANTE MÓVIL =====
