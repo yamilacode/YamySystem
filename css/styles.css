@@ -2599,24 +2599,23 @@ vertical-align: text-bottom;
         margin-top: calc(clamp(220px, 58vw, 320px) / -2);
     }
 
-    /* Certificaciones en Móvil: Fijo vertical a la derecha sin choque de letras */
+    /* Certificaciones en Móvil: Pila vertical ajustada al borde lateral derecho con texto rotado 90° y tono gris sobrio */
     #inicio .hero-card-glass {
         position: relative;
     }
 
-
     #inicio .hero-text-col {
-        padding-right: 90px; /* Canal reservado exclusivo en la derecha: evita choque de letras */
+        padding-right: 38px; /* Canal reservado para no solapar texto con la pila lateral */
     }
 
     .hero-certifications {
         position: absolute;
-        right: clamp(4px, 1.5vw, 10px);
-        top: 36%;
+        right: clamp(4px, 1.2vw, 8px);
+        top: 50%;
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         gap: 0.45rem;
         margin: 0;
         padding: 0;
@@ -2632,8 +2631,8 @@ vertical-align: text-bottom;
     .cert-badges {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        gap: 0.4rem;
+        align-items: center;
+        gap: 0.45rem;
         flex-wrap: nowrap;
         white-space: nowrap;
         animation: none !important;
@@ -2643,13 +2642,45 @@ vertical-align: text-bottom;
 
     .cert-item {
         flex-shrink: 0;
-        padding: 0.25rem 0.6rem;
-        font-size: clamp(0.7rem, 0.8vw, 0.78rem);
-        background: rgba(10, 15, 30, 0.92);
-        border: 1px solid rgba(139, 92, 246, 0.45);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(139, 92, 246, 0.15);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.28rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        color: rgba(226, 232, 240, 0.85);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+    }
+
+    .cert-item:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+    }
+
+    .cert-icon {
+        width: 13px;
+        height: 13px;
+        color: rgba(226, 232, 240, 0.88);
+        flex-shrink: 0;
+    }
+
+    .cert-item span {
+        writing-mode: vertical-rl;
+        -webkit-writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(226, 232, 240, 0.82);
+        line-height: 1;
     }
 }
 
