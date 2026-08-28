@@ -826,13 +826,14 @@
                         <!-- Anti-bot: timestamp de carga del formulario -->
                         <input type="hidden" id="form-loaded" name="form-loaded">
 
-                        <!-- Google reCAPTCHA v2 -->
-                        <div class="recaptcha-container" style="display:flex; justify-content:center; margin: 1.2rem 0; width:100%;">
-                            <div class="g-recaptcha" data-sitekey="6LcXdp0tAAAAAG9b_6FjesiR9texduthTI9ul3HK"></div>
-                        </div>
-
-                        <div class="form-submit-row">
-                            <button type="submit" class="btn-submit-compact"><span>Enviar</span></button>
+                        <div class="form-submit-wrapper">
+                            <div class="form-submit-row">
+                                <button type="submit" class="btn-submit-compact"><span>Enviar</span></button>
+                            </div>
+                            <!-- Google reCAPTCHA v2 (Ubicado debajo del botón) -->
+                            <div class="recaptcha-container">
+                                <div class="g-recaptcha" data-sitekey="6LcXdp0tAAAAAG9b_6FjesiR9texduthTI9ul3HK"></div>
+                            </div>
                         </div>
                     </form>
                 </div>
