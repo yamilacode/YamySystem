@@ -349,9 +349,22 @@ if (contactForm) {
         window._lastFormSubmit = Date.now();
 
         const nombreInput = document.getElementById('nombre');
+        const emailInput = document.getElementById('email');
+        const telefonoInput = document.getElementById('telefono');
         const mensajeInput = document.getElementById('mensaje');
 
+        // === VALIDACIÓN DE EMAIL (Regex) ===
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailInput && !emailRegex.test(emailInput.value.trim())) {
+            openFormModal('error');
+            const msgEl = document.getElementById('form-modal-message');
+            if (msgEl) msgEl.textContent = 'Por favor, ingresá un correo electrónico válido.';
+            return;
+        }
+
         if (nombreInput) nombreInput.value = sanitizeInput(nombreInput.value);
+        if (emailInput) emailInput.value = sanitizeInput(emailInput.value);
+        if (telefonoInput) telefonoInput.value = sanitizeInput(telefonoInput.value);
         if (mensajeInput) mensajeInput.value = sanitizeInput(mensajeInput.value);
 
         const servicioSelect = document.getElementById('servicio');

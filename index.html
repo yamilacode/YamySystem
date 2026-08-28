@@ -768,12 +768,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nombre">Nombre y Apellido</label>
-                                <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Tu nombre completo" required>
+                                <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Tu nombre completo" maxlength="100" required>
                             </div>
                             <div class="form-group email-group">
                                 <label for="email">Email</label>
                                 <div class="input-cat-wrapper">
-                                    <input type="email" id="email" name="email" autocomplete="email" placeholder="ejemplo@correo.com" required>
+                                    <input type="email" id="email" name="email" autocomplete="email" placeholder="ejemplo@correo.com" maxlength="120" required>
                                     <div id="cat-container-contacto" class="cat-box-general">
                                         <svg id="peep-contacto" xmlns="http://www.w3.org/2000/svg" viewBox="-210 -510 575 480" width="100%" height="100%">
                                             <!-- Arte original exacto del gato blanco -->
@@ -796,7 +796,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="telefono">Teléfono <span class="optional-label">(Opcional)</span></label>
-                                <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+54 9 11 1234-5678">
+                                <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+54 9 11 1234-5678" maxlength="30">
                             </div>
                             <div class="form-group">
                                 <label for="servicio">Servicio</label>
@@ -811,7 +811,7 @@
                         </div>
                         <div class="form-group">
                             <label for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." maxlength="2000" required></textarea>
                         </div>
 
                         <input type="hidden" name="title" id="title">
