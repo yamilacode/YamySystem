@@ -2825,8 +2825,11 @@ vertical-align: text-bottom;
 .recaptcha-container .g-recaptcha {
     transform: scale(0.88);
     transform-origin: right top;
-    border-radius: 10px;
-    box-shadow: 0 0 16px rgba(139, 92, 246, 0.2), inset 0 0 0 1px rgba(139, 92, 246, 0.3);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(35, 18, 65, 0.95), rgba(18, 10, 38, 0.95));
+    border: 1.5px solid rgba(139, 92, 246, 0.55);
+    box-shadow: 0 0 22px rgba(139, 92, 246, 0.38), inset 0 0 14px rgba(139, 92, 246, 0.25);
+    padding: 3px;
     overflow: hidden;
 }
 
