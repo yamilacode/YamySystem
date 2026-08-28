@@ -362,6 +362,17 @@ if (contactForm) {
             return;
         }
 
+        // === VALIDACIÓN DE TELÉFONO (Solo si fue completado) ===
+        if (telefonoInput && telefonoInput.value.trim() !== '') {
+            const telRegex = /^[\d\s+\-()]{6,30}$/;
+            if (!telRegex.test(telefonoInput.value.trim())) {
+                openFormModal('error');
+                const msgEl = document.getElementById('form-modal-message');
+                if (msgEl) msgEl.textContent = 'Por favor, ingresá un número de teléfono válido (solo números, +, - o espacios).';
+                return;
+            }
+        }
+
         if (nombreInput) nombreInput.value = sanitizeInput(nombreInput.value);
         if (emailInput) emailInput.value = sanitizeInput(emailInput.value);
         if (telefonoInput) telefonoInput.value = sanitizeInput(telefonoInput.value);
