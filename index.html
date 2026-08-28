@@ -107,6 +107,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (window.emailjs) emailjs.init('2ZCVwRxMpU4ucivnQ');
@@ -824,6 +825,11 @@
                         </div>
                         <!-- Anti-bot: timestamp de carga del formulario -->
                         <input type="hidden" id="form-loaded" name="form-loaded">
+
+                        <!-- Google reCAPTCHA v2 -->
+                        <div class="recaptcha-container" style="display:flex; justify-content:center; margin: 1.2rem 0; width:100%;">
+                            <div class="g-recaptcha" data-sitekey="6LcXdp0tAAAAAG9b_6FjesiR9texduthTI9ul3HK"></div>
+                        </div>
 
                         <div class="form-submit-row">
                             <button type="submit" class="btn-submit-compact"><span>Enviar</span></button>

@@ -373,6 +373,17 @@ if (contactForm) {
             }
         }
 
+        // === ANTI-BOTS: Google reCAPTCHA v2 ===
+        if (window.grecaptcha) {
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse || captchaResponse.length === 0) {
+                openFormModal('error');
+                const msgEl = document.getElementById('form-modal-message');
+                if (msgEl) msgEl.textContent = 'Por favor, completá la verificación "No soy un robot" (reCAPTCHA).';
+                return;
+            }
+        }
+
         if (nombreInput) nombreInput.value = sanitizeInput(nombreInput.value);
         if (emailInput) emailInput.value = sanitizeInput(emailInput.value);
         if (telefonoInput) telefonoInput.value = sanitizeInput(telefonoInput.value);
@@ -398,12 +409,14 @@ if (contactForm) {
                 console.log('Email enviado correctamente!');
                 openFormModal('success');
                 this.reset();
+                if (window.grecaptcha) grecaptcha.reset();
                 btn.textContent = originalText;
                 btn.disabled = false;
                 if (formLoaded) formLoaded.value = Date.now();
             }, (error) => {
                 console.error('Error al enviar:', error);
                 openFormModal('error');
+                if (window.grecaptcha) grecaptcha.reset();
                 btn.textContent = originalText;
                 btn.disabled = false;
             });
